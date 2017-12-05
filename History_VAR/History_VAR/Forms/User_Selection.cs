@@ -20,14 +20,16 @@ namespace History_VAR.Forms
         private void btn_teacher_user_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var User_Login = new User_Login();
+            string Choice = "Teacher";
+            var User_Login = new User_Login(Choice);
             User_Login.Closed += (s, args) => this.Close();
             User_Login.Show();
         }
         private void btn_student_user_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var User_Login = new User_Login();
+            string Choice = "Student";
+            var User_Login = new User_Login(Choice);
             User_Login.Closed += (s, args) => this.Close();
             User_Login.Show();
         }

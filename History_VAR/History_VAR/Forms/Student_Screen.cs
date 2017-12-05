@@ -16,5 +16,14 @@ namespace History_VAR.Forms
         {
             InitializeComponent();
         }
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            //Back to previous screen
+            this.Hide();
+            var User_Selection = new User_Selection();
+            User_Selection.Closed += (s, args) => this.Close();
+            User_Selection.Show();
+        }
     }
 }

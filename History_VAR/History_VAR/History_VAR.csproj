@@ -96,6 +96,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Student_Screen.resx">
+      <DependentUpon>Student_Screen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher_Current_Sets.resx">
+      <DependentUpon>Teacher_Current_Sets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher_Make_New_Sets.resx">
+      <DependentUpon>Teacher_Make_New_Sets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher_Options.resx">
+      <DependentUpon>Teacher_Options.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\User_Login.resx">
+      <DependentUpon>User_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\User_Selection.resx">
+      <DependentUpon>User_Selection.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Opening_Screen.resx">
       <DependentUpon>Opening_Screen.cs</DependentUpon>
     </EmbeddedResource>

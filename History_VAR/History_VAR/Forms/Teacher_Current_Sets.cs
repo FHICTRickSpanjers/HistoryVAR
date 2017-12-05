@@ -16,5 +16,28 @@ namespace History_VAR.Forms
         {
             InitializeComponent();
         }
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var Teacher_Screen = new Teacher_Options();
+            Teacher_Screen.Closed += (s, args) => this.Close();
+            Teacher_Screen.Show();
+        }
+
+        private void btn_publish_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_edit_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

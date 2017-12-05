@@ -16,5 +16,23 @@ namespace History_VAR.Forms
         {
             InitializeComponent();
         }
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var Teacher_Options = new Teacher_Options();
+            Teacher_Options.Closed += (s, args) => this.Close();
+            Teacher_Options.Show();
+        }
+
+        private void btn_save_lesson_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_add_objects_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

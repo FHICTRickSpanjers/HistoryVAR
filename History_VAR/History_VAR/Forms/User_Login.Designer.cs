@@ -34,6 +34,7 @@
             this.TB_Username = new System.Windows.Forms.TextBox();
             this.label_username = new System.Windows.Forms.Label();
             this.label_password = new System.Windows.Forms.Label();
+            this.btn_back = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label_title_user_login
@@ -52,9 +53,9 @@
             // 
             // btn_login
             // 
-            this.btn_login.Location = new System.Drawing.Point(12, 232);
+            this.btn_login.Location = new System.Drawing.Point(202, 232);
             this.btn_login.Name = "btn_login";
-            this.btn_login.Size = new System.Drawing.Size(377, 52);
+            this.btn_login.Size = new System.Drawing.Size(187, 52);
             this.btn_login.TabIndex = 2;
             this.btn_login.Text = "Login";
             this.btn_login.UseVisualStyleBackColor = true;
@@ -96,11 +97,22 @@
             this.label_password.TabIndex = 7;
             this.label_password.Text = "Password";
             // 
+            // btn_back
+            // 
+            this.btn_back.Location = new System.Drawing.Point(12, 232);
+            this.btn_back.Name = "btn_back";
+            this.btn_back.Size = new System.Drawing.Size(185, 52);
+            this.btn_back.TabIndex = 8;
+            this.btn_back.Text = "Back";
+            this.btn_back.UseVisualStyleBackColor = true;
+            this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
+            // 
             // User_Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 296);
+            this.ClientSize = new System.Drawing.Size(411, 309);
+            this.Controls.Add(this.btn_back);
             this.Controls.Add(this.label_password);
             this.Controls.Add(this.label_username);
             this.Controls.Add(this.TB_Username);
@@ -122,5 +134,6 @@
         private System.Windows.Forms.TextBox TB_Username;
         private System.Windows.Forms.Label label_username;
         private System.Windows.Forms.Label label_password;
+        private System.Windows.Forms.Button btn_back;
     }
 }
