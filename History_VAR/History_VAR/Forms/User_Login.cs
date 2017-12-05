@@ -23,37 +23,30 @@ namespace History_VAR.Forms
         }
 
 
-        private void Check_Values()
+        //Login Teacher
+        private void Log_In_Teacher()
         {
-            if(string.IsNullOrEmpty(TB_Username.Text) || string.IsNullOrEmpty(TB_Password.Text){
+            if (string.IsNullOrEmpty(TB_Username.Text) || string.IsNullOrEmpty(TB_Password.Text))
+            {
                 MessageBox.Show("The username or password was not filled");
             }
             else
             {
-                //Continue forward
-            }
-        }
+                DBRepository DB = DBRepository.GetInstance();
+                var DBUsername = DB.Get_Login_Data_Teachers("Username", TB_Username.Text);
+                var DBPassword = DB.Get_Login_Data_Teachers("Password", TB_Username.Text);
 
-
-        //Login Teacher
-        private void Log_In_Teacher()
-        {
-            Check_Values();
-
-            DBRepository DB = DBRepository.GetInstance();
-            var DBUsername = DB.Get_Login_Data_Teachers("Username", TB_Username.Text);
-            var DBPassword = DB.Get_Login_Data_Teachers("Password", TB_Username.Text);
-
-            if(TB_Password.Text == DBPassword)
-            {
-                this.Hide();
-                var Teacher_Screen = new Teacher_Options();
-                Teacher_Screen.Closed += (s, args) => this.Close();
-                Teacher_Screen.Show();
-            }
-            else
-            {
-                MessageBox.Show("The username or password was wrong!");
+                if (TB_Password.Text == DBPassword)
+                {
+                    this.Hide();
+                    var Teacher_Screen = new Teacher_Options();
+                    Teacher_Screen.Closed += (s, args) => this.Close();
+                    Teacher_Screen.Show();
+                }
+                else
+                {
+                    MessageBox.Show("The username or password was wrong!");
+                }
             }
 
         }
@@ -61,24 +54,28 @@ namespace History_VAR.Forms
         //Login Student
         private void Log_In_Student()
         {
-            Check_Values();
-
-            DBRepository DB = DBRepository.GetInstance();
-            var DBUsername = DB.Get_Login_Data_Teachers("Username", TB_Username.Text);
-            var DBPassword = DB.Get_Login_Data_Teachers("Password", TB_Username.Text);
-
-            if (TB_Password.Text == DBPassword)
+            if (string.IsNullOrEmpty(TB_Username.Text) || string.IsNullOrEmpty(TB_Password.Text))
             {
-                this.Hide();
-                var Student_Screen = new Student_Screen();
-                Student_Screen.Closed += (s, args) => this.Close();
-                Student_Screen.Show();
+                MessageBox.Show("The username or password was not filled");
             }
             else
             {
-                MessageBox.Show("The username or password was wrong!");
-            }
+                DBRepository DB = DBRepository.GetInstance();
+                var DBUsername = DB.Get_Login_Data_Teachers("Username", TB_Username.Text);
+                var DBPassword = DB.Get_Login_Data_Teachers("Password", TB_Username.Text);
 
+                if (TB_Password.Text == DBPassword)
+                {
+                    this.Hide();
+                    var Student_Screen = new Student_Screen();
+                    Student_Screen.Closed += (s, args) => this.Close();
+                    Student_Screen.Show();
+                }
+                else
+                {
+                    MessageBox.Show("The username or password was wrong!");
+                }
+            }
         }
 
         private void Login()

@@ -42,8 +42,10 @@ namespace History_VAR.Classes
             {
                 using (SqlConnection cnn = new SqlConnection("Temp"))
                 {
-                    string query = "SELECT @searchinfo FROM Teacher WHERE Username = @Username";
+                    string query = "SELECT @searchinfo FROM Teacher WHERE Username = @username";
                     SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.Parameters.AddWithValue("@searchinfo", searchinfo);
+                    cmd.Parameters.AddWithValue("@username", username);
                     cmd.CommandType = CommandType.Text;
                     cnn.Open();
 
@@ -76,8 +78,10 @@ namespace History_VAR.Classes
             {
                 using (SqlConnection cnn = new SqlConnection("Temp"))
                 {
-                    string query = "SELECT @searchinfo FROM Student WHERE Username = @Username";
+                    string query = "SELECT @searchinfo FROM Student WHERE Username = @username";
                     SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.Parameters.AddWithValue("@searchinfo", searchinfo);
+                    cmd.Parameters.AddWithValue("@username", username);
                     cmd.CommandType = CommandType.Text;
                     cnn.Open();
 
