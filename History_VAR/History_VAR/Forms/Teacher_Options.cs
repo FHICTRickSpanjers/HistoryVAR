@@ -32,5 +32,13 @@ namespace History_VAR.Forms
             Current_Lessons.Closed += (s, args) => this.Close();
             Current_Lessons.Show();
         }
+
+        private void btn_logout_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var userselect = new User_Selection();
+            userselect.Closed += (s, args) => this.Close();
+            userselect.Show();
+        }
     }
 }

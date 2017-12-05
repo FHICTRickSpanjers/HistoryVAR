@@ -31,6 +31,7 @@
             this.label_title_user_login = new System.Windows.Forms.Label();
             this.btn_show_all_lessons = new System.Windows.Forms.Button();
             this.btn_create_lesson = new System.Windows.Forms.Button();
+            this.btn_logout = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label_title_user_login
@@ -67,11 +68,22 @@
             this.btn_create_lesson.UseVisualStyleBackColor = true;
             this.btn_create_lesson.Click += new System.EventHandler(this.btn_create_lesson_Click);
             // 
+            // btn_logout
+            // 
+            this.btn_logout.Location = new System.Drawing.Point(12, 186);
+            this.btn_logout.Name = "btn_logout";
+            this.btn_logout.Size = new System.Drawing.Size(375, 46);
+            this.btn_logout.TabIndex = 6;
+            this.btn_logout.Text = "Logout";
+            this.btn_logout.UseVisualStyleBackColor = true;
+            this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
+            // 
             // Teacher_Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 198);
+            this.ClientSize = new System.Drawing.Size(408, 250);
+            this.Controls.Add(this.btn_logout);
             this.Controls.Add(this.btn_create_lesson);
             this.Controls.Add(this.btn_show_all_lessons);
             this.Controls.Add(this.label_title_user_login);
@@ -86,5 +98,6 @@
         private System.Windows.Forms.Label label_title_user_login;
         private System.Windows.Forms.Button btn_show_all_lessons;
         private System.Windows.Forms.Button btn_create_lesson;
+        private System.Windows.Forms.Button btn_logout;
     }
 }
