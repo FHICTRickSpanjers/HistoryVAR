@@ -8,5 +8,13 @@ namespace History_VAR.Classes
 {
     class Student
     {
+        private string StudentName;
+        private int StudentID;
+        private string SchoolName;
+
+        public Student()
+        {
+
+        }
     }
 }

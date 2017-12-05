@@ -6,15 +6,7 @@ using System.Threading.Tasks;
 
 namespace History_VAR.Classes
 {
-    class Teacher
+    class DBRepository
     {
-
-        private string TeacherName;
-        private string SchoolName;
-
-        public Teacher()
-        {
-
-        }
     }
 }
