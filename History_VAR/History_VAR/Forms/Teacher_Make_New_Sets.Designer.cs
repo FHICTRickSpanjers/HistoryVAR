@@ -141,6 +141,9 @@
             // CB_Lesson_Status
             // 
             this.CB_Lesson_Status.FormattingEnabled = true;
+            this.CB_Lesson_Status.Items.AddRange(new object[] {
+            "Published",
+            "Draft"});
             this.CB_Lesson_Status.Location = new System.Drawing.Point(136, 120);
             this.CB_Lesson_Status.Name = "CB_Lesson_Status";
             this.CB_Lesson_Status.Size = new System.Drawing.Size(217, 24);

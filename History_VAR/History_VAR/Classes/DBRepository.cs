@@ -34,7 +34,7 @@ namespace History_VAR.Classes
 
 
         //Teacher Login
-        public string Get_Login_Data_Teachers(string searchinfo, string username)
+        public string Get_Login_Data_Teachers(string username)
         {
             string ResultQuery = "";
 
@@ -42,9 +42,8 @@ namespace History_VAR.Classes
             {
                 using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
-                    string query = "SELECT @searchinfo FROM Teacher WHERE Username = @username";
+                    string query = "SELECT Teacher_password FROM Teacher WHERE Teacher_username = @username";
                     SqlCommand cmd = new SqlCommand(query, cnn);
-                    cmd.Parameters.AddWithValue("@searchinfo", searchinfo);
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.CommandType = CommandType.Text;
                     cnn.Open();
@@ -53,7 +52,7 @@ namespace History_VAR.Classes
                     {
                         while (dr.Read())
                         {
-                            ResultQuery =  dr[searchinfo].ToString();
+                            ResultQuery =  dr["Teacher_password"].ToString();
                         }
                     }
 
@@ -70,7 +69,7 @@ namespace History_VAR.Classes
 
 
         //Student Login
-        public string Get_Login_Data_Student(string searchinfo, string username)
+        public string Get_Login_Data_Student(string username)
         {
             string ResultQuery = "";
 
@@ -78,9 +77,8 @@ namespace History_VAR.Classes
             {
                 using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
-                    string query = "SELECT @searchinfo FROM Student WHERE Username = @username";
+                    string query = "SELECT Student_password FROM Student WHERE Student_username = @username";
                     SqlCommand cmd = new SqlCommand(query, cnn);
-                    cmd.Parameters.AddWithValue("@searchinfo", searchinfo);
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.CommandType = CommandType.Text;
                     cnn.Open();
@@ -89,7 +87,7 @@ namespace History_VAR.Classes
                     {
                         while (dr.Read())
                         {
-                            ResultQuery = dr[searchinfo].ToString();
+                            ResultQuery = dr["Student_password"].ToString();
                         }
                     }
 
