@@ -40,7 +40,7 @@ namespace History_VAR.Classes
 
             try
             {
-                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=YourChoosenPassword;"))
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
                     string query = "SELECT @searchinfo FROM Teacher WHERE Username = @username";
                     SqlCommand cmd = new SqlCommand(query, cnn);
@@ -76,7 +76,7 @@ namespace History_VAR.Classes
 
             try
             {
-                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=YourChoosenPassword;"))
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
                     string query = "SELECT @searchinfo FROM Student WHERE Username = @username";
                     SqlCommand cmd = new SqlCommand(query, cnn);
