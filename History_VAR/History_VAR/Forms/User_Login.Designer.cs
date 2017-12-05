@@ -53,7 +53,7 @@
             // 
             // btn_login
             // 
-            this.btn_login.Location = new System.Drawing.Point(202, 232);
+            this.btn_login.Location = new System.Drawing.Point(202, 199);
             this.btn_login.Name = "btn_login";
             this.btn_login.Size = new System.Drawing.Size(187, 52);
             this.btn_login.TabIndex = 2;
@@ -63,43 +63,44 @@
             // 
             // TB_Password
             // 
-            this.TB_Password.Location = new System.Drawing.Point(14, 173);
-            this.TB_Password.Multiline = true;
+            this.TB_Password.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.TB_Password.Location = new System.Drawing.Point(12, 158);
             this.TB_Password.Name = "TB_Password";
-            this.TB_Password.Size = new System.Drawing.Size(375, 43);
+            this.TB_Password.PasswordChar = '*';
+            this.TB_Password.Size = new System.Drawing.Size(375, 26);
             this.TB_Password.TabIndex = 4;
             // 
             // TB_Username
             // 
-            this.TB_Username.Location = new System.Drawing.Point(12, 98);
-            this.TB_Username.Multiline = true;
+            this.TB_Username.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TB_Username.Location = new System.Drawing.Point(12, 99);
             this.TB_Username.Name = "TB_Username";
-            this.TB_Username.Size = new System.Drawing.Size(375, 43);
+            this.TB_Username.Size = new System.Drawing.Size(375, 26);
             this.TB_Username.TabIndex = 5;
             // 
             // label_username
             // 
             this.label_username.AutoSize = true;
-            this.label_username.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_username.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.label_username.Location = new System.Drawing.Point(11, 78);
             this.label_username.Name = "label_username";
-            this.label_username.Size = new System.Drawing.Size(81, 17);
+            this.label_username.Size = new System.Drawing.Size(85, 18);
             this.label_username.TabIndex = 6;
             this.label_username.Text = "Username";
             // 
             // label_password
             // 
             this.label_password.AutoSize = true;
-            this.label_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_password.Location = new System.Drawing.Point(11, 153);
+            this.label_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.label_password.Location = new System.Drawing.Point(11, 137);
             this.label_password.Name = "label_password";
-            this.label_password.Size = new System.Drawing.Size(77, 17);
+            this.label_password.Size = new System.Drawing.Size(83, 18);
             this.label_password.TabIndex = 7;
             this.label_password.Text = "Password";
             // 
             // btn_back
             // 
-            this.btn_back.Location = new System.Drawing.Point(12, 232);
+            this.btn_back.Location = new System.Drawing.Point(12, 199);
             this.btn_back.Name = "btn_back";
             this.btn_back.Size = new System.Drawing.Size(185, 52);
             this.btn_back.TabIndex = 8;
@@ -111,7 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 309);
+            this.ClientSize = new System.Drawing.Size(411, 281);
             this.Controls.Add(this.btn_back);
             this.Controls.Add(this.label_password);
             this.Controls.Add(this.label_username);

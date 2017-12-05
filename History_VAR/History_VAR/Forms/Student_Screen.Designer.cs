@@ -232,7 +232,7 @@
             this.btn_back.Name = "btn_back";
             this.btn_back.Size = new System.Drawing.Size(115, 41);
             this.btn_back.TabIndex = 20;
-            this.btn_back.Text = "Back";
+            this.btn_back.Text = "Logout";
             this.btn_back.UseVisualStyleBackColor = true;
             this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
             // 

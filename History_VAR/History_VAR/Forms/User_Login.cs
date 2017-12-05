@@ -1,4 +1,5 @@
-﻿using System;
+﻿using History_VAR.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,21 +23,61 @@ namespace History_VAR.Forms
         }
 
 
+        private void Check_Values()
+        {
+            if(string.IsNullOrEmpty(TB_Username.Text) || string.IsNullOrEmpty(TB_Password.Text){
+                MessageBox.Show("The username or password was not filled");
+            }
+            else
+            {
+                //Continue forward
+            }
+        }
+
+
+        //Login Teacher
         private void Log_In_Teacher()
         {
-            //Login Teacher
-            this.Hide();
-            var Teacher_Screen = new Teacher_Options();
-            Teacher_Screen.Closed += (s, args) => this.Close();
-            Teacher_Screen.Show();
+            Check_Values();
+
+            DBRepository DB = DBRepository.GetInstance();
+            var DBUsername = DB.Get_Login_Data_Teachers("Username", TB_Username.Text);
+            var DBPassword = DB.Get_Login_Data_Teachers("Password", TB_Username.Text);
+
+            if(TB_Password.Text == DBPassword)
+            {
+                this.Hide();
+                var Teacher_Screen = new Teacher_Options();
+                Teacher_Screen.Closed += (s, args) => this.Close();
+                Teacher_Screen.Show();
+            }
+            else
+            {
+                MessageBox.Show("The username or password was wrong!");
+            }
+
         }
+
+        //Login Student
         private void Log_In_Student()
         {
-            //Login Student
-            this.Hide();
-            var Student_Screen = new Student_Screen();
-            Student_Screen.Closed += (s, args) => this.Close();
-            Student_Screen.Show();
+            Check_Values();
+
+            DBRepository DB = DBRepository.GetInstance();
+            var DBUsername = DB.Get_Login_Data_Teachers("Username", TB_Username.Text);
+            var DBPassword = DB.Get_Login_Data_Teachers("Password", TB_Username.Text);
+
+            if (TB_Password.Text == DBPassword)
+            {
+                this.Hide();
+                var Student_Screen = new Student_Screen();
+                Student_Screen.Closed += (s, args) => this.Close();
+                Student_Screen.Show();
+            }
+            else
+            {
+                MessageBox.Show("The username or password was wrong!");
+            }
 
         }
 
