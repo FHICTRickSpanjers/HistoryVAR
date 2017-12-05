@@ -16,5 +16,10 @@ namespace History_VAR.Forms
         {
             InitializeComponent();
         }
+
+        private void btn_login_Click(object sender, EventArgs e)
+        {
+         
+        }
     }
 }

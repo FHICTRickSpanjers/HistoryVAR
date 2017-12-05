@@ -45,14 +45,60 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Classes\ArtObject.cs" />
+    <Compile Include="Classes\Creator.cs" />
+    <Compile Include="Classes\DBRepository.cs" />
+    <Compile Include="Classes\Group.cs" />
+    <Compile Include="Classes\Lesson.cs" />
+    <Compile Include="Classes\Student.cs" />
+    <Compile Include="Classes\Teacher.cs" />
+    <Compile Include="Forms\Student_Screen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\Student_Screen.Designer.cs">
+      <DependentUpon>Student_Screen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Teacher_Current_Sets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher_Current_Sets.Designer.cs">
+      <DependentUpon>Teacher_Current_Sets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Teacher_Make_New_Sets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher_Make_New_Sets.Designer.cs">
+      <DependentUpon>Teacher_Make_New_Sets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Teacher_Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher_Options.Designer.cs">
+      <DependentUpon>Teacher_Options.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\User_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\User_Login.Designer.cs">
+      <DependentUpon>User_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\User_Selection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\User_Selection.Designer.cs">
+      <DependentUpon>User_Selection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Opening_Screen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Opening_Screen.Designer.cs">
+      <DependentUpon>Opening_Screen.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Opening_Screen.resx">
+      <DependentUpon>Opening_Screen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -75,5 +121,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

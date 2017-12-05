@@ -1,4 +1,5 @@
-﻿using System;
+﻿using History_VAR.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,9 +18,12 @@ namespace History_VAR
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void btn_enter_application_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            var Option_Screen = new User_Selection();
+            Option_Screen.Closed += (s, args) => this.Close();
+            Option_Screen.Show();
         }
     }
 }
