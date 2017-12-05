@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace History_VAR
+namespace History_VAR.Forms
 {
-    public partial class Form1 : Form
+    public partial class Teacher_Make_New_Sets : Form
     {
-        public Form1()
+        public Teacher_Make_New_Sets()
         {
             InitializeComponent();
         }

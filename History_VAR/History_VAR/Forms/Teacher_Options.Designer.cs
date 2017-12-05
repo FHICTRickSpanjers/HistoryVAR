@@ -1,6 +1,6 @@
-﻿namespace History_VAR
+﻿namespace History_VAR.Forms
 {
-    partial class Form1
+    partial class Teacher_Options
     {
         /// <summary>
         /// Required designer variable.
@@ -30,10 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.Text = "Teacher_Options";
         }
 
         #endregion
     }
 }
-
