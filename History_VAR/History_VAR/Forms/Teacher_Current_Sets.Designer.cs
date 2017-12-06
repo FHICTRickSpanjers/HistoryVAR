@@ -84,7 +84,7 @@
             this.btn_publish.Name = "btn_publish";
             this.btn_publish.Size = new System.Drawing.Size(297, 41);
             this.btn_publish.TabIndex = 11;
-            this.btn_publish.Text = "Publish Lesson";
+            this.btn_publish.Text = "Change Lesson Status";
             this.btn_publish.UseVisualStyleBackColor = true;
             this.btn_publish.Click += new System.EventHandler(this.btn_publish_Click);
             // 

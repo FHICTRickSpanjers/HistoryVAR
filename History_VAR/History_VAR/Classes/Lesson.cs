@@ -9,13 +9,45 @@ namespace History_VAR.Classes
     class Lesson
     {
         private string Subject;
+        private int LessonID;
+        private string Lesson_name;
+        private string Lesson_status;
         private string Course;
         private List<ArtObject> ListofArtObjects = new List<ArtObject>();
 
+        public Lesson(string LName)
+        {
+            Lesson_name = LName;
+        }
+
+        public Lesson(int ID)
+        {
+            LessonID = ID;
+        }
 
         public Lesson()
         {
 
+        }
+
+        public void SetLessonStatus(string status)
+        {
+            Lesson_status = status;
+        }
+
+        public string GetLessonStatus()
+        {
+            return Lesson_status;
+        }
+
+        public string GetLessonName()
+        {
+            return Lesson_name;
+        }
+
+        public int GetLessonID()
+        {
+            return LessonID;
         }
 
         public void Add_Object(ArtObject obj)

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label_new_lesson = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TB_Desc = new System.Windows.Forms.TextBox();
             this.btn_back = new System.Windows.Forms.Button();
             this.btn_save_lesson = new System.Windows.Forms.Button();
             this.GB_ListOfObjects = new System.Windows.Forms.GroupBox();
@@ -42,6 +42,9 @@
             this.btn_add_objects = new System.Windows.Forms.Button();
             this.label_Made_By = new System.Windows.Forms.Label();
             this.TB_Made_By = new System.Windows.Forms.TextBox();
+            this.TB_Subject = new System.Windows.Forms.TextBox();
+            this.label_subject = new System.Windows.Forms.Label();
+            this.btn_update = new System.Windows.Forms.Button();
             this.GB_ListOfObjects.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,18 +62,18 @@
             this.label_new_lesson.Text = "CREATE NEW LESSON";
             this.label_new_lesson.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // TB_Desc
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 269);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(705, 195);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "Enter your information here...";
+            this.TB_Desc.Location = new System.Drawing.Point(12, 269);
+            this.TB_Desc.Multiline = true;
+            this.TB_Desc.Name = "TB_Desc";
+            this.TB_Desc.Size = new System.Drawing.Size(705, 195);
+            this.TB_Desc.TabIndex = 5;
+            this.TB_Desc.Text = "Enter your information here...";
             // 
             // btn_back
             // 
-            this.btn_back.Location = new System.Drawing.Point(561, 470);
+            this.btn_back.Location = new System.Drawing.Point(12, 470);
             this.btn_back.Name = "btn_back";
             this.btn_back.Size = new System.Drawing.Size(75, 35);
             this.btn_back.TabIndex = 6;
@@ -132,7 +135,7 @@
             // 
             this.label_published.AutoSize = true;
             this.label_published.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_published.Location = new System.Drawing.Point(14, 123);
+            this.label_published.Location = new System.Drawing.Point(14, 116);
             this.label_published.Name = "label_published";
             this.label_published.Size = new System.Drawing.Size(79, 17);
             this.label_published.TabIndex = 11;
@@ -144,7 +147,7 @@
             this.CB_Lesson_Status.Items.AddRange(new object[] {
             "Published",
             "Draft"});
-            this.CB_Lesson_Status.Location = new System.Drawing.Point(136, 120);
+            this.CB_Lesson_Status.Location = new System.Drawing.Point(136, 113);
             this.CB_Lesson_Status.Name = "CB_Lesson_Status";
             this.CB_Lesson_Status.Size = new System.Drawing.Size(217, 24);
             this.CB_Lesson_Status.TabIndex = 12;
@@ -153,7 +156,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(14, 219);
+            this.label2.Location = new System.Drawing.Point(14, 216);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 17);
             this.label2.TabIndex = 15;
@@ -161,9 +164,9 @@
             // 
             // btn_add_objects
             // 
-            this.btn_add_objects.Location = new System.Drawing.Point(136, 201);
+            this.btn_add_objects.Location = new System.Drawing.Point(136, 199);
             this.btn_add_objects.Name = "btn_add_objects";
-            this.btn_add_objects.Size = new System.Drawing.Size(217, 52);
+            this.btn_add_objects.Size = new System.Drawing.Size(217, 51);
             this.btn_add_objects.TabIndex = 16;
             this.btn_add_objects.Text = "Add Objects";
             this.btn_add_objects.UseVisualStyleBackColor = true;
@@ -173,7 +176,7 @@
             // 
             this.label_Made_By.AutoSize = true;
             this.label_Made_By.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Made_By.Location = new System.Drawing.Point(14, 162);
+            this.label_Made_By.Location = new System.Drawing.Point(14, 146);
             this.label_Made_By.Name = "label_Made_By";
             this.label_Made_By.Size = new System.Drawing.Size(70, 17);
             this.label_Made_By.TabIndex = 17;
@@ -181,16 +184,47 @@
             // 
             // TB_Made_By
             // 
-            this.TB_Made_By.Location = new System.Drawing.Point(136, 162);
+            this.TB_Made_By.Location = new System.Drawing.Point(136, 143);
             this.TB_Made_By.Name = "TB_Made_By";
             this.TB_Made_By.Size = new System.Drawing.Size(217, 22);
             this.TB_Made_By.TabIndex = 18;
+            // 
+            // TB_Subject
+            // 
+            this.TB_Subject.Location = new System.Drawing.Point(136, 171);
+            this.TB_Subject.Name = "TB_Subject";
+            this.TB_Subject.Size = new System.Drawing.Size(217, 22);
+            this.TB_Subject.TabIndex = 20;
+            // 
+            // label_subject
+            // 
+            this.label_subject.AutoSize = true;
+            this.label_subject.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_subject.Location = new System.Drawing.Point(14, 174);
+            this.label_subject.Name = "label_subject";
+            this.label_subject.Size = new System.Drawing.Size(62, 17);
+            this.label_subject.TabIndex = 19;
+            this.label_subject.Text = "Subject";
+            // 
+            // btn_update
+            // 
+            this.btn_update.Enabled = false;
+            this.btn_update.Location = new System.Drawing.Point(561, 470);
+            this.btn_update.Name = "btn_update";
+            this.btn_update.Size = new System.Drawing.Size(75, 35);
+            this.btn_update.TabIndex = 21;
+            this.btn_update.Text = "Update";
+            this.btn_update.UseVisualStyleBackColor = true;
+            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
             // 
             // Teacher_Make_New_Sets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 512);
+            this.Controls.Add(this.btn_update);
+            this.Controls.Add(this.TB_Subject);
+            this.Controls.Add(this.label_subject);
             this.Controls.Add(this.TB_Made_By);
             this.Controls.Add(this.label_Made_By);
             this.Controls.Add(this.btn_add_objects);
@@ -202,7 +236,7 @@
             this.Controls.Add(this.GB_ListOfObjects);
             this.Controls.Add(this.btn_save_lesson);
             this.Controls.Add(this.btn_back);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TB_Desc);
             this.Controls.Add(this.label_new_lesson);
             this.Name = "Teacher_Make_New_Sets";
             this.Text = "Teacher_Make_New_Sets";
@@ -215,7 +249,7 @@
         #endregion
 
         private System.Windows.Forms.Label label_new_lesson;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TB_Desc;
         private System.Windows.Forms.Button btn_back;
         private System.Windows.Forms.Button btn_save_lesson;
         private System.Windows.Forms.GroupBox GB_ListOfObjects;
@@ -228,5 +262,8 @@
         private System.Windows.Forms.Label label_Made_By;
         private System.Windows.Forms.TextBox TB_Made_By;
         private System.Windows.Forms.ListBox LB_Object_Items;
+        private System.Windows.Forms.TextBox TB_Subject;
+        private System.Windows.Forms.Label label_subject;
+        private System.Windows.Forms.Button btn_update;
     }
 }
