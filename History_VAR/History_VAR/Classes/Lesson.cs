@@ -30,15 +30,18 @@ namespace History_VAR.Classes
 
         }
 
-        public void SetLessonStatus(string status)
+        public string LessonStatus
         {
-            Lesson_status = status;
+            get
+            {
+                return this.Lesson_status;
+            }
+            set
+            {
+                this.Lesson_status = value;
+            }
         }
-
-        public string GetLessonStatus()
-        {
-            return Lesson_status;
-        }
+ 
 
         public string GetLessonName()
         {

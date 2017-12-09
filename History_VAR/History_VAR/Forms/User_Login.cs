@@ -38,7 +38,7 @@ namespace History_VAR.Forms
                 if (TB_Password.Text == DBPassword)
                 {
                     this.Hide();
-                    var Teacher_Screen = new Teacher_Options();
+                    var Teacher_Screen = new Teacher_Options(TB_Username.Text);
                     Teacher_Screen.Closed += (s, args) => this.Close();
                     Teacher_Screen.Show();
                 }
@@ -66,7 +66,7 @@ namespace History_VAR.Forms
                 {
                     this.Hide();
                     var Student_Screen = new Student_Screen();
-                    Student_Screen.Closed += (s, args) => this.Close();
+                    Student_Screen.Closed += (s, args) => this.Close(TB_Username.Text);
                     Student_Screen.Show();
                 }
                 else
@@ -90,13 +90,14 @@ namespace History_VAR.Forms
                 }
                 else
                 {
-
+              
                 }
             }
             catch (NullReferenceException E)
             {
                 MessageBox.Show(E.Message);
             }
+
         }
 
 

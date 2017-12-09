@@ -33,9 +33,9 @@ namespace History_VAR.Forms
 
             DBRepository DB = DBRepository.GetInstance();
             var lessons = DB.Get_Lessons_Data();
-            foreach(string single_lesson in lessons)
+            foreach(var single_lesson in lessons)
             {
-                CB_Lessons.Items.Add(single_lesson);
+                CB_Lessons.Items.Add(single_lesson.GetLessonName());
             }
         }
 
@@ -81,11 +81,11 @@ namespace History_VAR.Forms
             {
                 DBRepository DB = DBRepository.GetInstance();
                 var Status = DB.Get_Lesson_Status(CB_Lessons.SelectedIndex + 1);
-                if (Status == "Published")
+                if (Status.LessonStatus == "Published")
                 {
                     DB.Update_Lesson_Status_By_ID(CB_Lessons.SelectedIndex + 1, "Draft");
                 }
-                else if (Status == "Draft")
+                else if (Status.LessonStatus == "Draft")
                 {
                     DB.Update_Lesson_Status_By_ID(CB_Lessons.SelectedIndex + 1, "Published");
                 }

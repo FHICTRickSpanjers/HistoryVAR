@@ -45,6 +45,8 @@
             this.TB_Subject = new System.Windows.Forms.TextBox();
             this.label_subject = new System.Windows.Forms.Label();
             this.btn_update = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.CB_Classes = new System.Windows.Forms.ComboBox();
             this.GB_ListOfObjects.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +66,7 @@
             // 
             // TB_Desc
             // 
-            this.TB_Desc.Location = new System.Drawing.Point(12, 269);
+            this.TB_Desc.Location = new System.Drawing.Point(12, 283);
             this.TB_Desc.Multiline = true;
             this.TB_Desc.Name = "TB_Desc";
             this.TB_Desc.Size = new System.Drawing.Size(705, 195);
@@ -73,7 +75,7 @@
             // 
             // btn_back
             // 
-            this.btn_back.Location = new System.Drawing.Point(12, 470);
+            this.btn_back.Location = new System.Drawing.Point(12, 484);
             this.btn_back.Name = "btn_back";
             this.btn_back.Size = new System.Drawing.Size(75, 35);
             this.btn_back.TabIndex = 6;
@@ -83,7 +85,7 @@
             // 
             // btn_save_lesson
             // 
-            this.btn_save_lesson.Location = new System.Drawing.Point(642, 470);
+            this.btn_save_lesson.Location = new System.Drawing.Point(642, 484);
             this.btn_save_lesson.Name = "btn_save_lesson";
             this.btn_save_lesson.Size = new System.Drawing.Size(75, 35);
             this.btn_save_lesson.TabIndex = 7;
@@ -156,7 +158,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(14, 216);
+            this.label2.Location = new System.Drawing.Point(14, 243);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 17);
             this.label2.TabIndex = 15;
@@ -164,9 +166,9 @@
             // 
             // btn_add_objects
             // 
-            this.btn_add_objects.Location = new System.Drawing.Point(136, 199);
+            this.btn_add_objects.Location = new System.Drawing.Point(136, 234);
             this.btn_add_objects.Name = "btn_add_objects";
-            this.btn_add_objects.Size = new System.Drawing.Size(217, 51);
+            this.btn_add_objects.Size = new System.Drawing.Size(217, 34);
             this.btn_add_objects.TabIndex = 16;
             this.btn_add_objects.Text = "Add Objects";
             this.btn_add_objects.UseVisualStyleBackColor = true;
@@ -209,7 +211,7 @@
             // btn_update
             // 
             this.btn_update.Enabled = false;
-            this.btn_update.Location = new System.Drawing.Point(561, 470);
+            this.btn_update.Location = new System.Drawing.Point(561, 484);
             this.btn_update.Name = "btn_update";
             this.btn_update.Size = new System.Drawing.Size(75, 35);
             this.btn_update.TabIndex = 21;
@@ -217,11 +219,33 @@
             this.btn_update.UseVisualStyleBackColor = true;
             this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(14, 202);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 17);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Classes";
+            // 
+            // CB_Classes
+            // 
+            this.CB_Classes.FormattingEnabled = true;
+            this.CB_Classes.Items.AddRange(new object[] {
+            "All"});
+            this.CB_Classes.Location = new System.Drawing.Point(136, 199);
+            this.CB_Classes.Name = "CB_Classes";
+            this.CB_Classes.Size = new System.Drawing.Size(217, 24);
+            this.CB_Classes.TabIndex = 23;
+            // 
             // Teacher_Make_New_Sets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(729, 512);
+            this.ClientSize = new System.Drawing.Size(729, 531);
+            this.Controls.Add(this.CB_Classes);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_update);
             this.Controls.Add(this.TB_Subject);
             this.Controls.Add(this.label_subject);
@@ -265,5 +289,7 @@
         private System.Windows.Forms.TextBox TB_Subject;
         private System.Windows.Forms.Label label_subject;
         private System.Windows.Forms.Button btn_update;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox CB_Classes;
     }
 }

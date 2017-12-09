@@ -12,6 +12,13 @@ namespace History_VAR.Forms
 {
     public partial class Teacher_Options : Form
     {
+        private string Logged_In_User;
+
+        public Teacher_Options(string username)
+        {
+            InitializeComponent();
+            this.Logged_In_User = username;
+        }
         public Teacher_Options()
         {
             InitializeComponent();
@@ -20,7 +27,7 @@ namespace History_VAR.Forms
         private void btn_create_lesson_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var Create_Lesson = new Teacher_Make_New_Sets();
+            var Create_Lesson = new Teacher_Make_New_Sets(Logged_In_User);
             Create_Lesson.Closed += (s, args) => this.Close();
             Create_Lesson.Show();
         }

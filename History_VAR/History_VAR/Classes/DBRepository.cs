@@ -33,7 +33,11 @@ namespace History_VAR.Classes
 
 
 
-        //Teacher Login
+        /// <summary>
+        /// Get login data for Teacher User
+        /// </summary>
+        /// <param name="username">Username as string</param>
+        /// <returns>Password</returns>
         public string Get_Login_Data_Teachers(string username)
         {
             string ResultQuery = "";
@@ -68,7 +72,11 @@ namespace History_VAR.Classes
         }
 
 
-        //Student Login
+        /// <summary>
+        /// Get login data for the student users
+        /// </summary>
+        /// <param name="username">string username</param>
+        /// <returns>password as string</returns>
         public string Get_Login_Data_Student(string username)
         {
             string ResultQuery = "";
@@ -104,10 +112,16 @@ namespace History_VAR.Classes
 
 
 
-        //Make new Lesson (set)
+        /// <summary>
+        /// Create new lessons (teachers)
+        /// </summary>
+        /// <param name="lesson_subject">string lesson subject</param>
+        /// <param name="teacherid">Id of the teacher</param>
+        /// <param name="lesson_name">Name of the lesson</param>
+        /// <param name="lesson_status">Status of the lesson</param>
+        /// <param name="lesson_desc">Description of the lesson</param>
         public void CreateNewLesson(string lesson_subject, int teacherid, string lesson_name, string lesson_status, string lesson_desc)
         {
-
             try
             {
 
@@ -218,10 +232,13 @@ namespace History_VAR.Classes
 
 
 
-        //Select all lessons
-        public List<string> Get_Lessons_Data()
+        /// <summary>
+        /// Select all the lessons
+        /// </summary>
+        /// <returns>return a string of lessons</returns>
+        public List<Lesson> Get_Lessons_Data()
         {
-            List<string> listOfLessons = new List<string>();
+            List<Lesson> listOfLessons = new List<Lesson>();
 
             try
             {
@@ -237,7 +254,7 @@ namespace History_VAR.Classes
                         while (dr.Read())
                         {
                             Lesson L = new Lesson(dr["Lesson_name"].ToString());
-                            listOfLessons.Add(L.GetLessonName());
+                            listOfLessons.Add(L);
                         }
                     }
 
@@ -289,6 +306,10 @@ namespace History_VAR.Classes
         }
 
 
+        /// <summary>
+        /// Delete lesson by ID
+        /// </summary>
+        /// <param name="Lesson_ID"></param>
         public void Delete_Lesson_By_ID(int Lesson_ID)
         {
             try
@@ -312,11 +333,14 @@ namespace History_VAR.Classes
 
         }
 
-        //Select Lesson status
-        public string Get_Lesson_Status(int lessonid)
+        /// <summary>
+        /// Get current lesson status
+        /// </summary>
+        /// <param name="lessonid">ID of the lesson</param>
+        /// <returns>Lesson object</returns>
+        public Lesson Get_Lesson_Status(int lessonid)
         {
-            string status = "";
-
+            Lesson Les = new Lesson();
             try
             {
                 using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
@@ -330,9 +354,7 @@ namespace History_VAR.Classes
                     {
                         while (dr.Read())
                         {
-                            Lesson L = new Lesson();
-                            L.SetLessonStatus(dr["Lesson_status"].ToString());
-                            status =  L.GetLessonStatus();
+                            Les.LessonStatus =  (dr["Lesson_status"].ToString());
                         }
                     }
 
@@ -344,11 +366,15 @@ namespace History_VAR.Classes
                 MessageBox.Show(e.Message);
             }
 
-            return status;
+            return Les;
         }
 
 
-        //Update lesson status
+        /// <summary>
+        /// Update a lesson
+        /// </summary>
+        /// <param name="Lesson_ID">ID of the lesson</param>
+        /// <param name="status">status of the lesson</param>
         public void Update_Lesson_Status_By_ID(int Lesson_ID, string status)
         {
             try
@@ -378,8 +404,13 @@ namespace History_VAR.Classes
         }
 
 
-        //Select necessary data from lesson to udpate
-
+        
+        /// <summary>
+        /// Select necessary data to update
+        /// </summary>
+        /// <param name="Lesson_ID">ID of the lesson</param>
+        /// <param name="searchinfo">Anything really</param>
+        /// <returns></returns>
         public string Get_Lesson_Data_By_ID(int Lesson_ID, string searchinfo)
         {
             string required_data = "";
@@ -449,5 +480,112 @@ namespace History_VAR.Classes
             }
         }
 
+
+
+
+        //Select groups from database
+
+        public List<Group> Get_Group_Data()
+        {
+            List<Group> ListOfGroups = new List<Group>();
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT * FROM Classes";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            Group G = new Group(dr["Class_name"].ToString());
+                            ListOfGroups.Add(G);
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return ListOfGroups;
+        }
+
+
+
+        //Get Teacher ID by name
+        public Teacher Get_Teacher_ID(string name)
+        {
+            Teacher T = new Teacher();
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT Teacher_ID FROM Teacher WHERE Teacher_username = @username";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.Parameters.AddWithValue("@username", name);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {                     
+                            T.TeacherIdentification = Convert.ToInt32(dr["Teacher_ID"]);
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return T;
+        }
+
+
+        public Teacher Get_Teacher_Name(int ID)
+        {
+            Teacher T = null;
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT Teacher_username FROM Teacher WHERE Teacher_ID = @ID";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.Parameters.AddWithValue("@ID", ID);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            T = new Teacher(dr["Teacher_username"].ToString());
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return T;
+        }
     }
 }

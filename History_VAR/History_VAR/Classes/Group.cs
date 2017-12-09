@@ -19,6 +19,16 @@ namespace History_VAR.Classes
 
         }
 
+        public Group(string name)
+        {
+            this.GroupName = name;
+        }
+
+        public string GetGroupName()
+        {
+            return this.GroupName;
+        }
+
         public List<Student> getStudents()
         {
             return ListofStudents;
