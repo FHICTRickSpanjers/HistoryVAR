@@ -44,7 +44,8 @@ namespace History_VAR.Forms
             if(CB_Lessons.SelectedIndex > -1)
             {
                 DBRepository DB = DBRepository.GetInstance();
-                DB.Delete_Lesson_By_ID(CB_Lessons.SelectedIndex + 1);
+                int Lesson_ID = DB.GetLessonID(CB_Lessons.SelectedItem.ToString());
+                DB.Delete_Lesson_By_ID(Lesson_ID);
                 GetAllLessons();
             }
             else

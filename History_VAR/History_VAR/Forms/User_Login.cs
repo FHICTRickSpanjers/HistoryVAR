@@ -65,8 +65,8 @@ namespace History_VAR.Forms
                 if (TB_Password.Text == DBPassword)
                 {
                     this.Hide();
-                    var Student_Screen = new Student_Screen();
-                    Student_Screen.Closed += (s, args) => this.Close(TB_Username.Text);
+                    var Student_Screen = new Student_Screen(TB_Username.Text);
+                    Student_Screen.Closed += (s, args) => this.Close();
                     Student_Screen.Show();
                 }
                 else

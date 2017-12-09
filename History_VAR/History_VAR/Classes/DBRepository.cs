@@ -493,7 +493,7 @@ namespace History_VAR.Classes
             {
                 using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
-                    string query = "SELECT * FROM Classes";
+                    string query = "SELECT * FROM Group";
                     SqlCommand cmd = new SqlCommand(query, cnn);
                     cmd.CommandType = CommandType.Text;
                     cnn.Open();
@@ -502,7 +502,7 @@ namespace History_VAR.Classes
                     {
                         while (dr.Read())
                         {
-                            Group G = new Group(dr["Class_name"].ToString());
+                            Group G = new Group(dr["Group_name"].ToString());
                             ListOfGroups.Add(G);
                         }
                     }
