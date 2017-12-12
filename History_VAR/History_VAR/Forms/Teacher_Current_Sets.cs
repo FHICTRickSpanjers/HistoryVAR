@@ -62,7 +62,6 @@ namespace History_VAR.Forms
             {
                 DBRepository DB = DBRepository.GetInstance();
                 int lesson_id = DB.GetLessonID(CB_Lessons.SelectedItem.ToString());
-                MessageBox.Show(lesson_id.ToString());
                 bool editchar = true;
 
                 this.Hide();
@@ -83,7 +82,7 @@ namespace History_VAR.Forms
             if (CB_Lessons.SelectedIndex > -1)
             {
                 DBRepository DB = DBRepository.GetInstance();
-                var Status = DB.Get_Lesson_Status(CB_Lessons.SelectedIndex + 1);
+                var Status = DB.Get_Lesson_Status(DB.GetLessonID(CB_Lessons.SelectedItem.ToString()));
                 if (Status.LessonStatus == "Published")
                 {
                     DB.Update_Lesson_Status_By_ID(CB_Lessons.SelectedIndex + 1, "Draft");

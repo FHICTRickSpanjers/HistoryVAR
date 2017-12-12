@@ -16,15 +16,14 @@ namespace History_VAR.Forms
 
         private string SelectedUser;
 
-        public User_Login(string C)
+        public User_Login()
         {
             InitializeComponent();
-            this.SelectedUser = C;
         }
 
 
         //Login Teacher
-        private void Log_In_Teacher()
+        private bool Log_In_Teacher()
         {
             if (string.IsNullOrEmpty(TB_Username.Text) || string.IsNullOrEmpty(TB_Password.Text))
             {
@@ -41,17 +40,17 @@ namespace History_VAR.Forms
                     var Teacher_Screen = new Teacher_Options(TB_Username.Text);
                     Teacher_Screen.Closed += (s, args) => this.Close();
                     Teacher_Screen.Show();
+                    return true;
                 }
-                else
-                {
-                    MessageBox.Show("The username or password was wrong!");
-                }
+                
             }
+
+            return false;
 
         }
 
         //Login Student
-        private void Log_In_Student()
+        private bool Log_In_Student()
         {
             if (string.IsNullOrEmpty(TB_Username.Text) || string.IsNullOrEmpty(TB_Password.Text))
             {
@@ -68,30 +67,25 @@ namespace History_VAR.Forms
                     var Student_Screen = new Student_Screen(TB_Username.Text);
                     Student_Screen.Closed += (s, args) => this.Close();
                     Student_Screen.Show();
-                }
-                else
-                {
-                    MessageBox.Show("The username or password was wrong!");
+                    return true;
                 }
             }
+
+            return false;
         }
 
         private void Login()
         {
             try
             {
-                if (SelectedUser == "Teacher")
+
+                if (Log_In_Teacher() == false)
                 {
-                    Log_In_Teacher();
-                }
-                else if (SelectedUser == "Student")
-                {
-                    Log_In_Student();
-                }
-                else
-                {
-              
-                }
+                    if(Log_In_Student() == false)
+                    {
+                        MessageBox.Show("The username or password was wrong!");
+                    }
+                }      
             }
             catch (NullReferenceException E)
             {
@@ -110,9 +104,9 @@ namespace History_VAR.Forms
         {
             //Back to previous screen
             this.Hide();
-            var User_Selection = new User_Selection();
-            User_Selection.Closed += (s, args) => this.Close();
-            User_Selection.Show();
+            var Opening_Screen = new Opening_Screen();
+            Opening_Screen.Closed += (s, args) => this.Close();
+            Opening_Screen.Show();
         }
     }
 }

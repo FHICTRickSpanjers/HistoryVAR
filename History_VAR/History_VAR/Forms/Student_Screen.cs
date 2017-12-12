@@ -12,20 +12,19 @@ namespace History_VAR.Forms
 {
     public partial class Student_Screen : Form
     {
-
         private string Logged_In_User;
 
-        public Student_Screen(string username)
+        public Student_Screen(string user)
         {
             InitializeComponent();
-            this.Logged_In_User = username;
+            this.Logged_In_User = user;
         }
 
         private void btn_back_Click(object sender, EventArgs e)
         {
             //Back to previous screen
             this.Hide();
-            var User_Selection = new User_Selection();
+            var User_Selection = new User_Login();
             User_Selection.Closed += (s, args) => this.Close();
             User_Selection.Show();
         }

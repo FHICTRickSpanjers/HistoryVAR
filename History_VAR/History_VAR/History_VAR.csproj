@@ -82,12 +82,6 @@
     <Compile Include="Forms\User_Login.Designer.cs">
       <DependentUpon>User_Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\User_Selection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\User_Selection.Designer.cs">
-      <DependentUpon>User_Selection.cs</DependentUpon>
-    </Compile>
     <Compile Include="Opening_Screen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,9 +104,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\User_Login.resx">
       <DependentUpon>User_Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\User_Selection.resx">
-      <DependentUpon>User_Selection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Opening_Screen.resx">
       <DependentUpon>Opening_Screen.cs</DependentUpon>

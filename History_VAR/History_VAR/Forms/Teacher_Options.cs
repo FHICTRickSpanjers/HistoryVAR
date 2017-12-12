@@ -43,9 +43,9 @@ namespace History_VAR.Forms
         private void btn_logout_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var userselect = new User_Selection();
-            userselect.Closed += (s, args) => this.Close();
-            userselect.Show();
+            var userlogin= new User_Login();
+            userlogin.Closed += (s, args) => this.Close();
+            userlogin.Show();
         }
     }
 }
