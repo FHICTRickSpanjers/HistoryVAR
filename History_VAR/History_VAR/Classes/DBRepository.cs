@@ -330,8 +330,32 @@ namespace History_VAR.Classes
             {
                 MessageBox.Show(e.Message);
             }
-
         }
+
+
+        //Delete the lesson for the groups that have it
+        public void Delete_Lesson_At_Groups_By_ID(int Lesson_ID)
+        {
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "DELETE FROM LessonGroups WHERE Lesson_ID = @Lesson_ID";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Lesson_ID", Lesson_ID);
+                    cnn.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
 
         /// <summary>
         /// Get current lesson status
@@ -493,8 +517,9 @@ namespace History_VAR.Classes
             {
                 using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
-                    string query = "SELECT * FROM Group";
+                    string query = "SELECT * FROM \"Group\"";
                     SqlCommand cmd = new SqlCommand(query, cnn);
+
                     cmd.CommandType = CommandType.Text;
                     cnn.Open();
 
@@ -502,7 +527,7 @@ namespace History_VAR.Classes
                     {
                         while (dr.Read())
                         {
-                            Group G = new Group(dr["Group_name"].ToString());
+                            Group G = new Group(Convert.ToInt32(dr["Group_ID"]), dr["Group_name"].ToString());
                             ListOfGroups.Add(G);
                         }
                     }
@@ -586,6 +611,142 @@ namespace History_VAR.Classes
             }
 
             return T;
+        }
+
+        public Group Get_Group_ID(string name)
+        {
+            Group G = null;
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT Group_ID FROM \"Group\" WHERE Group_name = @name";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            int groupid = Convert.ToInt32(dr["Group_ID"]);
+                            G = new Group(groupid);
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return G;
+        }
+
+
+        public void Insert_Lesson_For_Groups(int Lesson_ID, int Group_ID)
+        {
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    if (cnn.State == ConnectionState.Closed)
+                    {
+                        cnn.Open();
+                    }
+
+                    SqlCommand NewCmd = cnn.CreateCommand();
+                    NewCmd.Connection = cnn;
+                    NewCmd.CommandType = CommandType.Text;
+                    NewCmd.CommandText = "INSERT INTO LessonGroups(Lesson_ID, Group_ID) VALUES (@Lesson_ID, @Group_ID)";
+
+                    NewCmd.Parameters.AddWithValue("@Lesson_ID", Lesson_ID);
+                    NewCmd.Parameters.AddWithValue("@Group_ID", Group_ID);
+                    NewCmd.ExecuteNonQuery();
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }        
+        }
+
+
+
+        public Group Get_Group_ID_Based_On_Lesson_ID(int ID)
+        {
+            Group G = null;
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT Group_ID FROM LessonGroups WHERE Lesson_ID = @ID";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.Parameters.AddWithValue("@ID", ID);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            int groupid = Convert.ToInt32(dr["Group_ID"]);
+                            G = new Group(groupid);
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return G;
+        }
+
+
+        public Group Get_Group_Data_Based_On_GroupID(int ID)
+        {
+            Group G = null;
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT * FROM \"Group\" WHERE Group_ID = @ID";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.Parameters.AddWithValue("@ID", ID);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            int groupid = Convert.ToInt32(dr["Group_ID"]);
+                            string groupname = dr["Group_name"].ToString();
+                            G = new Group(groupid, groupname);
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return G;
         }
     }
 }

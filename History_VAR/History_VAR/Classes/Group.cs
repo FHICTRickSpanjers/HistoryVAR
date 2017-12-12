@@ -8,6 +8,7 @@ namespace History_VAR.Classes
 {
     class Group
     {
+        private int GroupID;
         private string GroupName;
         private List<Teacher> ListofTeachers = new List<Teacher>();
         private List<Student> ListofStudents = new List<Student>();
@@ -24,6 +25,17 @@ namespace History_VAR.Classes
             this.GroupName = name;
         }
 
+        public Group(int GroupID)
+        {
+            this.GroupID = GroupID;
+        }
+
+        public Group(int GroupID, string GroupName)
+        {
+            this.GroupID = GroupID;
+            this.GroupName = GroupName;
+        }
+
         public string GetGroupName()
         {
             return this.GroupName;
@@ -37,6 +49,11 @@ namespace History_VAR.Classes
         public List<Teacher> getTeachers()
         {
             return ListofTeachers;
+        }
+
+        public int Get_Group_ID()
+        {
+            return GroupID;
         }
 
 

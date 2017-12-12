@@ -65,27 +65,74 @@ namespace History_VAR.Forms
             }
             else
             {
+                //Get Teacher ID
                 int Teacher_ID = DB.Get_Teacher_ID(TB_Made_By.Text).TeacherIdentification;
-                MessageBox.Show(Teacher_ID.ToString());
+
+                //Insert new Lesson
                 DB.CreateNewLesson(TB_Subject.Text, Teacher_ID, TB_Title.Text, CB_Lesson_Status.SelectedItem.ToString(), TB_Desc.Text);
+
+                int Group_ID;
+                //Get Group and Lesson ID
+                if(CB_Classes.SelectedIndex == 0)
+                {
+
+                }
+                else
+                {
+                   Group_ID = DB.Get_Group_ID(CB_Classes.SelectedItem.ToString()).Get_Group_ID();
+                   int Lesson_ID = DB.GetLessonID(TB_Title.Text);
+                   //Insert Lesson into chosen group
+                   DB.Insert_Lesson_For_Groups(Lesson_ID, Group_ID);
+                }
+             
+                MessageBox.Show("Saved lesson!");
             }  
         }
 
 
         private void Fill_Saved_Lesson_Data(int Lesson_ID)
         {
+            //Open instance
             DBRepository DB = DBRepository.GetInstance();
-            string subject = DB.Get_Lesson_Data_By_ID(Lesson_ID, "Lesson_subject");
-            string title = DB.Get_Lesson_Data_By_ID(Lesson_ID, "Lesson_Name");
-            int Teacher_ID = Convert.ToInt32(DB.Get_Lesson_Data_By_ID(Lesson_ID, "Teacher_ID"));
-            string desc = DB.Get_Lesson_Data_By_ID(Lesson_ID, "Lesson_description");
-            string status = DB.Get_Lesson_Data_By_ID(Lesson_ID, "Lesson_status");
 
-            TB_Title.Text = title;
-            TB_Subject.Text = subject;
-            TB_Desc.Text = desc;
-            TB_Made_By.Text = DB.Get_Teacher_Name(Teacher_ID).GetTeacherName();
-            CB_Lesson_Status.SelectedItem = status;
+            try
+            {
+                //Get data
+                string subject = DB.Get_Lesson_Data_By_ID(Lesson_ID, "Lesson_subject");
+                string title = DB.Get_Lesson_Data_By_ID(Lesson_ID, "Lesson_Name");
+                int Teacher_ID = Convert.ToInt32(DB.Get_Lesson_Data_By_ID(Lesson_ID, "Teacher_ID"));
+                string desc = DB.Get_Lesson_Data_By_ID(Lesson_ID, "Lesson_description");
+                string status = DB.Get_Lesson_Data_By_ID(Lesson_ID, "Lesson_status");
+
+                //Fill the boxes with received DB data
+                TB_Title.Text = title;
+                TB_Subject.Text = subject;
+                TB_Desc.Text = desc;
+                TB_Made_By.Text = DB.Get_Teacher_Name(Teacher_ID).GetTeacherName();
+                CB_Lesson_Status.SelectedItem = status;
+
+                //Get Group ID
+                if (DB.Get_Group_ID_Based_On_Lesson_ID(Lesson_ID) != null)
+                {
+                    int groupid = DB.Get_Group_ID_Based_On_Lesson_ID(Lesson_ID).Get_Group_ID();
+                    string groupname = DB.Get_Group_Data_Based_On_GroupID(groupid).GetGroupName();
+                    CB_Classes.SelectedItem = groupname;
+                }
+                else
+                {
+                    CB_Classes.SelectedItem = "All";
+                }
+            }
+            catch (NullReferenceException)
+            {
+                //Do nothing
+            }    
+        }
+
+
+        private void Add_Images_To_Lesson()
+        {
+
         }
 
 
@@ -94,6 +141,33 @@ namespace History_VAR.Forms
             DBRepository DB = DBRepository.GetInstance();
             int Lesson_ID = DB.GetLessonID(TB_Title.Text);
             DB.UpdateLesson(Lesson_ID, TB_Subject.Text, TB_Title.Text, CB_Lesson_Status.SelectedItem.ToString(), TB_Desc.Text);
+
+            //Get Group Information
+            var Groups = DB.Get_Group_Data();
+            int Group_ID = 0;
+
+            foreach(var SGroup in Groups)
+            {
+                if(SGroup.GetGroupName() == CB_Classes.SelectedItem.ToString())
+                {
+                    Group_ID = SGroup.Get_Group_ID();
+                }
+            }
+
+            //Delete previous groups that had this lesson
+            DB.Delete_Lesson_At_Groups_By_ID(Lesson_ID);
+
+            //Add this lesson to the groups that currently have this lesson
+            if(CB_Classes.SelectedItem.ToString() == "All")
+            {
+                //If all don't insert
+            }
+            else
+            {
+                DB.Insert_Lesson_For_Groups(Lesson_ID, Group_ID);
+            }
+
+
             MessageBox.Show("Lesson Updated");
         }
 
@@ -119,6 +193,14 @@ namespace History_VAR.Forms
         private void btn_update_Click(object sender, EventArgs e)
         {
             Update_Lesson();
+        }
+
+
+
+
+        private void btn_add_images_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -60,7 +60,7 @@ namespace History_VAR.Forms
             else
             {
                 DBRepository DB = DBRepository.GetInstance();
-                var DBPassword = DB.Get_Login_Data_Teachers(TB_Username.Text);
+                var DBPassword = DB.Get_Login_Data_Student(TB_Username.Text);
 
                 if (TB_Password.Text == DBPassword)
                 {

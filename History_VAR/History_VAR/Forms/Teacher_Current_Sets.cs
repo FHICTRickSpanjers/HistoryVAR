@@ -46,6 +46,7 @@ namespace History_VAR.Forms
                 DBRepository DB = DBRepository.GetInstance();
                 int Lesson_ID = DB.GetLessonID(CB_Lessons.SelectedItem.ToString());
                 DB.Delete_Lesson_By_ID(Lesson_ID);
+                DB.Delete_Lesson_At_Groups_By_ID(Lesson_ID);
                 GetAllLessons();
             }
             else
@@ -61,6 +62,7 @@ namespace History_VAR.Forms
             {
                 DBRepository DB = DBRepository.GetInstance();
                 int lesson_id = DB.GetLessonID(CB_Lessons.SelectedItem.ToString());
+                MessageBox.Show(lesson_id.ToString());
                 bool editchar = true;
 
                 this.Hide();
