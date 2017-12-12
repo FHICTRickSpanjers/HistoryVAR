@@ -253,7 +253,13 @@ namespace History_VAR.Classes
                     {
                         while (dr.Read())
                         {
-                            Lesson L = new Lesson(dr["Lesson_name"].ToString());
+                            string Lname = dr["Lesson_name"].ToString();
+                            int LID = Convert.ToInt32(dr["Lesson_ID"]);
+                            string Lstatus = dr["Lesson_status"].ToString();
+                            string Ldesc = dr["Lesson_description"].ToString();
+                            string Lsubject = dr["Lesson_subject"].ToString();
+
+                            Lesson L = new Lesson(Lname, LID, Lstatus, Ldesc, Lsubject);
                             listOfLessons.Add(L);
                         }
                     }
@@ -713,6 +719,47 @@ namespace History_VAR.Classes
             return G;
         }
 
+        public List<Lesson> Get_Lessons_Based_On_GroupID(int ID)
+        {
+            List<Lesson> ListofLessons = new List<Lesson>();
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT * FROM Lesson WHERE Lesson_ID IN(SELECT Lesson_ID FROM LessonGroups WHERE Group_ID = @ID)";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.Parameters.AddWithValue("@ID", ID);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            int LessonID = Convert.ToInt32(dr["Lesson_ID"]);
+                            string LessonName = dr["Lesson_name"].ToString();
+                            string LessonStatus = dr["Lesson_status"].ToString();
+                            string LessonDesc = dr["Lesson_description"].ToString();
+                            string LessonSubject = dr["Lesson_subject"].ToString();
+
+                            Lesson L = new Lesson(LessonName, LessonID, LessonStatus, LessonDesc, LessonSubject);
+                            ListofLessons.Add(L);
+ 
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return ListofLessons;
+        }
+
 
         public Group Get_Group_Data_Based_On_GroupID(int ID)
         {
@@ -748,5 +795,83 @@ namespace History_VAR.Classes
 
             return G;
         }
+
+
+        public List<Student> GetStudentDetails()
+        {
+
+            List<Student> ListofStudents = new List<Student>();
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT * FROM Student";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            int StudentID = Convert.ToInt32(dr["Student_ID"]);
+                            string StudentName = dr["Student_username"].ToString() ;
+                            int SchoolID = Convert.ToInt32(dr["School_ID"]);
+
+                            Student S = new Student(StudentID, StudentName, SchoolID);
+
+                            ListofStudents.Add(S);
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return ListofStudents;
+        }
+
+
+        public Group Get_Group_ID_Based_On_Student(int ID)
+        {
+            Group G = null;
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT Group_ID FROM StudentGroup WHERE Student_ID = @ID";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.Parameters.AddWithValue("@ID", ID);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            int groupid = Convert.ToInt32(dr["Group_ID"]);
+                            G = new Group(groupid);
+
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return G;
+        }
+
+
     }
 }

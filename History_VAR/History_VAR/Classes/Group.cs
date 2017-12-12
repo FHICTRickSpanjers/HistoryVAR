@@ -56,6 +56,16 @@ namespace History_VAR.Classes
             return GroupID;
         }
 
+        public List<Student> StudentsInGroup
+        {
+            get{
+               return this.ListofStudents;
+            }
+            set{
+                this.ListofStudents = value;
+            }
+        }
+
 
     }
 }

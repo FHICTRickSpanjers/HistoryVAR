@@ -1,4 +1,5 @@
-﻿using System;
+﻿using History_VAR.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,7 @@ namespace History_VAR.Forms
         {
             InitializeComponent();
             this.Logged_In_User = user;
+            GetAllAvailableLessons();
         }
 
         private void btn_back_Click(object sender, EventArgs e)
@@ -27,6 +29,53 @@ namespace History_VAR.Forms
             var User_Selection = new User_Login();
             User_Selection.Closed += (s, args) => this.Close();
             User_Selection.Show();
+        }
+
+
+        private void GetAllAvailableLessons()
+        {
+            DBRepository DB = DBRepository.GetInstance();
+            var students = DB.GetStudentDetails();
+            int StudentID = 0;
+
+            foreach (var single_student in students)
+            {
+                if (Logged_In_User == single_student.GetStudentName())
+                {
+                    StudentID = single_student.GetStudentID();
+                }
+            }
+
+            var StudentGroup = DB.Get_Group_ID_Based_On_Student(StudentID);
+            var GroupLessons = DB.Get_Lessons_Based_On_GroupID(StudentGroup.Get_Group_ID());
+            foreach (var single_lesson in GroupLessons)
+            {
+                TextBox tb = new TextBox();
+                tb.Text = single_lesson.GetLessonName();
+                tb.Enabled = false;
+                tb.AutoSize = false;
+                tb.Size = new System.Drawing.Size(400, 35);
+                tb.Font = new Font(tb.Font.FontFamily, 14);
+
+                Button B = new Button();
+                B.Text = "Open";
+                B.Size = new System.Drawing.Size(75, 35);
+                B.Name = single_lesson.GetLessonName();
+
+                B.Click += (s, e) => {
+
+                    this.Hide();
+                    var show_lesson = new Student_Show_Lesson(B.Name, Logged_In_User);
+                    show_lesson.Closed += (x, args) => this.Close();
+                    show_lesson.Show();
+
+                };
+
+                FlowLayoutPanelLessons.Controls.Add(tb);
+                FlowLayoutPanelLessons.Controls.Add(B);
+            }
+
+
         }
     }
 }
