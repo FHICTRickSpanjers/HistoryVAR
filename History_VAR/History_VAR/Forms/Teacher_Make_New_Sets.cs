@@ -229,12 +229,12 @@ namespace History_VAR.Forms
 
         private void Add_Images_To_Current_Lesson()
         {
-
+            DBRepository DB = DBRepository.GetInstance();
         }
 
         private void btn_add_images_Click(object sender, EventArgs e)
         {
-            Add_Images_To_Curren_Lesson();
+            Add_Images_To_Current_Lesson();
         }
 
         private void LB_Images_DoubleClick(object sender, EventArgs e)

@@ -269,9 +269,9 @@
             // 
             // btn_Add_Image_to_system
             // 
-            this.btn_Add_Image_to_system.Location = new System.Drawing.Point(17, 232);
+            this.btn_Add_Image_to_system.Location = new System.Drawing.Point(15, 232);
             this.btn_Add_Image_to_system.Name = "btn_Add_Image_to_system";
-            this.btn_Add_Image_to_system.Size = new System.Drawing.Size(336, 34);
+            this.btn_Add_Image_to_system.Size = new System.Drawing.Size(338, 34);
             this.btn_Add_Image_to_system.TabIndex = 25;
             this.btn_Add_Image_to_system.Text = "Add Images To System";
             this.btn_Add_Image_to_system.UseVisualStyleBackColor = true;
