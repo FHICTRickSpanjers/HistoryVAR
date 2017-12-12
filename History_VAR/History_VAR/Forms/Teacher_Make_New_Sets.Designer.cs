@@ -49,6 +49,7 @@
             this.GB_Images = new System.Windows.Forms.GroupBox();
             this.LB_Images = new System.Windows.Forms.ListBox();
             this.btn_add_images = new System.Windows.Forms.Button();
+            this.btn_Add_Image_to_system = new System.Windows.Forms.Button();
             this.GB_ListOfObjects.SuspendLayout();
             this.GB_Images.SuspendLayout();
             this.SuspendLayout();
@@ -254,6 +255,7 @@
             this.LB_Images.Name = "LB_Images";
             this.LB_Images.Size = new System.Drawing.Size(211, 112);
             this.LB_Images.TabIndex = 0;
+            this.LB_Images.DoubleClick += new System.EventHandler(this.LB_Images_DoubleClick);
             // 
             // btn_add_images
             // 
@@ -261,15 +263,26 @@
             this.btn_add_images.Name = "btn_add_images";
             this.btn_add_images.Size = new System.Drawing.Size(223, 34);
             this.btn_add_images.TabIndex = 24;
-            this.btn_add_images.Text = "Add Images";
+            this.btn_add_images.Text = "Add System Images";
             this.btn_add_images.UseVisualStyleBackColor = true;
             this.btn_add_images.Click += new System.EventHandler(this.btn_add_images_Click);
+            // 
+            // btn_Add_Image_to_system
+            // 
+            this.btn_Add_Image_to_system.Location = new System.Drawing.Point(17, 232);
+            this.btn_Add_Image_to_system.Name = "btn_Add_Image_to_system";
+            this.btn_Add_Image_to_system.Size = new System.Drawing.Size(336, 34);
+            this.btn_Add_Image_to_system.TabIndex = 25;
+            this.btn_Add_Image_to_system.Text = "Add Images To System";
+            this.btn_Add_Image_to_system.UseVisualStyleBackColor = true;
+            this.btn_Add_Image_to_system.Click += new System.EventHandler(this.btn_Add_Image_to_system_Click);
             // 
             // Teacher_Make_New_Sets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(830, 531);
+            this.Controls.Add(this.btn_Add_Image_to_system);
             this.Controls.Add(this.btn_add_images);
             this.Controls.Add(this.GB_Images);
             this.Controls.Add(this.CB_Classes);
@@ -321,5 +334,6 @@
         private System.Windows.Forms.GroupBox GB_Images;
         private System.Windows.Forms.ListBox LB_Images;
         private System.Windows.Forms.Button btn_add_images;
+        private System.Windows.Forms.Button btn_Add_Image_to_system;
     }
 }

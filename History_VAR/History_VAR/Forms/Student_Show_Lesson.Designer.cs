@@ -98,7 +98,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 444);
+            this.ClientSize = new System.Drawing.Size(554, 429);
             this.Controls.Add(this.btn_back);
             this.Controls.Add(this.Download_OBJ);
             this.Controls.Add(this.LB_Objects);

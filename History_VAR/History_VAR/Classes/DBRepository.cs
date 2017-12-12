@@ -872,6 +872,38 @@ namespace History_VAR.Classes
             return G;
         }
 
+        public void Insert_Image_In_DB(string Filename, Byte[] Image)
+        {
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    if (cnn.State == ConnectionState.Closed)
+                    {
+                        cnn.Open();
+                    }
 
+                    SqlCommand NewCmd = cnn.CreateCommand();
+                    NewCmd.Connection = cnn;
+                    NewCmd.CommandType = CommandType.Text;
+                    NewCmd.CommandText = "INSERT INTO Images (Filename, Data) VALUES (@Filename, @Data)";
+
+                    NewCmd.Parameters.AddWithValue("@Filename", Filename);
+                    NewCmd.Parameters.AddWithValue("@Data", Image);
+                    NewCmd.ExecuteNonQuery();
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        public void Insert_Image_To_Lesson()
+        {
+
+        }
     }
 }

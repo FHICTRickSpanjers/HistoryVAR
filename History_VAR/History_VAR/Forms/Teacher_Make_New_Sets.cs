@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -171,6 +172,15 @@ namespace History_VAR.Forms
             MessageBox.Show("Lesson Updated");
         }
 
+        private void Activate_Update(bool editchar)
+        {
+            if (editchar == true)
+            {
+                btn_update.Enabled = true;
+                btn_save_lesson.Enabled = false;
+            }
+        }
+
         private void btn_save_lesson_Click(object sender, EventArgs e)
         {
             SaveLesson();
@@ -181,14 +191,6 @@ namespace History_VAR.Forms
 
         }
 
-        private void Activate_Update(bool editchar)
-        {
-            if (editchar == true)
-            {
-               btn_update.Enabled = true;
-               btn_save_lesson.Enabled = false;
-            }
-        }
 
         private void btn_update_Click(object sender, EventArgs e)
         {
@@ -196,11 +198,53 @@ namespace History_VAR.Forms
         }
 
 
+        private void Add_Images_To_System()
+        {
+            try
+            {
+                OpenFileDialog open = new OpenFileDialog();
+                open.Filter = "Image Files(*.jpg; *.jpeg;)|*.jpg; *.jpeg";
+                if (open.ShowDialog() == DialogResult.OK)
+                {
+                    Bitmap bit = new Bitmap(open.FileName);
+                    DBRepository DB = DBRepository.GetInstance();
 
+                    byte[] arr;
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        bit.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        arr = ms.ToArray();
+                    }
+
+                    DB.Insert_Image_In_DB(open.FileName, arr);
+
+                }
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Failed loading image");
+            }
+
+        }
+
+        private void Add_Images_To_Current_Lesson()
+        {
+
+        }
 
         private void btn_add_images_Click(object sender, EventArgs e)
         {
+            Add_Images_To_Curren_Lesson();
+        }
 
+        private void LB_Images_DoubleClick(object sender, EventArgs e)
+        {
+            LB_Images.Items.Remove(LB_Images.SelectedItem);
+        }
+
+        private void btn_Add_Image_to_system_Click(object sender, EventArgs e)
+        {
+            Add_Images_To_System();
         }
     }
 }
