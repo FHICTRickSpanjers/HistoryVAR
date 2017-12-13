@@ -934,6 +934,6 @@ namespace History_VAR.Classes
             }
 
             return ListofImages;
-        }    
+        }
     }
 }

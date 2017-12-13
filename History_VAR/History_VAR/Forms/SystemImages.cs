@@ -14,6 +14,8 @@ namespace History_VAR.Forms
 {
     public partial class SystemImages : Form
     {
+        private int IMG_ID;
+
         public SystemImages()
         {
             InitializeComponent();
@@ -44,8 +46,10 @@ namespace History_VAR.Forms
                 p.Click += (s, e) => {
 
                     this.Hide();
-                    var Make_New_Set = new Teacher_Make_New_Sets(image.ReturnImageID());
-                    Make_New_Set.Closed += (x, args) => this.Close();
+                    //var Make_New_Set = new Teacher_Make_New_Sets(image.ReturnImageID());
+                    //Make_New_Set.Closed += (x, args) => this.Close();
+                    //Make_New_Set.Show();
+                    SetImageID(image.ReturnImageID());
 
                 };
 
@@ -54,9 +58,14 @@ namespace History_VAR.Forms
 
         }
 
-        private void FlowLayoutPanelIMG_Paint(object sender, PaintEventArgs e)
+        public void SetImageID(int ID)
         {
+            this.IMG_ID = ID;
+        }
 
+        public int ReturnImageID()
+        {
+            return this.IMG_ID;
         }
     }
 }

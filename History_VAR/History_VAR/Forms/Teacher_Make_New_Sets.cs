@@ -36,6 +36,7 @@ namespace History_VAR.Forms
         {
             InitializeComponent();
             Add_Images_To_Lesson(I);
+            LB_Images.Items.Add("Testerino");
         }
 
         private void FillPresetData()
@@ -145,13 +146,12 @@ namespace History_VAR.Forms
             //Open instance
             DBRepository DB = DBRepository.GetInstance();
             var images = DB.Receive_Images_From_DB();
+
             foreach(var image in images)
             {
                 if(ImageID == image.ReturnImageID())
                 {
-                    MessageBox.Show(image.ReturnFileName());
                     LB_Images.Items.Add(image.ReturnFileName());
-                    Console.WriteLine(image.ReturnFileName());
                 }  
             }
         }
@@ -250,13 +250,13 @@ namespace History_VAR.Forms
         private void Add_Images_To_Current_Lesson()
         {
             var SystemImages = new SystemImages();
-            SystemImages.Show();
+            SystemImages.ShowDialog();
+            Add_Images_To_Lesson(SystemImages.ReturnImageID());
         }
 
         private void btn_add_images_Click(object sender, EventArgs e)
         {
             Add_Images_To_Current_Lesson();
-
         }
 
         private void LB_Images_DoubleClick(object sender, EventArgs e)

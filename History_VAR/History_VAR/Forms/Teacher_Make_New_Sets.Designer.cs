@@ -46,10 +46,10 @@
             this.btn_update = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.CB_Classes = new System.Windows.Forms.ComboBox();
-            this.GB_Images = new System.Windows.Forms.GroupBox();
-            this.LB_Images = new System.Windows.Forms.ListBox();
             this.btn_add_images = new System.Windows.Forms.Button();
             this.btn_Add_Image_to_system = new System.Windows.Forms.Button();
+            this.LB_Images = new System.Windows.Forms.ListBox();
+            this.GB_Images = new System.Windows.Forms.GroupBox();
             this.GB_ListOfObjects.SuspendLayout();
             this.GB_Images.SuspendLayout();
             this.SuspendLayout();
@@ -233,30 +233,6 @@
             this.CB_Classes.Size = new System.Drawing.Size(217, 24);
             this.CB_Classes.TabIndex = 23;
             // 
-            // GB_Images
-            // 
-            this.GB_Images.Controls.Add(this.LB_Images);
-            this.GB_Images.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GB_Images.Location = new System.Drawing.Point(595, 85);
-            this.GB_Images.Name = "GB_Images";
-            this.GB_Images.Size = new System.Drawing.Size(223, 138);
-            this.GB_Images.TabIndex = 9;
-            this.GB_Images.TabStop = false;
-            this.GB_Images.Text = "List of Images";
-            // 
-            // LB_Images
-            // 
-            this.LB_Images.BackColor = System.Drawing.SystemColors.Control;
-            this.LB_Images.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.LB_Images.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Images.FormattingEnabled = true;
-            this.LB_Images.ItemHeight = 16;
-            this.LB_Images.Location = new System.Drawing.Point(6, 21);
-            this.LB_Images.Name = "LB_Images";
-            this.LB_Images.Size = new System.Drawing.Size(211, 112);
-            this.LB_Images.TabIndex = 0;
-            this.LB_Images.DoubleClick += new System.EventHandler(this.LB_Images_DoubleClick);
-            // 
             // btn_add_images
             // 
             this.btn_add_images.Location = new System.Drawing.Point(595, 232);
@@ -277,14 +253,38 @@
             this.btn_Add_Image_to_system.UseVisualStyleBackColor = true;
             this.btn_Add_Image_to_system.Click += new System.EventHandler(this.btn_Add_Image_to_system_Click);
             // 
+            // LB_Images
+            // 
+            this.LB_Images.BackColor = System.Drawing.SystemColors.Control;
+            this.LB_Images.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.LB_Images.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_Images.FormattingEnabled = true;
+            this.LB_Images.ItemHeight = 16;
+            this.LB_Images.Location = new System.Drawing.Point(6, 21);
+            this.LB_Images.Name = "LB_Images";
+            this.LB_Images.Size = new System.Drawing.Size(208, 112);
+            this.LB_Images.TabIndex = 0;
+            this.LB_Images.DoubleClick += new System.EventHandler(this.LB_Images_DoubleClick);
+            // 
+            // GB_Images
+            // 
+            this.GB_Images.Controls.Add(this.LB_Images);
+            this.GB_Images.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GB_Images.Location = new System.Drawing.Point(595, 85);
+            this.GB_Images.Name = "GB_Images";
+            this.GB_Images.Size = new System.Drawing.Size(220, 138);
+            this.GB_Images.TabIndex = 9;
+            this.GB_Images.TabStop = false;
+            this.GB_Images.Text = "List of Images";
+            // 
             // Teacher_Make_New_Sets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(830, 531);
+            this.Controls.Add(this.GB_Images);
             this.Controls.Add(this.btn_Add_Image_to_system);
             this.Controls.Add(this.btn_add_images);
-            this.Controls.Add(this.GB_Images);
             this.Controls.Add(this.CB_Classes);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_update);
@@ -331,9 +331,9 @@
         private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CB_Classes;
-        private System.Windows.Forms.GroupBox GB_Images;
-        private System.Windows.Forms.ListBox LB_Images;
         private System.Windows.Forms.Button btn_add_images;
         private System.Windows.Forms.Button btn_Add_Image_to_system;
+        private System.Windows.Forms.ListBox LB_Images;
+        private System.Windows.Forms.GroupBox GB_Images;
     }
 }
