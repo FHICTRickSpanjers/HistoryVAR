@@ -935,5 +935,35 @@ namespace History_VAR.Classes
 
             return ListofImages;
         }
+
+
+        public void Insert_Image_In_Lesson(int LessonID, int Img_ID)
+        {
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    if (cnn.State == ConnectionState.Closed)
+                    {
+                        cnn.Open();
+                    }
+
+                    SqlCommand NewCmd = cnn.CreateCommand();
+                    NewCmd.Connection = cnn;
+                    NewCmd.CommandType = CommandType.Text;
+                    NewCmd.CommandText = "INSERT INTO LessonImage (Lesson_ID, Image_ID) VALUES (@Lesson_ID, @Image_ID)";
+
+                    NewCmd.Parameters.AddWithValue("@Lesson_ID", LessonID);
+                    NewCmd.Parameters.AddWithValue("@Image_ID", Img_ID);
+                    NewCmd.ExecuteNonQuery();
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+        }
     }
 }
