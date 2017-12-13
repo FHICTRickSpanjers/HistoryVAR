@@ -36,7 +36,7 @@ namespace History_VAR.Forms
                 if (single_lesson.GetLessonName() == Lesson_name)
                 {
                     TB_Lesson_Desc.Text = single_lesson.GetLessonDesc();
-                    LBL_Lesson_Subject.Text = single_lesson.GetLessonSubject();
+                    LBL_Lesson_Subject.Text = single_lesson.GetLessonSubject();                   
                 }
             }
 

@@ -263,7 +263,7 @@
             this.btn_add_images.Name = "btn_add_images";
             this.btn_add_images.Size = new System.Drawing.Size(223, 34);
             this.btn_add_images.TabIndex = 24;
-            this.btn_add_images.Text = "Add System Images";
+            this.btn_add_images.Text = "Add Images to Lesson";
             this.btn_add_images.UseVisualStyleBackColor = true;
             this.btn_add_images.Click += new System.EventHandler(this.btn_add_images_Click);
             // 

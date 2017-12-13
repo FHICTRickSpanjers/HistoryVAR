@@ -73,10 +73,13 @@ namespace History_VAR.Forms
                 DB.CreateNewLesson(TB_Subject.Text, Teacher_ID, TB_Title.Text, CB_Lesson_Status.SelectedItem.ToString(), TB_Desc.Text);
 
                 int Group_ID;
+
                 //Get Group and Lesson ID
                 if(CB_Classes.SelectedIndex == 0)
                 {
-
+                    int Lesson_ID = DB.GetLessonID(TB_Title.Text);
+                    //Insert Lesson into all groups (Using 0)
+                    DB.Insert_Lesson_For_Groups(Lesson_ID, 0);
                 }
                 else
                 {
@@ -113,7 +116,7 @@ namespace History_VAR.Forms
                 CB_Lesson_Status.SelectedItem = status;
 
                 //Get Group ID
-                if (DB.Get_Group_ID_Based_On_Lesson_ID(Lesson_ID) != null)
+                if (DB.Get_Group_ID_Based_On_Lesson_ID(Lesson_ID).Get_Group_ID() != 0)
                 {
                     int groupid = DB.Get_Group_ID_Based_On_Lesson_ID(Lesson_ID).Get_Group_ID();
                     string groupname = DB.Get_Group_Data_Based_On_GroupID(groupid).GetGroupName();
@@ -161,7 +164,7 @@ namespace History_VAR.Forms
             //Add this lesson to the groups that currently have this lesson
             if(CB_Classes.SelectedItem.ToString() == "All")
             {
-                //If all don't insert
+                DB.Insert_Lesson_For_Groups(Lesson_ID, 0);
             }
             else
             {
@@ -230,11 +233,13 @@ namespace History_VAR.Forms
         private void Add_Images_To_Current_Lesson()
         {
             DBRepository DB = DBRepository.GetInstance();
+
         }
 
         private void btn_add_images_Click(object sender, EventArgs e)
         {
             Add_Images_To_Current_Lesson();
+
         }
 
         private void LB_Images_DoubleClick(object sender, EventArgs e)
