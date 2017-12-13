@@ -4,8 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace History_VAR.Classes
 {
@@ -65,7 +63,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return ResultQuery;
@@ -104,7 +102,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return ResultQuery;
@@ -150,7 +148,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -180,7 +178,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -226,7 +224,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -269,7 +267,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return listOfLessons;
@@ -305,7 +303,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return LessonID;
@@ -334,7 +332,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -358,7 +356,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -393,7 +391,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return Les;
@@ -427,7 +425,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
 
@@ -469,7 +467,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return required_data;
@@ -506,7 +504,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -543,7 +541,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return ListOfGroups;
@@ -579,7 +577,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return T;
@@ -613,7 +611,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return T;
@@ -647,7 +645,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return G;
@@ -679,7 +677,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }        
         }
 
@@ -713,7 +711,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return G;
@@ -754,7 +752,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return ListofLessons;
@@ -790,7 +788,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return G;
@@ -830,7 +828,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return ListofStudents;
@@ -866,7 +864,7 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
             return G;
@@ -897,24 +895,19 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.Write(e.Message);
             }
         }
 
 
-        public Image Reveive_Images_From_DB()
+        public List<Image> Receive_Images_From_DB()
         {
-            Image I = null;
+            List<Image> ListofImages = new List<Image>();
 
             try
             {
                 using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
-                    if (cnn.State == ConnectionState.Closed)
-                    {
-                        cnn.Open();
-                    }
-
                     string query = "SELECT * FROM Images";
                     SqlCommand cmd = new SqlCommand(query, cnn);
                     cmd.CommandType = CommandType.Text;
@@ -924,9 +917,11 @@ namespace History_VAR.Classes
                     {
                         while (dr.Read())
                         {
+                            int Img_ID = Convert.ToInt32(dr["IMG_ID"]);
                             byte[] DataArr = (byte[])dr["Data"];
                             string FileName = dr["FileName"].ToString();
-                            I = new Image(FileName, DataArr);
+                            Image I = new Image(Img_ID, FileName, DataArr);
+                            ListofImages.Add(I);
                         }
                     }
 
@@ -935,10 +930,10 @@ namespace History_VAR.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
 
-            return I;
+            return ListofImages;
         }    
     }
 }

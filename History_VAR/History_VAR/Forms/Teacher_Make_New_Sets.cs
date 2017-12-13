@@ -24,12 +24,18 @@ namespace History_VAR.Forms
             GetClasses();
         }
 
-        public Teacher_Make_New_Sets(int lesson_id, bool editchar)
+        public Teacher_Make_New_Sets(int lesson_id, bool edit)
         {
             InitializeComponent();
-            Activate_Update(editchar);
+            Activate_Update(edit);
             GetClasses();
             Fill_Saved_Lesson_Data(lesson_id);
+        }
+
+        public Teacher_Make_New_Sets(int I)
+        {
+            InitializeComponent();
+            Add_Images_To_Lesson(I);
         }
 
         private void FillPresetData()
@@ -134,9 +140,20 @@ namespace History_VAR.Forms
         }
 
 
-        private void Add_Images_To_Lesson()
+        private void Add_Images_To_Lesson(int ImageID)
         {
-
+            //Open instance
+            DBRepository DB = DBRepository.GetInstance();
+            var images = DB.Receive_Images_From_DB();
+            foreach(var image in images)
+            {
+                if(ImageID == image.ReturnImageID())
+                {
+                    MessageBox.Show(image.ReturnFileName());
+                    LB_Images.Items.Add(image.ReturnFileName());
+                    Console.WriteLine(image.ReturnFileName());
+                }  
+            }
         }
 
 
@@ -232,8 +249,8 @@ namespace History_VAR.Forms
 
         private void Add_Images_To_Current_Lesson()
         {
-            DBRepository DB = DBRepository.GetInstance();
-
+            var SystemImages = new SystemImages();
+            SystemImages.Show();
         }
 
         private void btn_add_images_Click(object sender, EventArgs e)
