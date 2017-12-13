@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,10 +37,32 @@ namespace History_VAR.Forms
                 if (single_lesson.GetLessonName() == Lesson_name)
                 {
                     TB_Lesson_Desc.Text = single_lesson.GetLessonDesc();
-                    LBL_Lesson_Subject.Text = single_lesson.GetLessonSubject();                   
+                    LBL_Lesson_Subject.Text = single_lesson.GetLessonSubject();
+
+                    //Add images to box
+                    var Images = DB.Receive_Images_In_Lesson(single_lesson.GetLessonID());
+                    foreach(var image in Images)
+                    {
+                        PictureBox p = new PictureBox();
+                        p.Image = ByteToImage(image.ReturnImageData());
+                        p.SizeMode = PictureBoxSizeMode.Zoom;
+                        p.BorderStyle = BorderStyle.FixedSingle;
+
+                        GB_Images.Controls.Add(p);
+                    }
+                    
                 }
             }
+        }
 
+        public Bitmap ByteToImage(byte[] blob)
+        {
+            MemoryStream mStream = new MemoryStream();
+            byte[] pData = blob;
+            mStream.Write(pData, 0, Convert.ToInt32(pData.Length));
+            Bitmap bm = new Bitmap(mStream, false);
+            mStream.Dispose();
+            return bm;
         }
 
 
@@ -54,6 +77,11 @@ namespace History_VAR.Forms
             var Sscreen = new Student_Screen(current_user);
             Sscreen.Closed += (s, args) => this.Close();
             Sscreen.Show();
+        }
+
+        private void GB_Images_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

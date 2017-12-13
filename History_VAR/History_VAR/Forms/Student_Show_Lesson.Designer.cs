@@ -108,6 +108,7 @@
             this.GB_Images.Size = new System.Drawing.Size(317, 440);
             this.GB_Images.TabIndex = 6;
             this.GB_Images.TabStop = false;
+            this.GB_Images.Enter += new System.EventHandler(this.GB_Images_Enter);
             // 
             // label2
             // 

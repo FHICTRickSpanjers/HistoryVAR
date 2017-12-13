@@ -884,7 +884,7 @@ namespace History_VAR.Classes
                     SqlCommand NewCmd = cnn.CreateCommand();
                     NewCmd.Connection = cnn;
                     NewCmd.CommandType = CommandType.Text;
-                    NewCmd.CommandText = "INSERT INTO Images (Filename, Data) VALUES (@Filename, @Data)";
+                    NewCmd.CommandText = "INSERT INTO Image (Filename, Data) VALUES (@Filename, @Data)";
 
                     NewCmd.Parameters.AddWithValue("@Filename", Filename);
                     NewCmd.Parameters.AddWithValue("@Data", Image);
@@ -908,7 +908,7 @@ namespace History_VAR.Classes
             {
                 using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
-                    string query = "SELECT * FROM Images";
+                    string query = "SELECT * FROM Image";
                     SqlCommand cmd = new SqlCommand(query, cnn);
                     cmd.CommandType = CommandType.Text;
                     cnn.Open();
@@ -964,6 +964,68 @@ namespace History_VAR.Classes
             {
                 Console.Write(e.Message);
             }
+        }
+
+
+        //Delete the images that were set for the lesson
+        public void Delete_Image_From_Lesson_By_ID(int Lesson_ID)
+        {
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "DELETE FROM LessonImage WHERE Lesson_ID = @Lesson_ID";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Lesson_ID", Lesson_ID);
+                    cnn.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+
+        public List<Image> Receive_Images_In_Lesson(int LessonID)
+        {
+            List<Image> ListofImages = new List<Image>();
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT * FROM Image WHERE IMG_ID IN(SELECT Image_ID FROM LessonImage WHERE Lesson_ID = @Lesson_ID)";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Lesson_ID", LessonID);
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            int Img_ID = Convert.ToInt32(dr["IMG_ID"]);
+                            byte[] DataArr = (byte[])dr["Data"];
+                            string FileName = dr["FileName"].ToString();
+                            Image I = new Image(Img_ID, FileName, DataArr);
+                            ListofImages.Add(I);
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return ListofImages;
         }
     }
 }

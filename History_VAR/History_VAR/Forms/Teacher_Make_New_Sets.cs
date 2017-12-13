@@ -32,13 +32,6 @@ namespace History_VAR.Forms
             Fill_Saved_Lesson_Data(lesson_id);
         }
 
-        public Teacher_Make_New_Sets(int I)
-        {
-            InitializeComponent();
-            Add_Images_To_Lesson(I);
-            LB_Images.Items.Add("Testerino");
-        }
-
         private void FillPresetData()
         {
             TB_Made_By.Text = Logged_In_User;
@@ -87,6 +80,10 @@ namespace History_VAR.Forms
                     int Lesson_ID = DB.GetLessonID(TB_Title.Text);
                     //Insert Lesson into all groups (Using 0)
                     DB.Insert_Lesson_For_Groups(Lesson_ID, 0);
+
+                    //Inserting Images into Lesson
+                    Saving_Images_To_Lesson(Lesson_ID);
+
                 }
                 else
                 {
@@ -94,11 +91,15 @@ namespace History_VAR.Forms
                    int Lesson_ID = DB.GetLessonID(TB_Title.Text);
                    //Insert Lesson into chosen group
                    DB.Insert_Lesson_For_Groups(Lesson_ID, Group_ID);
+
+                    //Inserting Images into Lesson
+                    Saving_Images_To_Lesson(Lesson_ID);
                 }
              
                 MessageBox.Show("Saved lesson!");
             }  
         }
+
 
 
         private void Fill_Saved_Lesson_Data(int Lesson_ID)
@@ -133,6 +134,15 @@ namespace History_VAR.Forms
                 {
                     CB_Classes.SelectedItem = "All";
                 }
+
+                //Get Images in Lesson
+                var images = DB.Receive_Images_In_Lesson(Lesson_ID);
+
+                foreach(var image in images)
+                {
+                    LB_Images.Items.Add(image.ReturnFileName());
+                }
+
             }
             catch (NullReferenceException)
             {
@@ -141,20 +151,6 @@ namespace History_VAR.Forms
         }
 
 
-        private void Add_Images_To_Lesson(int ImageID)
-        {
-            //Open instance
-            DBRepository DB = DBRepository.GetInstance();
-            var images = DB.Receive_Images_From_DB();
-
-            foreach(var image in images)
-            {
-                if(ImageID == image.ReturnImageID())
-                {
-                    LB_Images.Items.Add(image.ReturnFileName());
-                }  
-            }
-        }
 
 
         private void Update_Lesson()
@@ -177,17 +173,23 @@ namespace History_VAR.Forms
 
             //Delete previous groups that had this lesson
             DB.Delete_Lesson_At_Groups_By_ID(Lesson_ID);
+            DB.Delete_Image_From_Lesson_By_ID(Lesson_ID);
 
             //Add this lesson to the groups that currently have this lesson
             if(CB_Classes.SelectedItem.ToString() == "All")
             {
                 DB.Insert_Lesson_For_Groups(Lesson_ID, 0);
+
+                //Inserting Images into Lesson
+                Saving_Images_To_Lesson(Lesson_ID);
             }
             else
             {
                 DB.Insert_Lesson_For_Groups(Lesson_ID, Group_ID);
-            }
 
+                //Inserting Images into Lesson
+                Saving_Images_To_Lesson(Lesson_ID);
+            }
 
             MessageBox.Show("Lesson Updated");
         }
@@ -211,11 +213,26 @@ namespace History_VAR.Forms
 
         }
 
-
         private void btn_update_Click(object sender, EventArgs e)
         {
             Update_Lesson();
         }
+
+        private void btn_add_images_Click(object sender, EventArgs e)
+        {
+            Add_Images_To_Lesson();
+        }
+
+        private void LB_Images_DoubleClick(object sender, EventArgs e)
+        {
+            LB_Images.Items.Remove(LB_Images.SelectedItem);
+        }
+
+        private void btn_Add_Image_to_system_Click(object sender, EventArgs e)
+        {
+            Add_Images_To_System();
+        }
+
 
 
         private void Add_Images_To_System()
@@ -223,7 +240,7 @@ namespace History_VAR.Forms
             try
             {
                 OpenFileDialog open = new OpenFileDialog();
-                open.Filter = "Image Files(*.jpg; *.jpeg;)|*.jpg; *.jpeg";
+                open.Filter = "Image Files(*.jpg; *.jpeg; *.png;)|*.jpg; *.jpeg; *.png;";
                 if (open.ShowDialog() == DialogResult.OK)
                 {
                     Bitmap bit = new Bitmap(open.FileName);
@@ -247,26 +264,46 @@ namespace History_VAR.Forms
 
         }
 
-        private void Add_Images_To_Current_Lesson()
+        private void Add_Images_To_Lesson()
         {
+            //Open instance
+            DBRepository DB = DBRepository.GetInstance();
+            
+            //New instance of system images
             var SystemImages = new SystemImages();
+            //Open Dialog for System images
             SystemImages.ShowDialog();
-            Add_Images_To_Lesson(SystemImages.ReturnImageID());
+            //Get ID from Image to Add
+            int ToAddImageID = SystemImages.ReturnImageID();
+
+
+            var images = DB.Receive_Images_From_DB();
+
+            foreach (var image in images)
+            {
+                if (ToAddImageID == image.ReturnImageID())
+                {
+                    LB_Images.Items.Add(image.ReturnFileName());
+                }
+            }
         }
 
-        private void btn_add_images_Click(object sender, EventArgs e)
+
+        public void Saving_Images_To_Lesson(int LessonID)
         {
-            Add_Images_To_Current_Lesson();
+            DBRepository DB = DBRepository.GetInstance();
+            var images = DB.Receive_Images_From_DB();
+            foreach(var image in images)
+            {
+                foreach(string item in LB_Images.Items)
+                {
+                    if(image.ReturnFileName() == item)
+                    {
+                        DB.Insert_Image_In_Lesson(LessonID, image.ReturnImageID());
+                    }
+                }
+            }
         }
 
-        private void LB_Images_DoubleClick(object sender, EventArgs e)
-        {
-            LB_Images.Items.Remove(LB_Images.SelectedItem);
-        }
-
-        private void btn_Add_Image_to_system_Click(object sender, EventArgs e)
-        {
-            Add_Images_To_System();
-        }
     }
 }

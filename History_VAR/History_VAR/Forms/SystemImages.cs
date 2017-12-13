@@ -67,5 +67,10 @@ namespace History_VAR.Forms
         {
             return this.IMG_ID;
         }
+
+        private void FlowLayoutPanelIMG_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
