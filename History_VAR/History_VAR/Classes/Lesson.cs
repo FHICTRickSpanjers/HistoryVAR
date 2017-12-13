@@ -67,7 +67,6 @@ namespace History_VAR.Classes
             return Lesson_subject;
         }
 
-
         public void Add_Object(ArtObject obj)
         {
             ListofArtObjects.Add(obj);

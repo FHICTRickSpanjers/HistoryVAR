@@ -901,9 +901,44 @@ namespace History_VAR.Classes
             }
         }
 
-        public void Insert_Image_To_Lesson()
-        {
 
-        }
+        public Image Reveive_Images_From_DB()
+        {
+            Image I = null;
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    if (cnn.State == ConnectionState.Closed)
+                    {
+                        cnn.Open();
+                    }
+
+                    string query = "SELECT * FROM Images";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            byte[] DataArr = (byte[])dr["Data"];
+                            string FileName = dr["FileName"].ToString();
+                            I = new Image(FileName, DataArr);
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return I;
+        }    
     }
 }

@@ -52,59 +52,63 @@ namespace History_VAR.Forms
 
             foreach (var single_lesson in GroupLessons)
             {
-                TextBox tb = new TextBox();
-                tb.Text = single_lesson.GetLessonName();
-                tb.AutoSize = false;
-                tb.ReadOnly = true;
-                tb.Size = new System.Drawing.Size(400, 35);
-                tb.Font = new Font(tb.Font.FontFamily, 14);
+                if(single_lesson.LessonStatus == "Published")
+                {
+                    TextBox tb = new TextBox();
+                    tb.Text = single_lesson.GetLessonName();
+                    tb.AutoSize = false;
+                    tb.ReadOnly = true;
+                    tb.Size = new System.Drawing.Size(400, 35);
+                    tb.Font = new Font(tb.Font.FontFamily, 14);
 
-                Button B = new Button();
-                B.Text = "Open";
-                B.Size = new System.Drawing.Size(75, 35);
-                B.Name = single_lesson.GetLessonName();
+                    Button B = new Button();
+                    B.Text = "Open";
+                    B.Size = new System.Drawing.Size(75, 35);
+                    B.Name = single_lesson.GetLessonName();
 
-                B.Click += (s, e) => {
+                    B.Click += (s, e) => {
 
-                    this.Hide();
-                    var show_lesson = new Student_Show_Lesson(B.Name, Logged_In_User);
-                    show_lesson.Closed += (x, args) => this.Close();
-                    show_lesson.Show();
+                        this.Hide();
+                        var show_lesson = new Student_Show_Lesson(B.Name, Logged_In_User);
+                        show_lesson.Closed += (x, args) => this.Close();
+                        show_lesson.Show();
 
-                };
+                    };
 
-                FlowLayoutPanelLessons.Controls.Add(tb);
-                FlowLayoutPanelLessons.Controls.Add(B);
+                    FlowLayoutPanelLessons.Controls.Add(tb);
+                    FlowLayoutPanelLessons.Controls.Add(B);
+                }             
             }
 
             foreach(var single_open_lesson in GroupLessonsForAll)
             {
-                TextBox tb = new TextBox();
-                tb.Text = single_open_lesson.GetLessonName();
-                tb.AutoSize = false;
-                tb.ReadOnly = true;
-                tb.Size = new System.Drawing.Size(400, 35);
-                tb.Font = new Font(tb.Font.FontFamily, 14);
+                if(single_open_lesson.LessonStatus == "Published")
+                {
+                    TextBox tb = new TextBox();
+                    tb.Text = single_open_lesson.GetLessonName();
+                    tb.AutoSize = false;
+                    tb.ReadOnly = true;
+                    tb.Size = new System.Drawing.Size(400, 35);
+                    tb.Font = new Font(tb.Font.FontFamily, 14);
 
-                Button B = new Button();
-                B.Text = "Open";
-                B.Size = new System.Drawing.Size(75, 35);
-                B.Name = single_open_lesson.GetLessonName();
+                    Button B = new Button();
+                    B.Text = "Open";
+                    B.Size = new System.Drawing.Size(75, 35);
+                    B.Name = single_open_lesson.GetLessonName();
 
-                B.Click += (s, e) => {
+                    B.Click += (s, e) => {
 
-                    this.Hide();
-                    var show_lesson = new Student_Show_Lesson(B.Name, Logged_In_User);
-                    show_lesson.Closed += (x, args) => this.Close();
-                    show_lesson.Show();
+                        this.Hide();
+                        var show_lesson = new Student_Show_Lesson(B.Name, Logged_In_User);
+                        show_lesson.Closed += (x, args) => this.Close();
+                        show_lesson.Show();
 
-                };
+                    };
 
-                FlowLayoutPanelLessons.Controls.Add(tb);
-                FlowLayoutPanelLessons.Controls.Add(B);
+                    FlowLayoutPanelLessons.Controls.Add(tb);
+                    FlowLayoutPanelLessons.Controls.Add(B);
+                }
             }
-
-
         }
     }
 }

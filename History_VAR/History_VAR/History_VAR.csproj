@@ -49,6 +49,7 @@
     <Compile Include="Classes\Creator.cs" />
     <Compile Include="Classes\DBRepository.cs" />
     <Compile Include="Classes\Group.cs" />
+    <Compile Include="Classes\Image.cs" />
     <Compile Include="Classes\Lesson.cs" />
     <Compile Include="Classes\Student.cs" />
     <Compile Include="Classes\Teacher.cs" />
@@ -63,6 +64,12 @@
     </Compile>
     <Compile Include="Forms\Student_Show_Lesson.Designer.cs">
       <DependentUpon>Student_Show_Lesson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SystemImages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SystemImages.Designer.cs">
+      <DependentUpon>SystemImages.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Teacher_Current_Sets.cs">
       <SubType>Form</SubType>
@@ -101,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Student_Show_Lesson.resx">
       <DependentUpon>Student_Show_Lesson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SystemImages.resx">
+      <DependentUpon>SystemImages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teacher_Current_Sets.resx">
       <DependentUpon>Teacher_Current_Sets.cs</DependentUpon>
