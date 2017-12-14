@@ -35,7 +35,7 @@ namespace History_VAR.Forms
         private void btn_show_all_lessons_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var Current_Lessons = new Teacher_Current_Sets();
+            var Current_Lessons = new Teacher_Current_Sets(Logged_In_User);
             Current_Lessons.Closed += (s, args) => this.Close();
             Current_Lessons.Show();
         }

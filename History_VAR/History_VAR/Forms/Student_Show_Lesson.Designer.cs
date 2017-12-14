@@ -34,9 +34,7 @@
             this.LB_Objects = new System.Windows.Forms.ListBox();
             this.Download_OBJ = new System.Windows.Forms.Button();
             this.btn_back = new System.Windows.Forms.Button();
-            this.GB_Images = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.LBL_Images = new System.Windows.Forms.Label();
+            this.FlowPanelLayoutIMG = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // LBL_Lesson_Title
@@ -63,7 +61,7 @@
             // 
             this.LBL_Lesson_Subject.AutoSize = true;
             this.LBL_Lesson_Subject.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.LBL_Lesson_Subject.Location = new System.Drawing.Point(185, 15);
+            this.LBL_Lesson_Subject.Location = new System.Drawing.Point(561, 15);
             this.LBL_Lesson_Subject.Name = "LBL_Lesson_Subject";
             this.LBL_Lesson_Subject.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.LBL_Lesson_Subject.Size = new System.Drawing.Size(139, 24);
@@ -75,9 +73,9 @@
             // 
             this.LB_Objects.FormattingEnabled = true;
             this.LB_Objects.ItemHeight = 16;
-            this.LB_Objects.Location = new System.Drawing.Point(18, 314);
+            this.LB_Objects.Location = new System.Drawing.Point(18, 330);
             this.LB_Objects.Name = "LB_Objects";
-            this.LB_Objects.Size = new System.Drawing.Size(524, 132);
+            this.LB_Objects.Size = new System.Drawing.Size(524, 100);
             this.LB_Objects.TabIndex = 3;
             // 
             // Download_OBJ
@@ -100,45 +98,19 @@
             this.btn_back.UseVisualStyleBackColor = true;
             this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
             // 
-            // GB_Images
+            // FlowPanelLayoutIMG
             // 
-            this.GB_Images.BackColor = System.Drawing.SystemColors.Control;
-            this.GB_Images.Location = new System.Drawing.Point(563, 53);
-            this.GB_Images.Name = "GB_Images";
-            this.GB_Images.Size = new System.Drawing.Size(317, 440);
-            this.GB_Images.TabIndex = 6;
-            this.GB_Images.TabStop = false;
-            this.GB_Images.Enter += new System.EventHandler(this.GB_Images_Enter);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(159, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(20, 26);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "-";
-            // 
-            // LBL_Images
-            // 
-            this.LBL_Images.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.LBL_Images.Location = new System.Drawing.Point(563, 15);
-            this.LBL_Images.Name = "LBL_Images";
-            this.LBL_Images.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LBL_Images.Size = new System.Drawing.Size(139, 24);
-            this.LBL_Images.TabIndex = 9;
-            this.LBL_Images.Text = "Images";
-            this.LBL_Images.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.FlowPanelLayoutIMG.Location = new System.Drawing.Point(561, 48);
+            this.FlowPanelLayoutIMG.Name = "FlowPanelLayoutIMG";
+            this.FlowPanelLayoutIMG.Size = new System.Drawing.Size(300, 440);
+            this.FlowPanelLayoutIMG.TabIndex = 9;
             // 
             // Student_Show_Lesson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 505);
-            this.Controls.Add(this.LBL_Images);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.GB_Images);
+            this.ClientSize = new System.Drawing.Size(875, 505);
+            this.Controls.Add(this.FlowPanelLayoutIMG);
             this.Controls.Add(this.btn_back);
             this.Controls.Add(this.Download_OBJ);
             this.Controls.Add(this.LB_Objects);
@@ -160,8 +132,6 @@
         private System.Windows.Forms.ListBox LB_Objects;
         private System.Windows.Forms.Button Download_OBJ;
         private System.Windows.Forms.Button btn_back;
-        private System.Windows.Forms.GroupBox GB_Images;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label LBL_Images;
+        private System.Windows.Forms.FlowLayoutPanel FlowPanelLayoutIMG;
     }
 }

@@ -13,10 +13,13 @@ namespace History_VAR.Forms
 {
     public partial class Teacher_Current_Sets : Form
     {
-        public Teacher_Current_Sets()
+        private string Logged_In_User;
+
+        public Teacher_Current_Sets(string username)
         {
             InitializeComponent();
             GetAllLessons();
+            this.Logged_In_User = username;
         }
 
         private void btn_back_Click(object sender, EventArgs e)
@@ -65,7 +68,7 @@ namespace History_VAR.Forms
                 bool editchar = true;
 
                 this.Hide();
-                var make_new_lesson = new Teacher_Make_New_Sets(lesson_id, editchar);
+                var make_new_lesson = new Teacher_Make_New_Sets(lesson_id, editchar, Logged_In_User);
                 make_new_lesson.Closed += (s, args) => this.Close();
                 make_new_lesson.Show();
 

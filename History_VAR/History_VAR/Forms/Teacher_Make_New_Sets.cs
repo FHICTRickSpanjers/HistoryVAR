@@ -24,9 +24,10 @@ namespace History_VAR.Forms
             GetClasses();
         }
 
-        public Teacher_Make_New_Sets(int lesson_id, bool edit)
+        public Teacher_Make_New_Sets(int lesson_id, bool edit, string username)
         {
             InitializeComponent();
+            this.Logged_In_User = username;
             Activate_Update(edit);
             GetClasses();
             Fill_Saved_Lesson_Data(lesson_id);

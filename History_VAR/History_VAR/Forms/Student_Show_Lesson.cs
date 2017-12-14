@@ -45,10 +45,11 @@ namespace History_VAR.Forms
                     {
                         PictureBox p = new PictureBox();
                         p.Image = ByteToImage(image.ReturnImageData());
-                        p.SizeMode = PictureBoxSizeMode.Zoom;
+                        p.SizeMode = PictureBoxSizeMode.StretchImage;
                         p.BorderStyle = BorderStyle.FixedSingle;
+                        p.Dock = DockStyle.Top;
 
-                        GB_Images.Controls.Add(p);
+                        FlowPanelLayoutIMG.Controls.Add(p);
                     }
                     
                 }
