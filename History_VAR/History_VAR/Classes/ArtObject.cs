@@ -7,6 +7,7 @@ namespace History_VAR.Classes
 {
     class ArtObject
     {
+        //Title / Type / Creatorname / Genre
         private string ObjectTitle;
         private string ObjectType;
         private string ObjectCreator;

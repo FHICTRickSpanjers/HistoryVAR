@@ -448,10 +448,10 @@ namespace History_VAR.Classes
                     SqlCommand NewCmd = cnn.CreateCommand();
                     NewCmd.Connection = cnn;
                     NewCmd.CommandType = CommandType.Text;
-                    NewCmd.CommandText = "UPDATE Lesson SET Lesson_subject=@Lesson_Subject, Lesson_name=@Lesson_Name, Lesson_status=@Lesson_Status, Lesson_description=@Lesson_Description WHERE Lesson_ID = @Lesson_ID";
+                    NewCmd.CommandText = "UPDATE Lesson SET Lesson_subject=@Lesson_Subject, Lesson_name=@name, Lesson_status=@Lesson_Status, Lesson_description=@Lesson_Description WHERE Lesson_ID = @Lesson_ID";
 
                     NewCmd.Parameters.AddWithValue("@Lesson_Subject", L.GetLessonSubject());
-                    NewCmd.Parameters.AddWithValue("@Lesson_Name", L.GetLessonName());
+                    NewCmd.Parameters.AddWithValue("@name", L.GetLessonName());
                     NewCmd.Parameters.AddWithValue("@Lesson_Status", L.LessonStatus);
                     NewCmd.Parameters.AddWithValue("@Lesson_Description", L.GetLessonDesc());
                     NewCmd.Parameters.AddWithValue("@Lesson_ID", L.GetLessonID());
@@ -840,7 +840,7 @@ namespace History_VAR.Classes
         /// </summary>
         /// <param name="ID">Student ID</param>
         /// <returns>Group OBJ</returns>
-        public Group FindGroup0IDBasedOnStudent(int ID)
+        public Group FindGroupIDBasedOnStudent(int ID)
         {
             Group G = null;
 

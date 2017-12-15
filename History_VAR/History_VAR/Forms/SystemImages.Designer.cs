@@ -38,7 +38,6 @@
             this.FlowLayoutPanelIMG.Name = "FlowLayoutPanelIMG";
             this.FlowLayoutPanelIMG.Size = new System.Drawing.Size(429, 336);
             this.FlowLayoutPanelIMG.TabIndex = 1;
-            this.FlowLayoutPanelIMG.Paint += new System.Windows.Forms.PaintEventHandler(this.FlowLayoutPanelIMG_Paint);
             // 
             // label_available_lessons
             // 
