@@ -12,15 +12,17 @@ namespace History_VAR.Classes
         private string Lesson_name;
         private string Lesson_status;
         private string Lesson_desc;
+        private int Teacher_ID;
         private List<ArtObject> ListofArtObjects = new List<ArtObject>();
 
-        public Lesson(string LName, int LessonID, string lessonstatus, string lessondesc, string lessonsubject)
+        public Lesson(string LName, int LessonID, string lessonstatus, string lessondesc, string lessonsubject, int TID)
         {
             this.Lesson_name = LName;
             this.LessonID = LessonID;
             this.Lesson_status = lessonstatus;
             this.Lesson_desc = lessondesc;
             this.Lesson_subject = lessonsubject;
+            this.Teacher_ID = TID;
         }
 
         public Lesson(int ID)
@@ -44,7 +46,7 @@ namespace History_VAR.Classes
                 this.Lesson_status = value;
             }
         }
- 
+
 
         public string GetLessonName()
         {
@@ -64,6 +66,11 @@ namespace History_VAR.Classes
         public string GetLessonSubject()
         {
             return Lesson_subject;
+        }
+
+        public int GetTeacherID()
+        {
+            return this.Teacher_ID;
         }
 
         public void Add_Object(ArtObject obj)

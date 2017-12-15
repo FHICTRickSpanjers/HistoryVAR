@@ -35,7 +35,7 @@ namespace History_VAR.Forms
             CB_Lessons.Items.Clear();
 
             DBRepository DB = DBRepository.GetInstance();
-            var lessons = DB.Get_Lessons_Data();
+            var lessons = DB.FindLessonsData();
             foreach(var single_lesson in lessons)
             {
                 CB_Lessons.Items.Add(single_lesson.GetLessonName());
@@ -47,9 +47,9 @@ namespace History_VAR.Forms
             if(CB_Lessons.SelectedIndex > -1)
             {
                 DBRepository DB = DBRepository.GetInstance();
-                int Lesson_ID = DB.GetLessonID(CB_Lessons.SelectedItem.ToString());
-                DB.Delete_Lesson_By_ID(Lesson_ID);
-                DB.Delete_Lesson_At_Groups_By_ID(Lesson_ID);
+                int Lesson_ID = DB.FindLessonIDByName(CB_Lessons.SelectedItem.ToString());
+                DB.DeleteLessonByID(Lesson_ID);
+                DB.DeleteLessonAtGroupsByID(Lesson_ID);
                 GetAllLessons();
             }
             else
@@ -64,7 +64,7 @@ namespace History_VAR.Forms
             if (CB_Lessons.SelectedIndex > -1)
             {
                 DBRepository DB = DBRepository.GetInstance();
-                int lesson_id = DB.GetLessonID(CB_Lessons.SelectedItem.ToString());
+                int lesson_id = DB.FindLessonIDByName(CB_Lessons.SelectedItem.ToString());
                 bool editchar = true;
 
                 this.Hide();
@@ -85,14 +85,14 @@ namespace History_VAR.Forms
             if (CB_Lessons.SelectedIndex > -1)
             {
                 DBRepository DB = DBRepository.GetInstance();
-                var Status = DB.Get_Lesson_Status(DB.GetLessonID(CB_Lessons.SelectedItem.ToString()));
+                var Status = DB.FindLessonByID(DB.FindLessonIDByName(CB_Lessons.SelectedItem.ToString()));
                 if (Status.LessonStatus == "Published")
                 {
-                    DB.Update_Lesson_Status_By_ID(CB_Lessons.SelectedIndex + 1, "Draft");
+                    DB.UpdateLessonStatusByID(CB_Lessons.SelectedIndex + 1, "Draft");
                 }
                 else if (Status.LessonStatus == "Draft")
                 {
-                    DB.Update_Lesson_Status_By_ID(CB_Lessons.SelectedIndex + 1, "Published");
+                    DB.UpdateLessonStatusByID(CB_Lessons.SelectedIndex + 1, "Published");
                 }
             }
             else

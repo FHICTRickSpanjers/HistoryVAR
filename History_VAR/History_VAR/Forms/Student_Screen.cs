@@ -35,7 +35,7 @@ namespace History_VAR.Forms
         private void GetAllAvailableLessons()
         {
             DBRepository DB = DBRepository.GetInstance();
-            var students = DB.GetStudentDetails();
+            var students = DB.FindStudentDetails();
             int StudentID = 0;
 
             foreach (var single_student in students)
@@ -46,9 +46,9 @@ namespace History_VAR.Forms
                 }
             }
 
-            var StudentGroup = DB.Get_Group_ID_Based_On_Student(StudentID);
-            var GroupLessons = DB.Get_Lessons_Based_On_GroupID(StudentGroup.Get_Group_ID());
-            var GroupLessonsForAll = DB.Get_Lessons_Based_On_GroupID(0);
+            var StudentGroup = DB.FindGroup0IDBasedOnStudent(StudentID);
+            var GroupLessons = DB.GetLessonsBasedOnGroupID(StudentGroup.Get_Group_ID());
+            var GroupLessonsForAll = DB.GetLessonsBasedOnGroupID(0);
 
             foreach (var single_lesson in GroupLessons)
             {

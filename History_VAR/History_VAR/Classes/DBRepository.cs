@@ -9,17 +9,29 @@ namespace History_VAR.Classes
 {
     class DBRepository
     {
+        enum Users
+        {
+            Teacher,
+            Student
+        };
 
-        //Instance always null
+        /// <summary>
+        /// //Instance will start at null (This makes sure that nothing is running etc)
+        /// </summary>
         private static DBRepository instance = null;
 
-        //Empty constructor
+        /// <summary>
+        /// Simple empty constructor
+        /// </summary>
         private DBRepository()
         {
 
         }
 
-        //Create Instance
+        /// <summary>
+        /// This creates an instance of the DBRepository class if none exists already
+        /// </summary>
+        /// <returns></returns>
         public static DBRepository GetInstance()
         {
             if (instance == null)
@@ -36,17 +48,30 @@ namespace History_VAR.Classes
         /// </summary>
         /// <param name="username">Username as string</param>
         /// <returns>Password</returns>
-        public string Get_Login_Data_Teachers(string username)
+        public bool FindLoginData(string username, string password, string user)
         {
-            string ResultQuery = "";
+            bool Result = false;
 
             try
             {
                 using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
-                    string query = "SELECT Teacher_password FROM Teacher WHERE Teacher_username = @username";
+                    string query = "";
+
+                    if(user == "Teacher")
+                    {
+                         query = "SELECT * FROM Teacher WHERE Username = @username AND Password = @password";
+                    }
+                    else if(user == "Student"){
+
+                        query = "SELECT * FROM Student WHERE Username = @username AND Password = @password";
+                    }
+                    
                     SqlCommand cmd = new SqlCommand(query, cnn);
                     cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@user", user);
+
                     cmd.CommandType = CommandType.Text;
                     cnn.Open();
 
@@ -54,7 +79,7 @@ namespace History_VAR.Classes
                     {
                         while (dr.Read())
                         {
-                            ResultQuery = dr["Teacher_password"].ToString();
+                            Result = true;
                         }
                     }
 
@@ -66,50 +91,11 @@ namespace History_VAR.Classes
                 Console.WriteLine(e.Message);
             }
 
-            return ResultQuery;
+            return Result;
         }
 
 
-        /// <summary>
-        /// Get login data for the student users
-        /// </summary>
-        /// <param name="username">string username</param>
-        /// <returns>password as string</returns>
-        public string Get_Login_Data_Student(string username)
-        {
-            string ResultQuery = "";
-
-            try
-            {
-                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
-                {
-                    string query = "SELECT Student_password FROM Student WHERE Student_username = @username";
-                    SqlCommand cmd = new SqlCommand(query, cnn);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.CommandType = CommandType.Text;
-                    cnn.Open();
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            ResultQuery = dr["Student_password"].ToString();
-                        }
-                    }
-
-                    cnn.Close();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            return ResultQuery;
-        }
-
-
-
+      
         /// <summary>
         /// Create new lessons (teachers)
         /// </summary>
@@ -118,7 +104,7 @@ namespace History_VAR.Classes
         /// <param name="lesson_name">Name of the lesson</param>
         /// <param name="lesson_status">Status of the lesson</param>
         /// <param name="lesson_desc">Description of the lesson</param>
-        public void CreateNewLesson(string lesson_subject, int teacherid, string lesson_name, string lesson_status, string lesson_desc)
+        public void CreateNewLesson(Lesson L)
         {
             try
             {
@@ -135,11 +121,11 @@ namespace History_VAR.Classes
                     NewCmd.CommandType = CommandType.Text;
                     NewCmd.CommandText = "INSERT INTO Lesson (Lesson_subject, Teacher_ID, Lesson_Name, Lesson_Status, Lesson_Description) VALUES (@Lesson_Subject, @Teacher_ID, @Lesson_Name, @Lesson_Status, @Lesson_Description)";
 
-                    NewCmd.Parameters.AddWithValue("@Lesson_Subject", lesson_subject);
-                    NewCmd.Parameters.AddWithValue("@Teacher_ID", teacherid);
-                    NewCmd.Parameters.AddWithValue("@Lesson_Name", lesson_name);
-                    NewCmd.Parameters.AddWithValue("@Lesson_Status", lesson_status);
-                    NewCmd.Parameters.AddWithValue("@Lesson_Description", lesson_desc);
+                    NewCmd.Parameters.AddWithValue("@Lesson_Subject", L.GetLessonSubject());
+                    NewCmd.Parameters.AddWithValue("@Teacher_ID", L.GetTeacherID());
+                    NewCmd.Parameters.AddWithValue("@Lesson_Name", L.GetLessonName());
+                    NewCmd.Parameters.AddWithValue("@Lesson_Status", L.LessonStatus);
+                    NewCmd.Parameters.AddWithValue("@Lesson_Description", L.GetLessonDesc());
 
                     NewCmd.ExecuteNonQuery();
 
@@ -154,7 +140,12 @@ namespace History_VAR.Classes
 
 
         //Insert Artobjects per lesson
-        public void Insert_Artobjects_In_lessons(int lessonid, int artobjid)
+        /// <summary>
+        /// Insert Artobjects into lesson
+        /// </summary>
+        /// <param name="lessonid">ID of the lesson</param>
+        /// <param name="artobjid">ID of the art object</param>
+        public void InsertArtobjectsInLessons(int lessonid, int artobjid)
         {
             try
             {
@@ -183,60 +174,13 @@ namespace History_VAR.Classes
         }
 
 
-        //Insert ArtObjects into Database
-        public void Insert_Artobjects(string title, string type, string creator, string movement, int YearMade, string periode, string city, 
-            string country,  decimal width, decimal height, decimal length,  string material, string original_located, string description)
-        {
-            try
-            {
-                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
-                {
-                    if (cnn.State == ConnectionState.Closed)
-                    {
-                        cnn.Open();
-                    }
-                    SqlCommand NewCmd = cnn.CreateCommand();
-                    NewCmd.Connection = cnn;
-                    NewCmd.CommandType = CommandType.Text;
-                    NewCmd.CommandText = "INSERT INTO ArtObj (Art_title, Art_type, Art_movement, Art_year, Art_periode, Art_city, " +
-                        "Art_country, Art_width, Art_height, Art_length, Art_material, Art_where_is_original_located, Art_description) " +
-                        "VALUES " +
-                        "(@Art_title, @Art_type, @Art_movement, @Art_year, @Art_periode, @Art_city, " +
-                        "@Art_country, @Art_width, @Art_height, @Art_length, @Art_material, @Art_where_is_original_located, @Art_description)";
-
-                    NewCmd.Parameters.AddWithValue("@Art_title", title);
-                    NewCmd.Parameters.AddWithValue("@Art_type", type);
-                    NewCmd.Parameters.AddWithValue("@Art_movement", movement);
-                    NewCmd.Parameters.AddWithValue("@Art_year", YearMade);
-                    NewCmd.Parameters.AddWithValue("@Art_periode", periode);
-                    NewCmd.Parameters.AddWithValue("@Art_city", city);
-                    NewCmd.Parameters.AddWithValue("@Art_country", country);
-                    NewCmd.Parameters.AddWithValue("@Art_width", width);
-                    NewCmd.Parameters.AddWithValue("@Art_height", height);
-                    NewCmd.Parameters.AddWithValue("@Art_length", length);
-                    NewCmd.Parameters.AddWithValue("@Art_material", material);
-                    NewCmd.Parameters.AddWithValue("@Art_where_is_original_located", original_located);
-                    NewCmd.Parameters.AddWithValue("@Art_description", description);
-                    NewCmd.ExecuteNonQuery();
-
-                    cnn.Close();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-
-
         /// <summary>
         /// Select all the lessons
         /// </summary>
         /// <returns>return a string of lessons</returns>
-        public List<Lesson> Get_Lessons_Data()
+        public List<Lesson> FindLessonsData()
         {
-            List<Lesson> listOfLessons = new List<Lesson>();
+            List<Lesson> ListOfLessons = new List<Lesson>();
 
             try
             {
@@ -251,30 +195,36 @@ namespace History_VAR.Classes
                     {
                         while (dr.Read())
                         {
-                            string Lname = dr["Lesson_name"].ToString();
-                            int LID = Convert.ToInt32(dr["Lesson_ID"]);
-                            string Lstatus = dr["Lesson_status"].ToString();
-                            string Ldesc = dr["Lesson_description"].ToString();
-                            string Lsubject = dr["Lesson_subject"].ToString();
+                            int LessonID = Convert.ToInt32(dr["Lesson_ID"]);
+                            string LessonName = dr["Lesson_name"].ToString();
+                            int TeacherID = Convert.ToInt32(dr["Teacher_ID"]);
+                            string LessonStatus = dr["Lesson_status"].ToString();
+                            string LessonDesc = dr["Lesson_description"].ToString();
+                            string LessonSubject = dr["Lesson_subject"].ToString();
 
-                            Lesson L = new Lesson(Lname, LID, Lstatus, Ldesc, Lsubject);
-                            listOfLessons.Add(L);
+                            Lesson L = new Lesson(LessonName, LessonID, LessonStatus, LessonDesc, LessonSubject, TeacherID);
+                            ListOfLessons.Add(L);
                         }
                     }
 
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }
 
-            return listOfLessons;
+            return ListOfLessons;
         }
 
 
-        public int GetLessonID(string name)
+        /// <summary>
+        /// Get Lesson ID
+        /// </summary>
+        /// <param name="name">Name of the lesson</param>
+        /// <returns>Integer with Lesson ID</returns>
+        public int FindLessonIDByName(string name)
         {
 
             int LessonID = 0;
@@ -301,7 +251,7 @@ namespace History_VAR.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -314,7 +264,7 @@ namespace History_VAR.Classes
         /// Delete lesson by ID
         /// </summary>
         /// <param name="Lesson_ID"></param>
-        public void Delete_Lesson_By_ID(int Lesson_ID)
+        public void DeleteLessonByID(int Lesson_ID)
         {
             try
             {
@@ -338,7 +288,7 @@ namespace History_VAR.Classes
 
 
         //Delete the lesson for the groups that have it
-        public void Delete_Lesson_At_Groups_By_ID(int Lesson_ID)
+        public void DeleteLessonAtGroupsByID(int Lesson_ID)
         {
             try
             {
@@ -366,7 +316,7 @@ namespace History_VAR.Classes
         /// </summary>
         /// <param name="lessonid">ID of the lesson</param>
         /// <returns>Lesson object</returns>
-        public Lesson Get_Lesson_Status(int lessonid)
+        public Lesson FindLessonByID(int lessonid)
         {
             Lesson Les = new Lesson();
             try
@@ -389,7 +339,7 @@ namespace History_VAR.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -403,7 +353,7 @@ namespace History_VAR.Classes
         /// </summary>
         /// <param name="Lesson_ID">ID of the lesson</param>
         /// <param name="status">status of the lesson</param>
-        public void Update_Lesson_Status_By_ID(int Lesson_ID, string status)
+        public void UpdateLessonStatusByID(int Lesson_ID, string status)
         {
             try
             {
@@ -437,11 +387,10 @@ namespace History_VAR.Classes
         /// Select necessary data to update
         /// </summary>
         /// <param name="Lesson_ID">ID of the lesson</param>
-        /// <param name="searchinfo">Anything really</param>
         /// <returns></returns>
-        public string Get_Lesson_Data_By_ID(int Lesson_ID, string searchinfo)
+        public Lesson GetLessonDataByID(int Lesson_ID)
         {
-            string required_data = "";
+            Lesson L = null;
 
             try
             {
@@ -458,24 +407,34 @@ namespace History_VAR.Classes
                     {
                         while (dr.Read())
                         {
-                            required_data = dr[searchinfo].ToString();
+                            int LessonID = Convert.ToInt32(dr["Lesson_ID"]);
+                            string LessonName = dr["Lesson_name"].ToString();
+                            int TeacherID = Convert.ToInt32(dr["Teacher_ID"]);
+                            string LessonStatus = dr["Lesson_status"].ToString();
+                            string LessonDesc = dr["Lesson_description"].ToString();
+                            string LessonSubject = dr["Lesson_subject"].ToString();
+
+                            L = new Lesson(LessonName, LessonID, LessonStatus, LessonDesc, LessonSubject, TeacherID);
                         }
                     }
 
 
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }
 
-            return required_data;
+            return L;
         }
 
 
-        //Make new Lesson (set)
-        public void UpdateLesson(int Lesson_ID, string lesson_subject, string lesson_name, string lesson_status, string lesson_desc)
+     /// <summary>
+     /// Update a lesson
+     /// </summary>
+     /// <param name="L">Lesson obj</param>
+        public void UpdateLesson(Lesson L)
         {
             try
             {
@@ -491,11 +450,12 @@ namespace History_VAR.Classes
                     NewCmd.CommandType = CommandType.Text;
                     NewCmd.CommandText = "UPDATE Lesson SET Lesson_subject=@Lesson_Subject, Lesson_name=@Lesson_Name, Lesson_status=@Lesson_Status, Lesson_description=@Lesson_Description WHERE Lesson_ID = @Lesson_ID";
 
-                    NewCmd.Parameters.AddWithValue("@Lesson_Subject", lesson_subject);
-                    NewCmd.Parameters.AddWithValue("@Lesson_Name", lesson_name);
-                    NewCmd.Parameters.AddWithValue("@Lesson_Status", lesson_status);
-                    NewCmd.Parameters.AddWithValue("@Lesson_Description", lesson_desc);
-                    NewCmd.Parameters.AddWithValue("@Lesson_ID", Lesson_ID);
+                    NewCmd.Parameters.AddWithValue("@Lesson_Subject", L.GetLessonSubject());
+                    NewCmd.Parameters.AddWithValue("@Lesson_Name", L.GetLessonName());
+                    NewCmd.Parameters.AddWithValue("@Lesson_Status", L.LessonStatus);
+                    NewCmd.Parameters.AddWithValue("@Lesson_Description", L.GetLessonDesc());
+                    NewCmd.Parameters.AddWithValue("@Lesson_ID", L.GetLessonID());
+                    
 
                     NewCmd.ExecuteNonQuery();
 
@@ -512,8 +472,11 @@ namespace History_VAR.Classes
 
 
         //Select groups from database
-
-        public List<Group> Get_Group_Data()
+        /// <summary>
+        /// Select Group Data
+        /// </summary>
+        /// <returns>Object of class Group</returns>
+        public List<Group> FindGroupData()
         {
             List<Group> ListOfGroups = new List<Group>();
 
@@ -539,7 +502,7 @@ namespace History_VAR.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -550,7 +513,12 @@ namespace History_VAR.Classes
 
 
         //Get Teacher ID by name
-        public Teacher Get_Teacher_ID(string name)
+        /// <summary>
+        /// Find ID of Teacher
+        /// </summary>
+        /// <param name="name">Teacher name</param>
+        /// <returns></returns>
+        public Teacher FindTeacherID(string name)
         {
             Teacher T = new Teacher();
 
@@ -558,7 +526,7 @@ namespace History_VAR.Classes
             {
                 using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
-                    string query = "SELECT Teacher_ID FROM Teacher WHERE Teacher_username = @username";
+                    string query = "SELECT Teacher_ID FROM Teacher WHERE Username = @username";
                     SqlCommand cmd = new SqlCommand(query, cnn);
                     cmd.Parameters.AddWithValue("@username", name);
                     cmd.CommandType = CommandType.Text;
@@ -575,7 +543,7 @@ namespace History_VAR.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -584,7 +552,12 @@ namespace History_VAR.Classes
         }
 
 
-        public Teacher Get_Teacher_Name(int ID)
+        /// <summary>
+        /// Get Teacher Name
+        /// </summary>
+        /// <param name="ID">ID of teacher</param>
+        /// <returns></returns>
+        public Teacher FindTeacherName(int ID)
         {
             Teacher T = null;
 
@@ -592,7 +565,7 @@ namespace History_VAR.Classes
             {
                 using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
-                    string query = "SELECT Teacher_username FROM Teacher WHERE Teacher_ID = @ID";
+                    string query = "SELECT Username FROM Teacher WHERE Teacher_ID = @ID";
                     SqlCommand cmd = new SqlCommand(query, cnn);
                     cmd.Parameters.AddWithValue("@ID", ID);
                     cmd.CommandType = CommandType.Text;
@@ -602,14 +575,14 @@ namespace History_VAR.Classes
                     {
                         while (dr.Read())
                         {
-                            T = new Teacher(dr["Teacher_username"].ToString());
+                            T = new Teacher(dr["Username"].ToString());
                         }
                     }
 
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -617,7 +590,12 @@ namespace History_VAR.Classes
             return T;
         }
 
-        public Group Get_Group_ID(string name)
+        /// <summary>
+        /// Get Group ID
+        /// </summary>
+        /// <param name="name">Name OF GROUP</param>
+        /// <returns></returns>
+        public Group FindGroupID(string name)
         {
             Group G = null;
 
@@ -643,7 +621,7 @@ namespace History_VAR.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -652,7 +630,12 @@ namespace History_VAR.Classes
         }
 
 
-        public void Insert_Lesson_For_Groups(int Lesson_ID, int Group_ID)
+        /// <summary>
+        /// Insert lesson for groups
+        /// </summary>
+        /// <param name="Lesson_ID">Lesson ID</param>
+        /// <param name="Group_ID">Group ID</param>
+        public void InsertLessonForGroups(int Lesson_ID, int Group_ID)
         {
             try
             {
@@ -682,8 +665,12 @@ namespace History_VAR.Classes
         }
 
 
-
-        public Group Get_Group_ID_Based_On_Lesson_ID(int ID)
+        /// <summary>
+        /// Get Group ID based on lesson
+        /// </summary>
+        /// <param name="ID">Lesson ID</param>
+        /// <returns>Group OBJ</returns>
+        public Group FindGroupIDBasedOnLessonID(int ID)
         {
             Group G = null;
 
@@ -709,7 +696,7 @@ namespace History_VAR.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -717,7 +704,12 @@ namespace History_VAR.Classes
             return G;
         }
 
-        public List<Lesson> Get_Lessons_Based_On_GroupID(int ID)
+        /// <summary>
+        /// Get Lesson based on Group ID
+        /// </summary>
+        /// <param name="ID">Group ID</param>
+        /// <returns>List of lessons</returns>
+        public List<Lesson> GetLessonsBasedOnGroupID(int ID)
         {
             List<Lesson> ListofLessons = new List<Lesson>();
 
@@ -737,11 +729,12 @@ namespace History_VAR.Classes
                         {
                             int LessonID = Convert.ToInt32(dr["Lesson_ID"]);
                             string LessonName = dr["Lesson_name"].ToString();
+                            int TeacherID = Convert.ToInt32(dr["Teacher_ID"]);
                             string LessonStatus = dr["Lesson_status"].ToString();
                             string LessonDesc = dr["Lesson_description"].ToString();
                             string LessonSubject = dr["Lesson_subject"].ToString();
 
-                            Lesson L = new Lesson(LessonName, LessonID, LessonStatus, LessonDesc, LessonSubject);
+                             Lesson L = new Lesson(LessonName, LessonID, LessonStatus, LessonDesc, LessonSubject, TeacherID);
                             ListofLessons.Add(L);
  
                         }
@@ -750,7 +743,7 @@ namespace History_VAR.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -758,8 +751,12 @@ namespace History_VAR.Classes
             return ListofLessons;
         }
 
-
-        public Group Get_Group_Data_Based_On_GroupID(int ID)
+        /// <summary>
+        /// Get Group Data based on Group ID
+        /// </summary>
+        /// <param name="ID">Group ID</param>
+        /// <returns>Group OBJ</returns>
+        public Group FindGroupDataBasedOnGroupID(int ID)
         {
             Group G = null;
 
@@ -786,7 +783,7 @@ namespace History_VAR.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -795,7 +792,11 @@ namespace History_VAR.Classes
         }
 
 
-        public List<Student> GetStudentDetails()
+        /// <summary>
+        /// Get info on students
+        /// </summary>
+        /// <returns>List of students</returns>
+        public List<Student> FindStudentDetails()
         {
 
             List<Student> ListofStudents = new List<Student>();
@@ -834,8 +835,12 @@ namespace History_VAR.Classes
             return ListofStudents;
         }
 
-
-        public Group Get_Group_ID_Based_On_Student(int ID)
+        /// <summary>
+        /// Get Group ID based on student
+        /// </summary>
+        /// <param name="ID">Student ID</param>
+        /// <returns>Group OBJ</returns>
+        public Group FindGroup0IDBasedOnStudent(int ID)
         {
             Group G = null;
 
@@ -870,7 +875,12 @@ namespace History_VAR.Classes
             return G;
         }
 
-        public void Insert_Image_In_DB(string Filename, Byte[] Image)
+        /// <summary>
+        /// Insert image into Database
+        /// </summary>
+        /// <param name="Filename">Name of file as string</param>
+        /// <param name="Image">Byte array image data</param>
+        public void InsertImageInDB(string Filename, Byte[] Image)
         {
             try
             {
@@ -899,8 +909,11 @@ namespace History_VAR.Classes
             }
         }
 
-
-        public List<Image> Receive_Images_From_DB()
+        /// <summary>
+        /// Get images from DB
+        /// </summary>
+        /// <returns>List of image objects</returns>
+        public List<Image> ReceiveImagesFromDB()
         {
             List<Image> ListofImages = new List<Image>();
 
@@ -928,7 +941,7 @@ namespace History_VAR.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -936,8 +949,12 @@ namespace History_VAR.Classes
             return ListofImages;
         }
 
-
-        public void Insert_Image_In_Lesson(int LessonID, int Img_ID)
+        /// <summary>
+        /// Insert image into lesson
+        /// </summary>
+        /// <param name="LessonID">Lesson ID</param>
+        /// <param name="Img_ID">Image ID</param>
+        public void InsertImageInLesson(int LessonID, int Img_ID)
         {
             try
             {
@@ -960,7 +977,7 @@ namespace History_VAR.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.Write(e.Message);
             }
@@ -968,7 +985,11 @@ namespace History_VAR.Classes
 
 
         //Delete the images that were set for the lesson
-        public void Delete_Image_From_Lesson_By_ID(int Lesson_ID)
+        /// <summary>
+        /// Delete images from lesson
+        /// </summary>
+        /// <param name="Lesson_ID">Lesson ID</param>
+        public void DeleteImageFromLessonByID(int Lesson_ID)
         {
             try
             {
@@ -990,10 +1011,15 @@ namespace History_VAR.Classes
             }
         }
 
-
-        public List<Image> Receive_Images_In_Lesson(int LessonID)
+        /// <summary>
+        /// Get images in lesson
+        /// </summary>
+        /// <param name="LessonID">Lesson ID</param>
+        /// <returns>LIST OF IMAGE OBJECTS</returns>
+        public List<Image> ReceiveImagesInLesson(Lesson l)
         {
             List<Image> ListofImages = new List<Image>();
+            int LessonID = l.GetLessonID();
 
             try
             {
@@ -1020,7 +1046,7 @@ namespace History_VAR.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message);
             }

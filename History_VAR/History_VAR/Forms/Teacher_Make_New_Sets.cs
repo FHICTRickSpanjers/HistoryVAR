@@ -50,7 +50,7 @@ namespace History_VAR.Forms
         private void GetClasses()
         {
             DBRepository DB = DBRepository.GetInstance();
-            var Classes = DB.Get_Group_Data();
+            var Classes = DB.FindGroupData();
             foreach(var Single_Class in Classes)
             {
                 CB_Classes.Items.Add(Single_Class.GetGroupName());
@@ -68,19 +68,20 @@ namespace History_VAR.Forms
             else
             {
                 //Get Teacher ID
-                int Teacher_ID = DB.Get_Teacher_ID(TB_Made_By.Text).TeacherIdentification;
+                int Teacher_ID = DB.FindTeacherID(TB_Made_By.Text).TeacherIdentification;
 
                 //Insert new Lesson
-                DB.CreateNewLesson(TB_Subject.Text, Teacher_ID, TB_Title.Text, CB_Lesson_Status.SelectedItem.ToString(), TB_Desc.Text);
+                Lesson L = new Lesson(TB_Title.Text, 0, CB_Lesson_Status.SelectedItem.ToString(), TB_Desc.Text, TB_Subject.Text, Teacher_ID);
+                DB.CreateNewLesson(L);
 
                 int Group_ID;
 
                 //Get Group and Lesson ID
                 if(CB_Classes.SelectedIndex == 0)
                 {
-                    int Lesson_ID = DB.GetLessonID(TB_Title.Text);
+                    int Lesson_ID = DB.FindLessonIDByName(TB_Title.Text);
                     //Insert Lesson into all groups (Using 0)
-                    DB.Insert_Lesson_For_Groups(Lesson_ID, 0);
+                    DB.InsertLessonForGroups(Lesson_ID, 0);
 
                     //Inserting Images into Lesson
                     Saving_Images_To_Lesson(Lesson_ID);
@@ -88,10 +89,10 @@ namespace History_VAR.Forms
                 }
                 else
                 {
-                   Group_ID = DB.Get_Group_ID(CB_Classes.SelectedItem.ToString()).Get_Group_ID();
-                   int Lesson_ID = DB.GetLessonID(TB_Title.Text);
+                   Group_ID = DB.FindGroupID(CB_Classes.SelectedItem.ToString()).Get_Group_ID();
+                   int Lesson_ID = DB.FindLessonIDByName(TB_Title.Text);
                    //Insert Lesson into chosen group
-                   DB.Insert_Lesson_For_Groups(Lesson_ID, Group_ID);
+                   DB.InsertLessonForGroups(Lesson_ID, Group_ID);
 
                     //Inserting Images into Lesson
                     Saving_Images_To_Lesson(Lesson_ID);
@@ -107,28 +108,29 @@ namespace History_VAR.Forms
         {
             //Open instance
             DBRepository DB = DBRepository.GetInstance();
+            var Lesson = DB.GetLessonDataByID(Lesson_ID);
 
             try
             {
                 //Get data
-                string subject = DB.Get_Lesson_Data_By_ID(Lesson_ID, "Lesson_subject");
-                string title = DB.Get_Lesson_Data_By_ID(Lesson_ID, "Lesson_Name");
-                int Teacher_ID = Convert.ToInt32(DB.Get_Lesson_Data_By_ID(Lesson_ID, "Teacher_ID"));
-                string desc = DB.Get_Lesson_Data_By_ID(Lesson_ID, "Lesson_description");
-                string status = DB.Get_Lesson_Data_By_ID(Lesson_ID, "Lesson_status");
+                string subject = Lesson.GetLessonSubject();
+                string title = Lesson.GetLessonName();
+                int Teacher_ID = Lesson.GetTeacherID();
+                string desc = Lesson.GetLessonDesc();
+                string status = Lesson.LessonStatus;
 
                 //Fill the boxes with received DB data
                 TB_Title.Text = title;
                 TB_Subject.Text = subject;
                 TB_Desc.Text = desc;
-                TB_Made_By.Text = DB.Get_Teacher_Name(Teacher_ID).GetTeacherName();
+                TB_Made_By.Text = DB.FindTeacherName(Teacher_ID).GetTeacherName();
                 CB_Lesson_Status.SelectedItem = status;
 
                 //Get Group ID
-                if (DB.Get_Group_ID_Based_On_Lesson_ID(Lesson_ID).Get_Group_ID() != 0)
+                if (DB.FindGroupIDBasedOnLessonID(Lesson_ID).Get_Group_ID() != 0)
                 {
-                    int groupid = DB.Get_Group_ID_Based_On_Lesson_ID(Lesson_ID).Get_Group_ID();
-                    string groupname = DB.Get_Group_Data_Based_On_GroupID(groupid).GetGroupName();
+                    int groupid = DB.FindGroupIDBasedOnLessonID(Lesson_ID).Get_Group_ID();
+                    string groupname = DB.FindGroupDataBasedOnGroupID(groupid).GetGroupName();
                     CB_Classes.SelectedItem = groupname;
                 }
                 else
@@ -137,7 +139,7 @@ namespace History_VAR.Forms
                 }
 
                 //Get Images in Lesson
-                var images = DB.Receive_Images_In_Lesson(Lesson_ID);
+                var images = DB.ReceiveImagesInLesson(Lesson);
 
                 foreach(var image in images)
                 {
@@ -154,14 +156,15 @@ namespace History_VAR.Forms
 
 
 
-        private void Update_Lesson()
+        private void UpdateLesson()
         {
             DBRepository DB = DBRepository.GetInstance();
-            int Lesson_ID = DB.GetLessonID(TB_Title.Text);
-            DB.UpdateLesson(Lesson_ID, TB_Subject.Text, TB_Title.Text, CB_Lesson_Status.SelectedItem.ToString(), TB_Desc.Text);
+            int Lesson_ID = DB.FindLessonIDByName(TB_Title.Text);
+            Lesson L = new Lesson(TB_Title.Text, Lesson_ID, CB_Lesson_Status.SelectedItem.ToString(), TB_Desc.Text, TB_Subject.Text, 0);
+            DB.UpdateLesson(L);
 
             //Get Group Information
-            var Groups = DB.Get_Group_Data();
+            var Groups = DB.FindGroupData();
             int Group_ID = 0;
 
             foreach(var SGroup in Groups)
@@ -173,20 +176,20 @@ namespace History_VAR.Forms
             }
 
             //Delete previous groups that had this lesson
-            DB.Delete_Lesson_At_Groups_By_ID(Lesson_ID);
-            DB.Delete_Image_From_Lesson_By_ID(Lesson_ID);
+            DB.DeleteLessonAtGroupsByID(Lesson_ID);
+            DB.DeleteImageFromLessonByID(Lesson_ID);
 
             //Add this lesson to the groups that currently have this lesson
             if(CB_Classes.SelectedItem.ToString() == "All")
             {
-                DB.Insert_Lesson_For_Groups(Lesson_ID, 0);
+                DB.InsertLessonForGroups(Lesson_ID, 0);
 
                 //Inserting Images into Lesson
                 Saving_Images_To_Lesson(Lesson_ID);
             }
             else
             {
-                DB.Insert_Lesson_For_Groups(Lesson_ID, Group_ID);
+                DB.InsertLessonForGroups(Lesson_ID, Group_ID);
 
                 //Inserting Images into Lesson
                 Saving_Images_To_Lesson(Lesson_ID);
@@ -216,7 +219,7 @@ namespace History_VAR.Forms
 
         private void btn_update_Click(object sender, EventArgs e)
         {
-            Update_Lesson();
+            UpdateLesson();
         }
 
         private void btn_add_images_Click(object sender, EventArgs e)
@@ -254,7 +257,7 @@ namespace History_VAR.Forms
                         arr = ms.ToArray();
                     }
 
-                    DB.Insert_Image_In_DB(open.FileName, arr);
+                    DB.InsertImageInDB(open.FileName, arr);
 
                 }
             }
@@ -278,7 +281,7 @@ namespace History_VAR.Forms
             int ToAddImageID = SystemImages.ReturnImageID();
 
 
-            var images = DB.Receive_Images_From_DB();
+            var images = DB.ReceiveImagesFromDB();
 
             foreach (var image in images)
             {
@@ -293,14 +296,14 @@ namespace History_VAR.Forms
         public void Saving_Images_To_Lesson(int LessonID)
         {
             DBRepository DB = DBRepository.GetInstance();
-            var images = DB.Receive_Images_From_DB();
+            var images = DB.ReceiveImagesFromDB();
             foreach(var image in images)
             {
                 foreach(string item in LB_Images.Items)
                 {
                     if(image.ReturnFileName() == item)
                     {
-                        DB.Insert_Image_In_Lesson(LessonID, image.ReturnImageID());
+                        DB.InsertImageInLesson(LessonID, image.ReturnImageID());
                     }
                 }
             }

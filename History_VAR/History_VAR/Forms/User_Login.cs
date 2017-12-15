@@ -32,9 +32,9 @@ namespace History_VAR.Forms
             else
             {
                 DBRepository DB = DBRepository.GetInstance();
-                var DBPassword = DB.Get_Login_Data_Teachers(TB_Username.Text);
+                var LoggedIn = DB.FindLoginData(TB_Username.Text, TB_Password.Text, "Teacher");
 
-                if (TB_Password.Text == DBPassword)
+                if (LoggedIn == true)
                 {
                     this.Hide();
                     var Teacher_Screen = new Teacher_Options(TB_Username.Text);
@@ -59,9 +59,9 @@ namespace History_VAR.Forms
             else
             {
                 DBRepository DB = DBRepository.GetInstance();
-                var DBPassword = DB.Get_Login_Data_Student(TB_Username.Text);
+                var LoggedIn = DB.FindLoginData(TB_Username.Text, TB_Password.Text, "Student");
 
-                if (TB_Password.Text == DBPassword)
+                if (LoggedIn == true)
                 {
                     this.Hide();
                     var Student_Screen = new Student_Screen(TB_Username.Text);

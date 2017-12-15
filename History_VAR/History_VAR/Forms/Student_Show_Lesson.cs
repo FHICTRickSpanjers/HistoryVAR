@@ -30,7 +30,7 @@ namespace History_VAR.Forms
         {
             LBL_Lesson_Title.Text = Lesson_name;
             DBRepository DB = DBRepository.GetInstance();
-            var Lessons = DB.Get_Lessons_Data();
+            var Lessons = DB.FindLessonsData();
 
             foreach(var single_lesson in Lessons)
             {
@@ -40,7 +40,7 @@ namespace History_VAR.Forms
                     LBL_Lesson_Subject.Text = single_lesson.GetLessonSubject();
 
                     //Add images to box
-                    var Images = DB.Receive_Images_In_Lesson(single_lesson.GetLessonID());
+                    var Images = DB.ReceiveImagesInLesson(single_lesson);
                     foreach(var image in Images)
                     {
                         PictureBox p = new PictureBox();

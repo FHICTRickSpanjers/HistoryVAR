@@ -35,7 +35,7 @@ namespace History_VAR.Forms
         private void Fill_Panel_With_Images()
         {
             DBRepository DB = DBRepository.GetInstance();
-            var images = DB.Receive_Images_From_DB();
+            var images = DB.ReceiveImagesFromDB();
             foreach(var image in images)
             {
                 PictureBox p = new PictureBox();
