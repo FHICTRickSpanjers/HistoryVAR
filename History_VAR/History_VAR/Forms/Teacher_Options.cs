@@ -79,9 +79,14 @@ namespace History_VAR.Forms
         /// <param name="e"></param>
         private void btn_logout_Click(object sender, EventArgs e)
         {
+            //Hide the current form
             this.Hide();
+
+            //Make instance of new form
             var userlogin= new User_Login();
             userlogin.Closed += (s, args) => this.Close();
+
+            //Open new form
             userlogin.Show();
         }
     }

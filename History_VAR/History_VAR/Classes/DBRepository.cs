@@ -815,7 +815,7 @@ namespace History_VAR.Classes
                         while (dr.Read())
                         {
                             int StudentID = Convert.ToInt32(dr["Student_ID"]);
-                            string StudentName = dr["Student_username"].ToString() ;
+                            string StudentName = dr["Username"].ToString();
                             int SchoolID = Convert.ToInt32(dr["School_ID"]);
 
                             Student S = new Student(StudentID, StudentName, SchoolID);
