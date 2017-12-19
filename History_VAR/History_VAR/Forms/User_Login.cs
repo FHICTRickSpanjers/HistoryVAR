@@ -151,5 +151,6 @@ namespace History_VAR.Forms
             //Open new form
             Opening_Screen.Show();
         }
+
     }
 }

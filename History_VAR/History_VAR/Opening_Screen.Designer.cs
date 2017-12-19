@@ -34,23 +34,28 @@
             // 
             // btn_enter_application
             // 
-            this.btn_enter_application.Location = new System.Drawing.Point(12, 80);
+            this.btn_enter_application.BackColor = System.Drawing.Color.White;
+            this.btn_enter_application.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_enter_application.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btn_enter_application.ForeColor = System.Drawing.Color.Black;
+            this.btn_enter_application.Location = new System.Drawing.Point(112, 286);
             this.btn_enter_application.Name = "btn_enter_application";
-            this.btn_enter_application.Size = new System.Drawing.Size(470, 51);
+            this.btn_enter_application.Size = new System.Drawing.Size(567, 51);
             this.btn_enter_application.TabIndex = 0;
             this.btn_enter_application.Text = "Enter Application";
-            this.btn_enter_application.UseVisualStyleBackColor = true;
+            this.btn_enter_application.UseVisualStyleBackColor = false;
             this.btn_enter_application.Click += new System.EventHandler(this.btn_enter_application_Click);
             // 
             // label2
             // 
+            this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(12, 9);
+            this.label2.Location = new System.Drawing.Point(121, 36);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(10);
-            this.label2.Size = new System.Drawing.Size(470, 59);
+            this.label2.Size = new System.Drawing.Size(529, 115);
             this.label2.TabIndex = 2;
             this.label2.Text = "History VAR";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -67,6 +72,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Opening Screen";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

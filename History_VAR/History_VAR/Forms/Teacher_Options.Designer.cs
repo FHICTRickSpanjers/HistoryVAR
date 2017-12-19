@@ -28,76 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label_title_user_login = new System.Windows.Forms.Label();
             this.btn_show_all_lessons = new System.Windows.Forms.Button();
             this.btn_create_lesson = new System.Windows.Forms.Button();
             this.btn_logout = new System.Windows.Forms.Button();
+            this.label_login = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // label_title_user_login
-            // 
-            this.label_title_user_login.BackColor = System.Drawing.Color.Black;
-            this.label_title_user_login.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
-            this.label_title_user_login.ForeColor = System.Drawing.Color.White;
-            this.label_title_user_login.Location = new System.Drawing.Point(12, 9);
-            this.label_title_user_login.Name = "label_title_user_login";
-            this.label_title_user_login.Padding = new System.Windows.Forms.Padding(10);
-            this.label_title_user_login.Size = new System.Drawing.Size(375, 59);
-            this.label_title_user_login.TabIndex = 2;
-            this.label_title_user_login.Tag = "";
-            this.label_title_user_login.Text = "TEACHER OPTIONS";
-            this.label_title_user_login.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btn_show_all_lessons
             // 
-            this.btn_show_all_lessons.Location = new System.Drawing.Point(12, 134);
+            this.btn_show_all_lessons.BackColor = System.Drawing.Color.White;
+            this.btn_show_all_lessons.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_show_all_lessons.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btn_show_all_lessons.Location = new System.Drawing.Point(87, 273);
+            this.btn_show_all_lessons.Margin = new System.Windows.Forms.Padding(10);
             this.btn_show_all_lessons.Name = "btn_show_all_lessons";
-            this.btn_show_all_lessons.Size = new System.Drawing.Size(375, 46);
+            this.btn_show_all_lessons.Size = new System.Drawing.Size(608, 58);
             this.btn_show_all_lessons.TabIndex = 4;
             this.btn_show_all_lessons.Text = "Show All Lessons";
-            this.btn_show_all_lessons.UseVisualStyleBackColor = true;
+            this.btn_show_all_lessons.UseVisualStyleBackColor = false;
             this.btn_show_all_lessons.Click += new System.EventHandler(this.btn_show_all_lessons_Click);
             // 
             // btn_create_lesson
             // 
-            this.btn_create_lesson.Location = new System.Drawing.Point(12, 82);
+            this.btn_create_lesson.BackColor = System.Drawing.Color.White;
+            this.btn_create_lesson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_create_lesson.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btn_create_lesson.ForeColor = System.Drawing.Color.Black;
+            this.btn_create_lesson.Location = new System.Drawing.Point(87, 195);
+            this.btn_create_lesson.Margin = new System.Windows.Forms.Padding(10);
             this.btn_create_lesson.Name = "btn_create_lesson";
-            this.btn_create_lesson.Size = new System.Drawing.Size(375, 46);
+            this.btn_create_lesson.Size = new System.Drawing.Size(608, 58);
             this.btn_create_lesson.TabIndex = 5;
             this.btn_create_lesson.Text = "Create Lesson";
-            this.btn_create_lesson.UseVisualStyleBackColor = true;
+            this.btn_create_lesson.UseVisualStyleBackColor = false;
             this.btn_create_lesson.Click += new System.EventHandler(this.btn_create_lesson_Click);
             // 
             // btn_logout
             // 
-            this.btn_logout.Location = new System.Drawing.Point(12, 186);
+            this.btn_logout.BackColor = System.Drawing.Color.White;
+            this.btn_logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_logout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btn_logout.ForeColor = System.Drawing.Color.Black;
+            this.btn_logout.Location = new System.Drawing.Point(87, 351);
+            this.btn_logout.Margin = new System.Windows.Forms.Padding(10);
             this.btn_logout.Name = "btn_logout";
-            this.btn_logout.Size = new System.Drawing.Size(375, 46);
+            this.btn_logout.Size = new System.Drawing.Size(608, 58);
             this.btn_logout.TabIndex = 6;
             this.btn_logout.Text = "Logout";
-            this.btn_logout.UseVisualStyleBackColor = true;
+            this.btn_logout.UseVisualStyleBackColor = false;
             this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
+            // 
+            // label_login
+            // 
+            this.label_login.AutoSize = true;
+            this.label_login.BackColor = System.Drawing.Color.Transparent;
+            this.label_login.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold);
+            this.label_login.ForeColor = System.Drawing.Color.White;
+            this.label_login.Location = new System.Drawing.Point(39, 20);
+            this.label_login.Name = "label_login";
+            this.label_login.Padding = new System.Windows.Forms.Padding(10);
+            this.label_login.Size = new System.Drawing.Size(697, 115);
+            this.label_login.TabIndex = 11;
+            this.label_login.Text = "Teacher Options";
+            this.label_login.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Teacher_Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 250);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(782, 553);
+            this.Controls.Add(this.label_login);
             this.Controls.Add(this.btn_logout);
             this.Controls.Add(this.btn_create_lesson);
             this.Controls.Add(this.btn_show_all_lessons);
-            this.Controls.Add(this.label_title_user_login);
             this.Name = "Teacher_Options";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Teacher_Options";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label_title_user_login;
         private System.Windows.Forms.Button btn_show_all_lessons;
         private System.Windows.Forms.Button btn_create_lesson;
         private System.Windows.Forms.Button btn_logout;
+        private System.Windows.Forms.Label label_login;
     }
 }

@@ -34,6 +34,7 @@
             // 
             // FlowLayoutPanelIMG
             // 
+            this.FlowLayoutPanelIMG.ForeColor = System.Drawing.Color.White;
             this.FlowLayoutPanelIMG.Location = new System.Drawing.Point(12, 69);
             this.FlowLayoutPanelIMG.Name = "FlowLayoutPanelIMG";
             this.FlowLayoutPanelIMG.Size = new System.Drawing.Size(429, 336);
@@ -50,17 +51,20 @@
             this.label_available_lessons.Size = new System.Drawing.Size(429, 56);
             this.label_available_lessons.TabIndex = 3;
             this.label_available_lessons.Tag = "";
-            this.label_available_lessons.Text = "SELECT IMAGE";
+            this.label_available_lessons.Text = "Select Image";
             this.label_available_lessons.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // SystemImages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(458, 418);
             this.Controls.Add(this.label_available_lessons);
             this.Controls.Add(this.FlowLayoutPanelIMG);
+            this.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.Name = "SystemImages";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SystemImages";
             this.ResumeLayout(false);
 
