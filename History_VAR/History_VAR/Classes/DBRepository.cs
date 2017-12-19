@@ -139,41 +139,6 @@ namespace History_VAR.Classes
         }
 
 
-        //Insert Artobjects per lesson
-        /// <summary>
-        /// Insert Artobjects into lesson
-        /// </summary>
-        /// <param name="lessonid">ID of the lesson</param>
-        /// <param name="artobjid">ID of the art object</param>
-        public void InsertArtobjectsInLessons(int lessonid, int artobjid)
-        {
-            try
-            {
-                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
-                {
-                    if (cnn.State == ConnectionState.Closed)
-                    {
-                        cnn.Open();
-                    }
-                    SqlCommand NewCmd = cnn.CreateCommand();
-                    NewCmd.Connection = cnn;
-                    NewCmd.CommandType = CommandType.Text;
-                    NewCmd.CommandText = "INSERT INTO LessonObj (Lesson_ID, Art_ID) VALUES (@Lesson_ID, @Art_ID)";
-
-                    NewCmd.Parameters.AddWithValue("@Lesson_ID", lessonid);
-                    NewCmd.Parameters.AddWithValue("@Art_ID", artobjid);
-                    NewCmd.ExecuteNonQuery();
-
-                    cnn.Close();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-
         /// <summary>
         /// Select all the lessons
         /// </summary>
@@ -218,58 +183,6 @@ namespace History_VAR.Classes
             return ListOfLessons;
         }
 
-
-        //Get All Artobjects
-        public List<ArtObject> FindArtData()
-        {
-            List<ArtObject> ListOfArt = new List<ArtObject>();
-
-            try
-            {
-                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
-                {
-                    string query = "SELECT * FROM ArtObj";
-                    SqlCommand cmd = new SqlCommand(query, cnn);
-                    cmd.CommandType = CommandType.Text;
-                    cnn.Open();
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            int ArtID = Convert.ToInt32(dr["Art_ID"]);
-                            string Art_title = dr["Art_title"].ToString();
-                            string Art_type = dr["Art_type"].ToString();
-                            string Art_genre = dr["Art_genre"].ToString();
-                            int Art_year = Convert.ToInt32(dr["Art_year"]);
-                            string Art_period = dr["Art_period"].ToString();
-                            string Art_city = dr["Art_city"].ToString();
-                            string Art_country = dr["Art_country"].ToString();
-                            decimal Art_width = Convert.ToDecimal(dr["Art_width"]);
-                            decimal Art_height = Convert.ToDecimal(dr["Art_height"]);
-                            decimal Art_length = Convert.ToDecimal(dr["Art_length"]);
-                            string Art_material = dr["Art_material"].ToString();
-                            string Art_where_is_original_located = dr["Art_where_is_original_located"].ToString();
-                            string Art_description = dr["Art_description"].ToString();
-
-                            ArtObject A = new ArtObject(ArtID, Art_title, Art_type, Art_genre, Art_year,
-                                Art_period, Art_city, Art_country, Art_width, Art_height, Art_length, Art_material, 
-                                Art_where_is_original_located, Art_description);
-
-                            ListOfArt.Add(A);
-                        }
-                    }
-
-                    cnn.Close();
-                }
-            }
-            catch (NullReferenceException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            return ListOfArt;
-        }
 
 
         /// <summary>
@@ -1108,6 +1021,60 @@ namespace History_VAR.Classes
         }
 
 
+
+        //Get All Artobjects
+        public List<ArtObject> FindArtData()
+        {
+            List<ArtObject> ListOfArt = new List<ArtObject>();
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT * FROM ArtObj";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            int ArtID = Convert.ToInt32(dr["Art_ID"]);
+                            string Art_title = dr["Art_title"].ToString();
+                            string Art_type = dr["Art_type"].ToString();
+                            string Art_genre = dr["Art_genre"].ToString();
+                            int Art_year = Convert.ToInt32(dr["Art_year"]);
+                            string Art_period = dr["Art_period"].ToString();
+                            string Art_city = dr["Art_city"].ToString();
+                            string Art_country = dr["Art_country"].ToString();
+                            decimal Art_width = Convert.ToDecimal(dr["Art_width"]);
+                            decimal Art_height = Convert.ToDecimal(dr["Art_height"]);
+                            decimal Art_length = Convert.ToDecimal(dr["Art_length"]);
+                            string Art_material = dr["Art_material"].ToString();
+                            string Art_where_is_original_located = dr["Art_where_is_original_located"].ToString();
+                            string Art_description = dr["Art_description"].ToString();
+
+                            ArtObject A = new ArtObject(ArtID, Art_title, Art_type, Art_genre, Art_year,
+                                Art_period, Art_city, Art_country, Art_width, Art_height, Art_length, Art_material,
+                                Art_where_is_original_located, Art_description);
+
+                            ListOfArt.Add(A);
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return ListOfArt;
+        }
+
+
         /// <summary>
         /// Insert Artobject into lesson
         /// </summary>
@@ -1227,6 +1194,68 @@ namespace History_VAR.Classes
             }
 
             return ListofArt;
+        }
+
+
+
+        /// <summary>
+        /// Find all the data from the art creator
+        /// </summary>
+        /// <returns>List of creator objects</returns>
+        public List<Creator> FindArtCreatorsData()
+        {
+            List<Creator> ListOfCreators = new List<Creator>();
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT * FROM Creator";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            int Creator_ID = Convert.ToInt32(dr["Creator_ID"]);
+                            string Creator_name = dr["Creator_name"].ToString();
+                            string Creator_gender = dr["Creator_gender"].ToString();
+                            string Creator_place_of_birth_city = dr["Creator_place_of_birth_city"].ToString();
+                            string Creator_place_of_birth_country = dr["Creator_place_of_birth_country"].ToString();
+                            DateTime Creator_date_of_birth = Convert.ToDateTime(dr["Creator_date_of_birth"]);
+                            string Creator_place_of_death_city = dr["Creator_place_of_death_city"].ToString();
+                            string Creator_place_of_death_country = dr["Creator_place_of_death_country"].ToString();
+                            DateTime Creator_date_of_death = Convert.ToDateTime(dr["Creator_date_of_death"]);
+                            string Creator_best_known_art = dr["Creator_best_known_art"].ToString();
+                            string Creator_genre = dr["Creator_genre"].ToString();
+                            string Creator_description = dr["Creator_description"].ToString();
+
+                            Creator C = new Creator(Creator_ID, Creator_name);
+
+                            C.GenderOfCreator = Creator_gender;
+                            C.PlaceOfBirthCreator = Creator_place_of_birth_city;
+                            C.BdayOfCreator = Creator_date_of_birth;
+                            C.PlaceOfDeathCreator = Creator_place_of_death_city;
+                            C.DeathOfCreator = Creator_date_of_death;
+                            C.MostFamousArtCreator = Creator_best_known_art;
+                            C.GenreOfCreator = Creator_genre;
+                            C.DescriptionOfCreator = Creator_description;
+
+                            ListOfCreators.Add(C);
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return ListOfCreators;
         }
     }
 }

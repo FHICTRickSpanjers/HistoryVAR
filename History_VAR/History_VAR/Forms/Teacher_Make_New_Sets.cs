@@ -478,12 +478,17 @@ namespace History_VAR.Forms
             }
         }
 
-
+        /// <summary>
+        /// Add art to lesson listbox
+        /// </summary>
         public void Add_Art_To_Lesson()
         {
-           if(CB_Art.SelectedText != null)
+           if(CB_Art.SelectedIndex > -1)
             {
                 LB_Art_Items.Items.Add(CB_Art.SelectedItem.ToString());
+            }
+            else{
+                //Do nothing
             }
         }
 
@@ -517,22 +522,25 @@ namespace History_VAR.Forms
         }
 
 
-
+        /// <summary>
+        /// Save artobjects to a lesson
+        /// </summary>
+        /// <param name="LessonID">ID of the lesson</param>
         public void Saving_Artobjects_To_Lesson(int LessonID)
         {
             //Make a new instance of DB class
             DBRepository DB = DBRepository.GetInstance();
 
-            //Get images from DB
+            //Get art from DB
             var Art = DB.FindArtData();
 
-            //For every image in images do the following
+            //For every art in list of art do the following
             foreach (var single_art in Art)
             {
-                //For every item in listbox images
+                //For every item in listbox art
                 foreach (string item in LB_Art_Items.Items)
                 {
-                    //If image name is the same as item name
+                    //If art name is the same as art name in the listbox
                     if (single_art.ReturnArtTitle() == item)
                     {
                         //ADD ART TO LESSON IN DATABASE
