@@ -219,6 +219,59 @@ namespace History_VAR.Classes
         }
 
 
+        //Get All Artobjects
+        public List<ArtObject> FindArtData()
+        {
+            List<ArtObject> ListOfArt = new List<ArtObject>();
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT * FROM ArtObj";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.CommandType = CommandType.Text;
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            int ArtID = Convert.ToInt32(dr["Art_ID"]);
+                            string Art_title = dr["Art_title"].ToString();
+                            string Art_type = dr["Art_type"].ToString();
+                            string Art_genre = dr["Art_genre"].ToString();
+                            int Art_year = Convert.ToInt32(dr["Art_year"]);
+                            string Art_period = dr["Art_period"].ToString();
+                            string Art_city = dr["Art_city"].ToString();
+                            string Art_country = dr["Art_country"].ToString();
+                            decimal Art_width = Convert.ToDecimal(dr["Art_width"]);
+                            decimal Art_height = Convert.ToDecimal(dr["Art_height"]);
+                            decimal Art_length = Convert.ToDecimal(dr["Art_length"]);
+                            string Art_material = dr["Art_material"].ToString();
+                            string Art_where_is_original_located = dr["Art_where_is_original_located"].ToString();
+                            string Art_description = dr["Art_description"].ToString();
+
+                            ArtObject A = new ArtObject(ArtID, Art_title, Art_type, Art_genre, Art_year,
+                                Art_period, Art_city, Art_country, Art_width, Art_height, Art_length, Art_material, 
+                                Art_where_is_original_located, Art_description);
+
+                            ListOfArt.Add(A);
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return ListOfArt;
+        }
+
+
         /// <summary>
         /// Get Lesson ID
         /// </summary>
@@ -913,9 +966,9 @@ namespace History_VAR.Classes
         /// Get images from DB
         /// </summary>
         /// <returns>List of image objects</returns>
-        public List<Image> ReceiveImagesFromDB()
+        public List<ArtImage> ReceiveImagesFromDB()
         {
-            List<Image> ListofImages = new List<Image>();
+            List<ArtImage> ListofImages = new List<ArtImage>();
 
             try
             {
@@ -933,7 +986,7 @@ namespace History_VAR.Classes
                             int Img_ID = Convert.ToInt32(dr["IMG_ID"]);
                             byte[] DataArr = (byte[])dr["Data"];
                             string FileName = dr["FileName"].ToString();
-                            Image I = new Image(Img_ID, FileName, DataArr);
+                            ArtImage I = new ArtImage(Img_ID, FileName, DataArr);
                             ListofImages.Add(I);
                         }
                     }
@@ -1015,10 +1068,10 @@ namespace History_VAR.Classes
         /// Get images in lesson
         /// </summary>
         /// <param name="LessonID">Lesson ID</param>
-        /// <returns>LIST OF IMAGE OBJECTS</returns>
-        public List<Image> ReceiveImagesInLesson(Lesson l)
+        /// <returns>List of Image objects</returns>
+        public List<ArtImage> ReceiveImagesInLesson(Lesson l)
         {
-            List<Image> ListofImages = new List<Image>();
+            List<ArtImage> ListofImages = new List<ArtImage>();
             int LessonID = l.GetLessonID();
 
             try
@@ -1038,7 +1091,7 @@ namespace History_VAR.Classes
                             int Img_ID = Convert.ToInt32(dr["IMG_ID"]);
                             byte[] DataArr = (byte[])dr["Data"];
                             string FileName = dr["FileName"].ToString();
-                            Image I = new Image(Img_ID, FileName, DataArr);
+                            ArtImage I = new ArtImage(Img_ID, FileName, DataArr);
                             ListofImages.Add(I);
                         }
                     }
@@ -1052,6 +1105,128 @@ namespace History_VAR.Classes
             }
 
             return ListofImages;
+        }
+
+
+        /// <summary>
+        /// Insert Artobject into lesson
+        /// </summary>
+        /// <param name="LessonID">Lesson ID</param>
+        /// <param name="Art_ID">ART_ID</param>
+        public void InsertArtObjInLesson(int LessonID, int Art_ID)
+        {
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    if (cnn.State == ConnectionState.Closed)
+                    {
+                        cnn.Open();
+                    }
+
+                    SqlCommand NewCmd = cnn.CreateCommand();
+                    NewCmd.Connection = cnn;
+                    NewCmd.CommandType = CommandType.Text;
+                    NewCmd.CommandText = "INSERT INTO LessonObj (Lesson_ID, Art_ID) VALUES (@Lesson_ID, @Art_ID)";
+
+                    NewCmd.Parameters.AddWithValue("@Lesson_ID", LessonID);
+                    NewCmd.Parameters.AddWithValue("@Art_ID", Art_ID);
+                    NewCmd.ExecuteNonQuery();
+
+                    cnn.Close();
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.Write(e.Message);
+            }
+        }
+
+
+        //Delete the art objects that were set for the lesson
+        /// <summary>
+        /// Delete art from lesson
+        /// </summary>
+        /// <param name="Lesson_ID">Lesson ID</param>
+        public void DeleteArtObjFromLessonByID(int Lesson_ID)
+        {
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "DELETE FROM LessonObj WHERE Lesson_ID = @Lesson_ID";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Lesson_ID", Lesson_ID);
+                    cnn.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// Get images in lesson
+        /// </summary>
+        /// <param name="LessonID">Lesson ID</param>
+        /// <returns>List of Image objects</returns>
+        public List<ArtObject> ReceiveArtObjInLesson(Lesson L)
+        {
+            List<ArtObject> ListofArt = new List<ArtObject>();
+            int LessonID = L.GetLessonID();
+
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
+                {
+                    string query = "SELECT * FROM ArtObj WHERE Art_ID IN(SELECT Art_ID FROM LessonObj WHERE Lesson_ID = @Lesson_ID)";
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Lesson_ID", LessonID);
+                    cnn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            int ArtID = Convert.ToInt32(dr["Art_ID"]);
+                            string Art_title = dr["Art_title"].ToString();
+                            string Art_type = dr["Art_type"].ToString();
+                            string Art_genre = dr["Art_genre"].ToString();
+                            int Art_year = Convert.ToInt32(dr["Art_year"]);
+                            string Art_period = dr["Art_period"].ToString();
+                            string Art_city = dr["Art_city"].ToString();
+                            string Art_country = dr["Art_country"].ToString();
+                            decimal Art_width = Convert.ToDecimal(dr["Art_width"]);
+                            decimal Art_height = Convert.ToDecimal(dr["Art_height"]);
+                            decimal Art_length = Convert.ToDecimal(dr["Art_length"]);
+                            string Art_material = dr["Art_material"].ToString();
+                            string Art_where_is_original_located = dr["Art_where_is_original_located"].ToString();
+                            string Art_description = dr["Art_description"].ToString();
+
+                            ArtObject A = new ArtObject(ArtID, Art_title, Art_type, Art_genre, Art_year,
+                                Art_period, Art_city, Art_country, Art_width, Art_height, Art_length, Art_material,
+                                Art_where_is_original_located, Art_description);
+
+                            ListofArt.Add(A);
+                        }
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return ListofArt;
         }
     }
 }

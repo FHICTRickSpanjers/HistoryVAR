@@ -49,7 +49,7 @@
     <Compile Include="Classes\Creator.cs" />
     <Compile Include="Classes\DBRepository.cs" />
     <Compile Include="Classes\Group.cs" />
-    <Compile Include="Classes\Image.cs" />
+    <Compile Include="Classes\ArtImage.cs" />
     <Compile Include="Classes\Lesson.cs" />
     <Compile Include="Classes\Student.cs" />
     <Compile Include="Classes\Teacher.cs" />

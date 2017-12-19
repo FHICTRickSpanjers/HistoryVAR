@@ -5,7 +5,7 @@ using System.Text;
 
 namespace History_VAR.Classes
 {
-    class Image
+    class ArtImage
     {
         //ID of Image
         int Image_ID;
@@ -21,7 +21,7 @@ namespace History_VAR.Classes
         /// <param name="ID">Image ID</param>
         /// <param name="filename">Image Filename</param>
         /// <param name="data">Byte array (varbinary data)</param>
-        public Image(int ID, string filename, byte[] data)
+        public ArtImage(int ID, string filename, byte[] data)
         {
             //setting the data
             this.ImageFileName = filename;

@@ -33,6 +33,7 @@ namespace History_VAR.Forms
 
             //Get classes from the database
             GetClasses();
+            GetArt();
         }
 
 
@@ -54,6 +55,7 @@ namespace History_VAR.Forms
 
             //Get all the classes (from the database)
             GetClasses();
+            GetArt();
 
             //Fill saved lesson data
             Fill_Saved_Lesson_Data(lesson_id);
@@ -70,6 +72,8 @@ namespace History_VAR.Forms
 
             //Set status for the lesson
             CB_Lesson_Status.SelectedIndex = 1;
+
+            //
         }
 
 
@@ -110,6 +114,24 @@ namespace History_VAR.Forms
             }
         }
 
+        private void GetArt()
+        {
+            //New instance of DB
+            DBRepository DB = DBRepository.GetInstance();
+
+            //Get all the classes from the DB
+            var Art = DB.FindArtData();
+
+            //Foreach class in classes
+            foreach (var Single_Art in Art)
+            {
+                //Add items to class list
+                CB_Art.Items.Add(Single_Art.ReturnArtTitle());
+            }
+        }
+
+
+
         /// <summary>
         /// Saving a new lesson
         /// </summary>
@@ -134,6 +156,7 @@ namespace History_VAR.Forms
                 Lesson L = new Lesson(TB_Title.Text, 0, CB_Lesson_Status.SelectedItem.ToString(), TB_Desc.Text, TB_Subject.Text, Teacher_ID);
                 DB.CreateNewLesson(L);
 
+                //Necessary for which group to save to
                 int Group_ID;
 
                 //Get Group and Lesson ID
@@ -146,6 +169,10 @@ namespace History_VAR.Forms
                     //Inserting Images into Lesson
                     Saving_Images_To_Lesson(Lesson_ID);
 
+                    //Inserting Art objects into Lesson
+                    Saving_Artobjects_To_Lesson(Lesson_ID);
+
+
                 }
                 else
                 {
@@ -156,6 +183,9 @@ namespace History_VAR.Forms
 
                     //Inserting Images into Lesson
                     Saving_Images_To_Lesson(Lesson_ID);
+
+                    //Inserting Art objects into Lesson
+                    Saving_Artobjects_To_Lesson(Lesson_ID);
                 }
              
                 MessageBox.Show("Saved lesson!");
@@ -210,6 +240,16 @@ namespace History_VAR.Forms
                     LB_Images.Items.Add(image.ReturnFileName());
                 }
 
+
+                //Get Art objects in lesson
+
+                var Art = DB.ReceiveArtObjInLesson(Lesson);
+
+                foreach(var Single_Art in Art)
+                {
+                    LB_Art_Items.Items.Add(Single_Art.ReturnArtTitle());
+                }
+
             }
             catch (NullReferenceException)
             {
@@ -253,6 +293,7 @@ namespace History_VAR.Forms
             //Delete previous groups that had this lesson
             DB.DeleteLessonAtGroupsByID(Lesson_ID);
             DB.DeleteImageFromLessonByID(Lesson_ID);
+            DB.DeleteArtObjFromLessonByID(Lesson_ID);
 
             //Add this lesson to the groups that currently have this lesson
             if(CB_Classes.SelectedItem.ToString() == "All")
@@ -261,6 +302,9 @@ namespace History_VAR.Forms
 
                 //Inserting Images into Lesson
                 Saving_Images_To_Lesson(Lesson_ID);
+
+                //Inserting Art into Lesson
+                Saving_Artobjects_To_Lesson(Lesson_ID);
             }
             else
             {
@@ -268,6 +312,9 @@ namespace History_VAR.Forms
 
                 //Inserting Images into Lesson
                 Saving_Images_To_Lesson(Lesson_ID);
+
+                //Inserting Art into Lesson
+                Saving_Artobjects_To_Lesson(Lesson_ID);
             }
 
             MessageBox.Show("Lesson Updated");
@@ -306,7 +353,7 @@ namespace History_VAR.Forms
         /// <param name="e"></param>
         private void btn_add_objects_Click(object sender, EventArgs e)
         {
-
+            Add_Art_To_Lesson();
         }
 
         /// <summary>
@@ -338,6 +385,17 @@ namespace History_VAR.Forms
         private void LB_Images_DoubleClick(object sender, EventArgs e)
         {
             LB_Images.Items.Remove(LB_Images.SelectedItem);
+        }
+
+
+        /// <summary>
+        /// Remove art objects from list on doubleclick
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LB_Art_Items_DoubleClick(object sender, EventArgs e)
+        {
+            LB_Art_Items.Items.Remove(LB_Art_Items.SelectedItem);
         }
 
         /// <summary>
@@ -421,6 +479,15 @@ namespace History_VAR.Forms
         }
 
 
+        public void Add_Art_To_Lesson()
+        {
+           if(CB_Art.SelectedText != null)
+            {
+                LB_Art_Items.Items.Add(CB_Art.SelectedItem.ToString());
+            }
+        }
+
+
         /// <summary>
         /// Save image to lesson where lesson ID
         /// </summary>
@@ -449,5 +516,32 @@ namespace History_VAR.Forms
             }
         }
 
+
+
+        public void Saving_Artobjects_To_Lesson(int LessonID)
+        {
+            //Make a new instance of DB class
+            DBRepository DB = DBRepository.GetInstance();
+
+            //Get images from DB
+            var Art = DB.FindArtData();
+
+            //For every image in images do the following
+            foreach (var single_art in Art)
+            {
+                //For every item in listbox images
+                foreach (string item in LB_Art_Items.Items)
+                {
+                    //If image name is the same as item name
+                    if (single_art.ReturnArtTitle() == item)
+                    {
+                        //ADD ART TO LESSON IN DATABASE
+                        DB.InsertArtObjInLesson(LessonID, single_art.ReturnArtID());
+                    }
+                }
+            }
+        }
+
+ 
     }
 }
