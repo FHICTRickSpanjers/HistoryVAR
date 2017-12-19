@@ -30,11 +30,6 @@ namespace History_VAR.Classes
         private string Country;
         private string City;
 
-        public ArtObject()
-        {
-
-        }
-
 
         public ArtObject(int ID, string title, string type, string genre, int year, string period, string city, string country, decimal width, decimal height, decimal length, string material, string originallocation, string description)
         {

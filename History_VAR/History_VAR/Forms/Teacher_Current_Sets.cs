@@ -144,20 +144,20 @@ namespace History_VAR.Forms
                 DBRepository DB = DBRepository.GetInstance();
 
                 //Get the current status by the ID of the lesson
-                var Status = DB.FindLessonByID(DB.FindLessonIDByName(CB_Lessons.SelectedItem.ToString()));
+                var Status = DB.FindLessonStatusByID(DB.FindLessonIDByName(CB_Lessons.SelectedItem.ToString()));
 
                 //If status is published
                 if (Status.LessonStatus == "Published")
                 {
                     //Update the status to Draft
-                    DB.UpdateLessonStatusByID(CB_Lessons.SelectedIndex + 1, "Draft");
+                    DB.UpdateLessonStatusByID(DB.FindLessonIDByName(CB_Lessons.SelectedItem.ToString()), "Draft");
                 }
 
                 //If status is draft
                 else if (Status.LessonStatus == "Draft")
                 {
                     //Update the status to published
-                    DB.UpdateLessonStatusByID(CB_Lessons.SelectedIndex + 1, "Published");
+                    DB.UpdateLessonStatusByID(DB.FindLessonIDByName(CB_Lessons.SelectedItem.ToString()), "Published");
                 }
             }
             else

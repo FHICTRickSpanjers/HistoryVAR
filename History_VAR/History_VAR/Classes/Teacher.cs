@@ -12,13 +12,6 @@ namespace History_VAR.Classes
         private string TeacherName;
         private string SchoolName;
 
-        /// <summary>
-        /// Empty constructor
-        /// </summary>
-        public Teacher()
-        {
-            //Does nothing
-        }
 
         /// <summary>
         /// Constructor that receives a name

@@ -44,7 +44,7 @@
             // 
             // label2
             // 
-            this.label2.BackColor = System.Drawing.Color.Black;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(12, 9);
@@ -52,17 +52,19 @@
             this.label2.Padding = new System.Windows.Forms.Padding(10);
             this.label2.Size = new System.Drawing.Size(470, 59);
             this.label2.TabIndex = 2;
-            this.label2.Text = "HISTORY VAR";
+            this.label2.Text = "History VAR";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Opening_Screen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 149);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(782, 553);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_enter_application);
             this.Name = "Opening_Screen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Opening Screen";
             this.ResumeLayout(false);
 

@@ -10,24 +10,10 @@ namespace History_VAR.Classes
         //Group ID, Name, List of teachers and List of students
         private int GroupID;
         private string GroupName;
-        private List<Teacher> ListofTeachers = new List<Teacher>();
+        private Teacher GroupTeacher;
         private List<Student> ListofStudents = new List<Student>();
         private string schoolName;
 
-        //Empty constructor for Group
-        public Group()
-        {
-            //Does nothing
-        }
-
-        /// <summary>
-        /// Constructor that receives the group name
-        /// </summary>
-        /// <param name="name">string groupname</param>
-        public Group(string name)
-        {
-            this.GroupName = name;
-        }
 
         /// <summary>
         /// Constructor that receives the GroupID
@@ -71,9 +57,9 @@ namespace History_VAR.Classes
         /// Get teachers from group
         /// </summary>
         /// <returns>List of teachers</returns>
-        public List<Teacher> getTeachers()
+        public Teacher getTeacher()
         {
-            return ListofTeachers;
+            return GroupTeacher;
         }
         
         /// <summary>

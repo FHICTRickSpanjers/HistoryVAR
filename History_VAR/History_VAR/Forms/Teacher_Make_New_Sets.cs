@@ -16,6 +16,7 @@ namespace History_VAR.Forms
     {
         //Set the name of the currently logged in teacher
         private string Logged_In_User;
+        private int LessonToEditID;
 
         /// <summary>
         /// Constructor make new lesson
@@ -203,6 +204,7 @@ namespace History_VAR.Forms
             DBRepository DB = DBRepository.GetInstance();
             //Get lesson object by the ID
             var Lesson = DB.GetLessonDataByID(Lesson_ID);
+            LessonToEditID = Lesson_ID;
 
             try
             {
@@ -267,11 +269,9 @@ namespace History_VAR.Forms
             //Make new instance of DB Class
             DBRepository DB = DBRepository.GetInstance();
 
-            //Get lesson ID by lesson name
-            int Lesson_ID = DB.FindLessonIDByName(TB_Title.Text);
 
             //Make a new lesson object
-            Lesson L = new Lesson(TB_Title.Text, Lesson_ID, CB_Lesson_Status.SelectedItem.ToString(), TB_Desc.Text, TB_Subject.Text, 0);
+            Lesson L = new Lesson(TB_Title.Text, LessonToEditID, CB_Lesson_Status.SelectedItem.ToString(), TB_Desc.Text, TB_Subject.Text, 0);
 
             //Update the lesson using the object
             DB.UpdateLesson(L);
@@ -291,30 +291,30 @@ namespace History_VAR.Forms
             }
 
             //Delete previous groups that had this lesson
-            DB.DeleteLessonAtGroupsByID(Lesson_ID);
-            DB.DeleteImageFromLessonByID(Lesson_ID);
-            DB.DeleteArtObjFromLessonByID(Lesson_ID);
+            DB.DeleteLessonAtGroupsByID(LessonToEditID);
+            DB.DeleteImageFromLessonByID(LessonToEditID);
+            DB.DeleteArtObjFromLessonByID(LessonToEditID);
 
             //Add this lesson to the groups that currently have this lesson
             if(CB_Classes.SelectedItem.ToString() == "All")
             { 
-                DB.InsertLessonForGroups(Lesson_ID, 0);
+                DB.InsertLessonForGroups(LessonToEditID, 0);
 
                 //Inserting Images into Lesson
-                Saving_Images_To_Lesson(Lesson_ID);
+                Saving_Images_To_Lesson(LessonToEditID);
 
                 //Inserting Art into Lesson
-                Saving_Artobjects_To_Lesson(Lesson_ID);
+                Saving_Artobjects_To_Lesson(LessonToEditID);
             }
             else
             {
-                DB.InsertLessonForGroups(Lesson_ID, Group_ID);
+                DB.InsertLessonForGroups(LessonToEditID, Group_ID);
 
                 //Inserting Images into Lesson
-                Saving_Images_To_Lesson(Lesson_ID);
+                Saving_Images_To_Lesson(LessonToEditID);
 
                 //Inserting Art into Lesson
-                Saving_Artobjects_To_Lesson(Lesson_ID);
+                Saving_Artobjects_To_Lesson(LessonToEditID);
             }
 
             MessageBox.Show("Lesson Updated");

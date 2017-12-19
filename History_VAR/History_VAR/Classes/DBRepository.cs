@@ -282,23 +282,26 @@ namespace History_VAR.Classes
         /// </summary>
         /// <param name="lessonid">ID of the lesson</param>
         /// <returns>Lesson object</returns>
-        public Lesson FindLessonByID(int lessonid)
+        public Lesson FindLessonStatusByID(int Lesson_ID)
         {
-            Lesson Les = new Lesson();
+            Lesson Les = null;
             try
             {
                 using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
-                    string query = "SELECT * FROM Lesson";
+                    string query = "SELECT * FROM Lesson WHERE Lesson_ID = @Lesson_ID";
                     SqlCommand cmd = new SqlCommand(query, cnn);
                     cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Lesson_ID", Lesson_ID);
                     cnn.Open();
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
+                            Les = new Lesson(Convert.ToInt32(dr["Lesson_ID"]));
                             Les.LessonStatus =  (dr["Lesson_status"].ToString());
+
                         }
                     }
 
@@ -486,13 +489,13 @@ namespace History_VAR.Classes
         /// <returns></returns>
         public Teacher FindTeacherID(string name)
         {
-            Teacher T = new Teacher();
+            Teacher T = null;
 
             try
             {
                 using (SqlConnection cnn = new SqlConnection("Server=mssql.fhict.local;Database=dbi367493;User Id=dbi367493;Password=$5esa8);"))
                 {
-                    string query = "SELECT Teacher_ID FROM Teacher WHERE Username = @username";
+                    string query = "SELECT * FROM Teacher WHERE Username = @username";
                     SqlCommand cmd = new SqlCommand(query, cnn);
                     cmd.Parameters.AddWithValue("@username", name);
                     cmd.CommandType = CommandType.Text;
@@ -501,7 +504,8 @@ namespace History_VAR.Classes
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
-                        {                     
+                        {
+                            T = new Teacher(dr["Teacher_ID"].ToString());
                             T.TeacherIdentification = Convert.ToInt32(dr["Teacher_ID"]);
                         }
                     }

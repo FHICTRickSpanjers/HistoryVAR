@@ -47,14 +47,6 @@ namespace History_VAR.Classes
             LessonID = ID;
         }
 
-        /// <summary>
-        /// Empty constructor for Lesson
-        /// </summary>
-        public Lesson()
-        {
-            //Does nothing
-        }
-
 
         /// <summary>
         /// Gets and sets the lesson status

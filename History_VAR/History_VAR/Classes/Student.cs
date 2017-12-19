@@ -18,12 +18,12 @@ namespace History_VAR.Classes
         /// <param name="stuID">Student ID (int)</param>
         /// <param name="StuName">Student name (string)</param>
         /// <param name="SchoID">School ID (int)</param>
-        public Student(int stuID, string StuName, int SchoID)
+        public Student(int stuID, string StuName, int SchoolID)
         {
             //Setting the data
             this.StudentID = stuID;
             this.StudentName = StuName;
-            this.SchoolID = SchoID;
+            this.SchoolID = SchoolID;
         }
 
         /// <summary>
