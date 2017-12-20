@@ -152,5 +152,20 @@ namespace History_VAR.Forms
             Opening_Screen.Show();
         }
 
+        /// <summary>
+        /// Empty password field on click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TB_Password_Click(object sender, EventArgs e)
+        {
+            TB_Password.Text = "";
+        }
+
+        //Empty username on click
+        private void TB_Username_Click(object sender, EventArgs e)
+        {
+            TB_Username.Text = "";
+        }
     }
 }

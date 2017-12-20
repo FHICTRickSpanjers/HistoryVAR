@@ -59,6 +59,7 @@
             this.TB_Password.TabIndex = 4;
             this.TB_Password.TabStop = false;
             this.TB_Password.Text = "Password";
+            this.TB_Password.Click += new System.EventHandler(this.TB_Password_Click);
             // 
             // TB_Username
             // 
@@ -68,6 +69,7 @@
             this.TB_Username.Size = new System.Drawing.Size(665, 45);
             this.TB_Username.TabIndex = 5;
             this.TB_Username.Text = "Username";
+            this.TB_Username.Click += new System.EventHandler(this.TB_Username_Click);
             // 
             // btn_back
             // 
