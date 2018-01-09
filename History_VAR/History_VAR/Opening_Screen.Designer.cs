@@ -34,29 +34,29 @@
 			// 
 			// btn_enter_application
 			// 
-			this.btn_enter_application.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(13)))), ((int)(((byte)(48)))));
+			this.btn_enter_application.AutoSize = true;
+			this.btn_enter_application.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(32)))), ((int)(((byte)(37)))));
 			this.btn_enter_application.FlatAppearance.BorderSize = 0;
 			this.btn_enter_application.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btn_enter_application.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+			this.btn_enter_application.Font = new System.Drawing.Font("AvenirNext LT Pro Regular", 10.2F);
 			this.btn_enter_application.ForeColor = System.Drawing.Color.White;
-			this.btn_enter_application.Location = new System.Drawing.Point(104, 291);
+			this.btn_enter_application.Location = new System.Drawing.Point(158, 371);
 			this.btn_enter_application.Name = "btn_enter_application";
 			this.btn_enter_application.Size = new System.Drawing.Size(567, 51);
 			this.btn_enter_application.TabIndex = 0;
-			this.btn_enter_application.Text = "Enter Application";
+			this.btn_enter_application.Text = "Start Applicatie";
 			this.btn_enter_application.UseVisualStyleBackColor = false;
 			this.btn_enter_application.Click += new System.EventHandler(this.btn_enter_application_Click);
 			// 
 			// label2
 			// 
-			this.label2.AutoSize = true;
 			this.label2.BackColor = System.Drawing.Color.Transparent;
 			this.label2.Font = new System.Drawing.Font("Poetsen One", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(32)))), ((int)(((byte)(37)))));
-			this.label2.Location = new System.Drawing.Point(12, 35);
+			this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(13)))), ((int)(((byte)(48)))));
+			this.label2.Location = new System.Drawing.Point(12, 186);
 			this.label2.Name = "label2";
 			this.label2.Padding = new System.Windows.Forms.Padding(10);
-			this.label2.Size = new System.Drawing.Size(744, 164);
+			this.label2.Size = new System.Drawing.Size(858, 164);
 			this.label2.TabIndex = 2;
 			this.label2.Text = "History VAR";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -68,7 +68,7 @@
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(251)))), ((int)(((byte)(216)))));
 			this.BackgroundImage = global::History_VAR.Properties.Resources.HistoryVAR_BG;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.ClientSize = new System.Drawing.Size(782, 553);
+			this.ClientSize = new System.Drawing.Size(882, 653);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.btn_enter_application);
 			this.DoubleBuffered = true;

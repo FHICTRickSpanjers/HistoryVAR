@@ -34,24 +34,24 @@
 			// 
 			// FlowLayoutPanelIMG
 			// 
+			this.FlowLayoutPanelIMG.BackColor = System.Drawing.Color.Transparent;
 			this.FlowLayoutPanelIMG.ForeColor = System.Drawing.Color.Black;
-			this.FlowLayoutPanelIMG.Location = new System.Drawing.Point(12, 69);
+			this.FlowLayoutPanelIMG.Location = new System.Drawing.Point(12, 149);
 			this.FlowLayoutPanelIMG.Name = "FlowLayoutPanelIMG";
-			this.FlowLayoutPanelIMG.Size = new System.Drawing.Size(429, 336);
+			this.FlowLayoutPanelIMG.Size = new System.Drawing.Size(858, 492);
 			this.FlowLayoutPanelIMG.TabIndex = 1;
 			// 
 			// label3
 			// 
-			this.label3.AutoSize = true;
 			this.label3.BackColor = System.Drawing.Color.Transparent;
-			this.label3.Font = new System.Drawing.Font("Poetsen One", 15F, System.Drawing.FontStyle.Bold);
-			this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(32)))), ((int)(((byte)(37)))));
-			this.label3.Location = new System.Drawing.Point(110, 16);
+			this.label3.Font = new System.Drawing.Font("Poetsen One", 35F, System.Drawing.FontStyle.Bold);
+			this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(13)))), ((int)(((byte)(48)))));
+			this.label3.Location = new System.Drawing.Point(12, 26);
 			this.label3.Name = "label3";
 			this.label3.Padding = new System.Windows.Forms.Padding(10);
-			this.label3.Size = new System.Drawing.Size(235, 50);
+			this.label3.Size = new System.Drawing.Size(858, 110);
 			this.label3.TabIndex = 30;
-			this.label3.Text = "Teacher options";
+			this.label3.Text = "Afbeeldingen in History VAR";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// SystemImages
@@ -61,7 +61,7 @@
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(251)))), ((int)(((byte)(216)))));
 			this.BackgroundImage = global::History_VAR.Properties.Resources.HistoryVAR_BG;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.ClientSize = new System.Drawing.Size(458, 418);
+			this.ClientSize = new System.Drawing.Size(882, 653);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.FlowLayoutPanelIMG);
 			this.DoubleBuffered = true;
@@ -70,7 +70,6 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "SystemImages";
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
         }
 

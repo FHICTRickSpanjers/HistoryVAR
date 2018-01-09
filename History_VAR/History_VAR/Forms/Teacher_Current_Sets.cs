@@ -95,10 +95,12 @@ namespace History_VAR.Forms
 
                 //Get new list of lessons
                 GetAllLessons();
-            }
+
+				MessageBox.Show("Les verwijderd!");
+			}
             else
             {
-                MessageBox.Show("Select item to delete");
+                MessageBox.Show("Selecteer item om te verwijderen");
             }
  
         }

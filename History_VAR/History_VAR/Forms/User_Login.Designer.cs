@@ -37,26 +37,26 @@
 			// 
 			// btn_login
 			// 
-			this.btn_login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(13)))), ((int)(((byte)(48)))));
+			this.btn_login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(32)))), ((int)(((byte)(37)))));
 			this.btn_login.FlatAppearance.BorderSize = 0;
 			this.btn_login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btn_login.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+			this.btn_login.Font = new System.Drawing.Font("AvenirNext LT Pro Regular", 10.2F);
 			this.btn_login.ForeColor = System.Drawing.Color.White;
-			this.btn_login.Location = new System.Drawing.Point(58, 356);
+			this.btn_login.Location = new System.Drawing.Point(109, 438);
 			this.btn_login.Name = "btn_login";
 			this.btn_login.Size = new System.Drawing.Size(665, 52);
 			this.btn_login.TabIndex = 2;
-			this.btn_login.Text = "Login";
+			this.btn_login.Text = "Inloggen";
 			this.btn_login.UseVisualStyleBackColor = false;
 			this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
 			// 
 			// TB_Password
 			// 
-			this.TB_Password.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Italic);
-			this.TB_Password.Location = new System.Drawing.Point(58, 268);
+			this.TB_Password.Font = new System.Drawing.Font("AvenirNext LT Pro Regular", 19.8F);
+			this.TB_Password.Location = new System.Drawing.Point(109, 350);
 			this.TB_Password.Name = "TB_Password";
 			this.TB_Password.PasswordChar = '*';
-			this.TB_Password.Size = new System.Drawing.Size(665, 45);
+			this.TB_Password.Size = new System.Drawing.Size(665, 47);
 			this.TB_Password.TabIndex = 4;
 			this.TB_Password.TabStop = false;
 			this.TB_Password.Text = "Password";
@@ -64,39 +64,38 @@
 			// 
 			// TB_Username
 			// 
-			this.TB_Username.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TB_Username.Location = new System.Drawing.Point(58, 198);
+			this.TB_Username.Font = new System.Drawing.Font("AvenirNext LT Pro Regular", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TB_Username.Location = new System.Drawing.Point(109, 280);
 			this.TB_Username.Name = "TB_Username";
-			this.TB_Username.Size = new System.Drawing.Size(665, 45);
+			this.TB_Username.Size = new System.Drawing.Size(665, 47);
 			this.TB_Username.TabIndex = 5;
-			this.TB_Username.Text = "Username";
+			this.TB_Username.Text = "Gebruikersnaam";
 			this.TB_Username.Click += new System.EventHandler(this.TB_Username_Click);
 			// 
 			// btn_back
 			// 
-			this.btn_back.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(13)))), ((int)(((byte)(48)))));
+			this.btn_back.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(32)))), ((int)(((byte)(37)))));
 			this.btn_back.FlatAppearance.BorderSize = 0;
 			this.btn_back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btn_back.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+			this.btn_back.Font = new System.Drawing.Font("AvenirNext LT Pro Regular", 10.2F);
 			this.btn_back.ForeColor = System.Drawing.Color.White;
-			this.btn_back.Location = new System.Drawing.Point(58, 427);
+			this.btn_back.Location = new System.Drawing.Point(109, 509);
 			this.btn_back.Name = "btn_back";
 			this.btn_back.Size = new System.Drawing.Size(665, 52);
 			this.btn_back.TabIndex = 8;
-			this.btn_back.Text = "Back";
+			this.btn_back.Text = "Terug";
 			this.btn_back.UseVisualStyleBackColor = false;
 			this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
 			// 
 			// label_login
 			// 
-			this.label_login.AutoSize = true;
 			this.label_login.BackColor = System.Drawing.Color.Transparent;
 			this.label_login.Font = new System.Drawing.Font("Poetsen One", 72F, System.Drawing.FontStyle.Bold);
-			this.label_login.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(32)))), ((int)(((byte)(37)))));
-			this.label_login.Location = new System.Drawing.Point(26, 9);
+			this.label_login.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(13)))), ((int)(((byte)(48)))));
+			this.label_login.Location = new System.Drawing.Point(12, 91);
 			this.label_login.Name = "label_login";
 			this.label_login.Padding = new System.Windows.Forms.Padding(10);
-			this.label_login.Size = new System.Drawing.Size(744, 164);
+			this.label_login.Size = new System.Drawing.Size(858, 164);
 			this.label_login.TabIndex = 10;
 			this.label_login.Text = "History VAR";
 			this.label_login.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -108,7 +107,7 @@
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(251)))), ((int)(((byte)(216)))));
 			this.BackgroundImage = global::History_VAR.Properties.Resources.HistoryVAR_BG;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.ClientSize = new System.Drawing.Size(782, 553);
+			this.ClientSize = new System.Drawing.Size(882, 653);
 			this.Controls.Add(this.label_login);
 			this.Controls.Add(this.btn_back);
 			this.Controls.Add(this.TB_Username);

@@ -330,6 +330,7 @@ namespace History_VAR.Forms
             //If this is an lesson that is being edited
             if (editlesson == true)
             {
+				LBL_Title_New_Set.Text = "Les Wijzigen";
                 btn_update.Enabled = true;
                 btn_save_lesson.Enabled = false;
             }
