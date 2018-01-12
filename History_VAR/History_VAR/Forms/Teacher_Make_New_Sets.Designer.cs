@@ -109,7 +109,7 @@
 			this.GB_ListOfObjects.Size = new System.Drawing.Size(380, 191);
 			this.GB_ListOfObjects.TabIndex = 8;
 			this.GB_ListOfObjects.TabStop = false;
-			this.GB_ListOfObjects.Text = "Lijst van 3D Art Objecten in les";
+			this.GB_ListOfObjects.Text = "Lijst van 3D Kunst Objecten in les";
 			// 
 			// LB_Art_Items
 			// 
@@ -142,9 +142,9 @@
 			this.TB_Title.BackColor = System.Drawing.Color.White;
 			this.TB_Title.Font = new System.Drawing.Font("AvenirNext LT Pro Regular", 10F);
 			this.TB_Title.ForeColor = System.Drawing.Color.Black;
-			this.TB_Title.Location = new System.Drawing.Point(192, 161);
+			this.TB_Title.Location = new System.Drawing.Point(210, 161);
 			this.TB_Title.Name = "TB_Title";
-			this.TB_Title.Size = new System.Drawing.Size(225, 27);
+			this.TB_Title.Size = new System.Drawing.Size(207, 27);
 			this.TB_Title.TabIndex = 10;
 			// 
 			// label_published
@@ -168,9 +168,9 @@
 			this.CB_Lesson_Status.Items.AddRange(new object[] {
             "Published",
             "Draft"});
-			this.CB_Lesson_Status.Location = new System.Drawing.Point(192, 193);
+			this.CB_Lesson_Status.Location = new System.Drawing.Point(210, 193);
 			this.CB_Lesson_Status.Name = "CB_Lesson_Status";
-			this.CB_Lesson_Status.Size = new System.Drawing.Size(225, 28);
+			this.CB_Lesson_Status.Size = new System.Drawing.Size(207, 28);
 			this.CB_Lesson_Status.TabIndex = 12;
 			// 
 			// btn_add_objects
@@ -205,9 +205,9 @@
 			this.TB_Made_By.BackColor = System.Drawing.Color.White;
 			this.TB_Made_By.Font = new System.Drawing.Font("AvenirNext LT Pro Regular", 10F);
 			this.TB_Made_By.ForeColor = System.Drawing.Color.Black;
-			this.TB_Made_By.Location = new System.Drawing.Point(192, 225);
+			this.TB_Made_By.Location = new System.Drawing.Point(210, 225);
 			this.TB_Made_By.Name = "TB_Made_By";
-			this.TB_Made_By.Size = new System.Drawing.Size(225, 27);
+			this.TB_Made_By.Size = new System.Drawing.Size(207, 27);
 			this.TB_Made_By.TabIndex = 18;
 			// 
 			// TB_Subject
@@ -215,9 +215,9 @@
 			this.TB_Subject.BackColor = System.Drawing.Color.White;
 			this.TB_Subject.Font = new System.Drawing.Font("AvenirNext LT Pro Regular", 10F);
 			this.TB_Subject.ForeColor = System.Drawing.Color.Black;
-			this.TB_Subject.Location = new System.Drawing.Point(192, 255);
+			this.TB_Subject.Location = new System.Drawing.Point(210, 255);
 			this.TB_Subject.Name = "TB_Subject";
-			this.TB_Subject.Size = new System.Drawing.Size(225, 27);
+			this.TB_Subject.Size = new System.Drawing.Size(207, 27);
 			this.TB_Subject.TabIndex = 20;
 			// 
 			// label_subject
@@ -268,9 +268,9 @@
 			this.CB_Classes.FormattingEnabled = true;
 			this.CB_Classes.Items.AddRange(new object[] {
             "All"});
-			this.CB_Classes.Location = new System.Drawing.Point(192, 285);
+			this.CB_Classes.Location = new System.Drawing.Point(210, 285);
 			this.CB_Classes.Name = "CB_Classes";
-			this.CB_Classes.Size = new System.Drawing.Size(225, 28);
+			this.CB_Classes.Size = new System.Drawing.Size(207, 28);
 			this.CB_Classes.TabIndex = 23;
 			// 
 			// btn_add_images
@@ -280,9 +280,9 @@
 			this.btn_add_images.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btn_add_images.Font = new System.Drawing.Font("AvenirNext LT Pro Regular", 10.2F);
 			this.btn_add_images.ForeColor = System.Drawing.Color.White;
-			this.btn_add_images.Location = new System.Drawing.Point(849, 359);
+			this.btn_add_images.Location = new System.Drawing.Point(849, 358);
 			this.btn_add_images.Name = "btn_add_images";
-			this.btn_add_images.Size = new System.Drawing.Size(374, 51);
+			this.btn_add_images.Size = new System.Drawing.Size(380, 51);
 			this.btn_add_images.TabIndex = 24;
 			this.btn_add_images.Text = "Voeg afbeelding toe aan les";
 			this.btn_add_images.UseVisualStyleBackColor = false;
@@ -336,9 +336,9 @@
 			this.CB_Art.Font = new System.Drawing.Font("AvenirNext LT Pro Regular", 10F);
 			this.CB_Art.ForeColor = System.Drawing.Color.Black;
 			this.CB_Art.FormattingEnabled = true;
-			this.CB_Art.Location = new System.Drawing.Point(192, 317);
+			this.CB_Art.Location = new System.Drawing.Point(210, 317);
 			this.CB_Art.Name = "CB_Art";
-			this.CB_Art.Size = new System.Drawing.Size(225, 28);
+			this.CB_Art.Size = new System.Drawing.Size(207, 28);
 			this.CB_Art.TabIndex = 26;
 			// 
 			// label2
@@ -349,9 +349,9 @@
 			this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(13)))), ((int)(((byte)(48)))));
 			this.label2.Location = new System.Drawing.Point(21, 319);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(142, 21);
+			this.label2.Size = new System.Drawing.Size(162, 21);
 			this.label2.TabIndex = 27;
-			this.label2.Text = "3D Art Objecten";
+			this.label2.Text = "3D Kunst Objecten";
 			// 
 			// LBL_Title_New_Set
 			// 
@@ -370,7 +370,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(251)))), ((int)(((byte)(216)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.BackgroundImage = global::History_VAR.Properties.Resources.HistoryVAR_BG;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.ClientSize = new System.Drawing.Size(1262, 753);

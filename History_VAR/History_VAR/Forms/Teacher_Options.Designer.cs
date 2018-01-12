@@ -85,12 +85,12 @@
 			// label2
 			// 
 			this.label2.BackColor = System.Drawing.Color.Transparent;
-			this.label2.Font = new System.Drawing.Font("Poetsen One", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label2.Font = new System.Drawing.Font("Poetsen One", 55F, System.Drawing.FontStyle.Bold);
 			this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(13)))), ((int)(((byte)(48)))));
-			this.label2.Location = new System.Drawing.Point(12, 138);
+			this.label2.Location = new System.Drawing.Point(12, 129);
 			this.label2.Name = "label2";
 			this.label2.Padding = new System.Windows.Forms.Padding(10);
-			this.label2.Size = new System.Drawing.Size(858, 116);
+			this.label2.Size = new System.Drawing.Size(858, 146);
 			this.label2.TabIndex = 7;
 			this.label2.Text = "Docent Opties";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -99,7 +99,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(251)))), ((int)(((byte)(216)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.BackgroundImage = global::History_VAR.Properties.Resources.HistoryVAR_BG;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.ClientSize = new System.Drawing.Size(882, 653);
